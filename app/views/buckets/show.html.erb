@@ -1,0 +1,23 @@
+<p>
+  <b>Tag:</b>
+  <%=h @bucket.tag %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @bucket.state %>
+</p>
+
+<p>
+  <b>Boilerplate:</b>
+  <%=h @bucket.boilerplate %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @bucket.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_bucket_path(@bucket) %> |
+<%= link_to 'Back', buckets_path %>

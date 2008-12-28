@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tag: MyString
+  state: MyString
+  boilerplate: MyText
+  user_id: 1
+
+two:
+  tag: MyString
+  state: MyString
+  boilerplate: MyText
+  user_id: 1
