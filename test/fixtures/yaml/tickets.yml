@@ -1,0 +1,451 @@
+--- 
+-
+    permalink: snipe-error
+    updated_at: 2008-08-14 09:52:11 Z
+    number: 254
+    title: Snipe error
+    creator_id: 27881
+    tag: bug macosx snipe
+    attachments_count: 0
+    priority: 43
+    closed: false
+    user_id: 18613
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-02 19:48:55 Z
+-
+    permalink: update-fails-when-bid-is-already-in-beta6
+    updated_at: 2008-08-05 22:47:24 Z
+    number: 274
+    title: Update fails when bid is already in (beta6)
+    creator_id: 28214
+    tag: bug
+    attachments_count: 2
+    priority: 53
+    closed: false
+    user_id: 28214
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-05 22:45:45 Z
+-
+    permalink: selling-tab-empty-with-2-0beta6-os-x-10-4-11
+    updated_at: 2008-09-15 13:29:59 Z
+    number: 278
+    title: Selling tab empty with 2.0beta8 [OS X 10.5.4]
+    creator_id: 28255
+    tag: bug display interface linux macosx tabs
+    attachments_count: 0
+    priority: 57
+    closed: false
+    user_id: 28255
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-06 10:18:28 Z
+-
+    permalink: cannot-open-configure-in-beta6
+    updated_at: 2008-08-06 21:38:50 Z
+    number: 282
+    title: Cannot open Configure in beta6
+    creator_id: 28309
+    tag: 
+    attachments_count: 0
+    priority: 60
+    closed: false
+    user_id: 28309
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-06 17:55:33 Z
+-
+    permalink: the-program-did-not-snipe
+    updated_at: 2008-08-06 23:56:24 Z
+    number: 283
+    title: "The program did not snipe. "
+    creator_id: 28341
+    tag: 
+    attachments_count: 0
+    priority: 61
+    closed: false
+    user_id: 28341
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-06 23:56:24 Z
+-
+    permalink: failed-to-snipe
+    updated_at: 2008-08-07 03:16:47 Z
+    number: 284
+    title: Failed to Snipe
+    creator_id: 28353
+    tag: 
+    attachments_count: 0
+    priority: 62
+    closed: false
+    user_id: 28353
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-07 03:16:46 Z
+-
+    permalink: incorrect-sort-by-time-left
+    updated_at: 2008-08-07 16:09:21 Z
+    number: 287
+    title: "Incorrect sort by \"Time left\"  "
+    creator_id: 28414
+    tag: auction bug display interface list
+    attachments_count: 1
+    priority: 64
+    closed: false
+    user_id: 28414
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-07 16:03:19 Z
+-
+    permalink: mac-osx-auctions-not-updating-2-0b6
+    updated_at: 2008-08-13 16:01:38 Z
+    number: 305
+    title: Mac OSX - auctions not updating - 2.0b6
+    creator_id: 28684
+    tag: 
+    attachments_count: 0
+    priority: 77
+    closed: false
+    user_id: 28906
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-11 19:32:18 Z
+-
+    permalink: 1-0-2-database-can-t-be-udpate
+    updated_at: 2008-08-15 02:20:55 Z
+    number: 314
+    title: 1.0.2 database can't be udpate
+    creator_id: 27367
+    tag: 
+    attachments_count: 1
+    priority: 82
+    closed: false
+    user_id: 27367
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-15 02:20:55 Z
+-
+    permalink: 2-0beta6-won-t-load-my-auctions
+    updated_at: 2008-08-15 16:30:34 Z
+    number: 318
+    title: 2.0beta6 won't load my auctions
+    creator_id: 29101
+    tag: 
+    attachments_count: 0
+    priority: 83
+    closed: false
+    user_id: 29101
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-15 16:30:34 Z
+-
+    permalink: never-ending-items-signed-as-closed-after-30-days
+    updated_at: 2008-08-16 07:13:14 Z
+    number: 320
+    title: Never ending items signed as closed after 30 days
+    creator_id: 29140
+    tag: bug display search tabs update
+    attachments_count: 0
+    priority: 84
+    closed: false
+    user_id: 29140
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-16 07:13:13 Z
+-
+    permalink: item-not-in-the-lists-but
+    updated_at: 2008-08-17 01:17:28 Z
+    number: 323
+    title: item not in the lists but ...
+    creator_id: 29188
+    tag: 
+    attachments_count: 0
+    priority: 86
+    closed: false
+    user_id: 29188
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-17 01:17:27 Z
+-
+    permalink: beta-6-shows-no-checkmark-for-won-items
+    updated_at: 2008-08-17 04:11:02 Z
+    number: 324
+    title: Beta 6 shows no checkmark for won items
+    creator_id: 29193
+    tag: display
+    attachments_count: 1
+    priority: 87
+    closed: false
+    user_id: 29193
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-17 04:11:02 Z
+-
+    permalink: deleting-auction
+    updated_at: 2008-08-17 16:16:36 Z
+    number: 326
+    title: Deleting Auction
+    creator_id: 29219
+    tag: 
+    attachments_count: 0
+    priority: 88
+    closed: false
+    user_id: 29219
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-17 16:16:36 Z
+-
+    permalink: shipping
+    updated_at: 2008-08-18 00:25:33 Z
+    number: 328
+    title: Shipping
+    creator_id: 29244
+    tag: 
+    attachments_count: 0
+    priority: 90
+    closed: false
+    user_id: 29244
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-18 00:21:51 Z
+-
+    permalink: notify-pre-snipe-login-failed
+    updated_at: 2008-12-27 11:09:28 Z
+    number: 332
+    title: "Notify: Pre-snipe login failed."
+    creator_id: 18805
+    tag: 
+    attachments_count: 0
+    priority: 92
+    closed: false
+    user_id: 13969
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-18 11:54:40 Z
+-
+    permalink: 2-0beta7-snipe-failure-timing-auction-ended
+    updated_at: 2008-08-18 19:26:39 Z
+    number: 336
+    title: 2.0Beta7 snipe failure - timing / Auction ended?
+    creator_id: 29334
+    tag: bug
+    attachments_count: 0
+    priority: 94
+    closed: false
+    user_id: 29334
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-18 19:26:39 Z
+-
+    permalink: odd-display-issue-when-starting
+    updated_at: 2008-08-18 22:33:27 Z
+    number: 337
+    title: Odd display issue when starting
+    creator_id: 29363
+    tag: 
+    attachments_count: 0
+    priority: 95
+    closed: false
+    user_id: 29363
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-18 22:33:26 Z
+-
+    permalink: multisnipe-failed-to-bid
+    updated_at: 2008-08-19 16:11:16 Z
+    number: 340
+    title: Multisnipe failed to bid
+    creator_id: 28788
+    tag: bug
+    attachments_count: 1
+    priority: 98
+    closed: false
+    user_id: 28788
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-19 16:11:16 Z
+-
+    permalink: migration-error-1-0-2-to-2-0beta7-2
+    updated_at: 2008-08-31 06:39:13 Z
+    number: 342
+    title: Migration Error 1.0.2. to 2.0beta7
+    creator_id: 29477
+    tag: migration
+    attachments_count: 0
+    priority: 99
+    closed: false
+    user_id: 29477
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-19 20:50:18 Z
+-
+    permalink: can-t-delete-item-from-list
+    updated_at: 2008-08-19 22:27:23 Z
+    number: 343
+    title: "Can't Delete Item from list "
+    creator_id: 21207
+    tag: 
+    attachments_count: 0
+    priority: 100
+    closed: false
+    user_id: 21207
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-19 22:27:22 Z
+-
+    permalink: time-synchronization
+    updated_at: 2008-08-20 15:42:25 Z
+    number: 346
+    title: time synchronization
+    creator_id: 29558
+    tag: 
+    attachments_count: 0
+    priority: 101
+    closed: false
+    user_id: 29558
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-20 15:42:25 Z
+-
+    permalink: beta-7-is-totally-hosed
+    updated_at: 2008-08-20 17:26:08 Z
+    number: 347
+    title: Beta 7 is totally hosed
+    creator_id: 29567
+    tag: 
+    attachments_count: 0
+    priority: 102
+    closed: false
+    user_id: 29567
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-20 17:26:08 Z
+-
+    permalink: 2-0b6-something-really-bad-happened-and-i-don-t-know-what
+    updated_at: 2008-08-20 19:40:14 Z
+    number: 348
+    title: "2.0b6: Something really bad happened, and I don't know what."
+    creator_id: 18826
+    tag: 
+    attachments_count: 1
+    priority: 103
+    closed: false
+    user_id: 18826
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-20 19:40:14 Z
+-
+    permalink: spontaneous-addition-of-a-relisted-item
+    updated_at: 2008-08-21 03:18:35 Z
+    number: 349
+    title: Spontaneous addition of a relisted(?) item
+    creator_id: 21904
+    tag: 
+    attachments_count: 0
+    priority: 104
+    closed: false
+    user_id: 21904
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-21 03:03:55 Z
+-
+    permalink: ebay-time-is-5-seconds-ahead-in-jbid
+    updated_at: 2008-08-24 21:45:21 Z
+    number: 354
+    title: ebay time is 5 seconds ahead in JBID
+    creator_id: 29884
+    tag: 
+    attachments_count: 0
+    priority: 107
+    closed: false
+    user_id: 29884
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-24 21:39:14 Z
+-
+    permalink: send-to-list-is-too-long-goes-off-page
+    updated_at: 2008-08-26 19:08:53 Z
+    number: 357
+    title: "\"Send To\" list is too long, list goes off the screen"
+    creator_id: 29964
+    tag: bug send tab tabs to
+    attachments_count: 0
+    priority: 108
+    closed: false
+    user_id: 29964
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-25 20:50:09 Z
+-
+    permalink: 2-0-beta-7
+    updated_at: 2008-08-26 17:15:45 Z
+    number: 359
+    title: 2.0 Beta 7 - cannot log on to Ebay
+    creator_id: 30063
+    tag: 
+    attachments_count: 0
+    priority: 110
+    closed: false
+    user_id: 30063
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-26 16:54:06 Z
+-
+    permalink: cannot-add-auction-already-in-list
+    updated_at: 2008-09-02 04:56:39 Z
+    number: 361
+    title: Cannot add auction - "already in list"
+    creator_id: 21227
+    tag: 
+    attachments_count: 0
+    priority: 111
+    closed: false
+    user_id: 30579
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-26 20:46:57 Z
+-
+    permalink: sniping-cancelled-because-of-unsynchronized-server-time
+    updated_at: 2008-08-27 13:43:16 Z
+    number: 365
+    title: sniping cancelled because of unsynchronized server time
+    creator_id: 20516
+    tag: 
+    attachments_count: 0
+    priority: 113
+    closed: false
+    user_id: 20516
+    assigned_user_id: 13969
+    state: new
+    milestone_id: 7468
+    created_at: 2008-08-27 13:43:15 Z

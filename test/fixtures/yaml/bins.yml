@@ -1,0 +1,31 @@
+--- 
+- 
+  name: New tickets
+  tickets_count: 120
+  default: false
+  updated_at: 2008-11-13 09:35:27 Z
+  shared: true
+  id: 5933
+  user_id: 13969
+  query: milestone:next state:new sort:oldest
+  position: 1
+- 
+  name: Open tickets
+  tickets_count: 227
+  default: false
+  updated_at: 2008-11-13 09:35:46 Z
+  shared: true
+  id: 6109
+  user_id: 13969
+  query: state:open milestone:next sort:oldest
+  position: 2
+- 
+  name: All new
+  tickets_count: 127
+  default: false
+  updated_at: 2008-07-07 09:28:16 Z
+  shared: true
+  id: 7709
+  user_id: 13969
+  query: state:new
+  position: 3

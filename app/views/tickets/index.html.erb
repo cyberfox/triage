@@ -1,0 +1,7 @@
+<h1>Tickets for <%= @project.name %>, in search bin <%= @bin.name %></h1>
+Showing <%= @tickets.length %> of <%= @bin.tickets_count %>.<br/>
+<ul>
+<% @tickets.each do |ticket| -%>
+<li><%= link_to(ticket.title, ticket_path(:project_id => @project.id, :bin_id => @bin.id, :ticket_id => ticket.number, :action => 'show')) %></li>
+<% end -%>
+</ul>

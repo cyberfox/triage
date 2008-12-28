@@ -1,0 +1,15 @@
+<h1><%= @title %></h1>
+<% unless @ticket.tags.blank? -%>
+<h2>Tags: <%= @ticket.tags.join(', ') %></h2>
+<% end -%>
+<% @ticket.versions.each do |version| -%>
+<h3>by <%= @user_map[version.user_id].name %>:
+<% if version.title != @title -%>
+<%= version.title %>
+<% end -%>
+</h3>
+<div style="margin-left: 30px">
+<%= version.body_html %>
+</div>
+<hr width="50%"/>
+<% end -%>
