@@ -1,0 +1,47 @@
+<h1>A simple interface to the Lighthouse API to allow for fast triaging of tickets</h1>
+The initial goal is to build a few screens that allow for one-button triaging.
+
+*Background:* After a while of not having time to handle triaging
+tickets for an open source project I moved over to Lighthouse, I found
+I had over 170 _new_ tickets to wade through.  If it takes me 1 minute
+to triage (excessively low) then I'm still looking at 3 hours just to
+speed through those tickets.  The truth is that it usually takes me
+5-10 minutes per ticket.  I needed some way to triage it down to a
+core set of 'investigate' issues quickly, then I could take my time
+with those.
+
+I decided I wanted a way to search for auctions (preferrably using the
+existing search bins), show the first ticket result, and click Skip,
+or one of 'details', 'investigate', 'acknowledged', 'feature',
+'duplicate', or 'invalid'.  This set of 'buckets' is what I use; the
+idea is that everybody'd have their own, and whether it changes the
+state of the ticket (and what to), would be customizable per-bucket.
+
+This magic application would then apply that tag, change it from 'new'
+to 'open' (or closed in the case of the last two), and move to showing
+the next ticket in the Lighthouse search results.  The buttons would
+be in the same place for each ticket, for minimal mouse movement.
+
+Eventually, I'd love to offer niceties like applying tags to multiple
+items at once, perhaps with some simple gmail like multiple selection.
+There are other UI features that Lighthouse itself might not want to
+include (in order to keep the core app simple), but that would be
+useful to many developers.
+
+For now, I'm working on the simple things.  Getting a list of projects,
+then a list of search bins, then a list of tickets, then an individual
+ticket.  That all works, right now.
+
+Next, I'll try adding a button to quickly tag something as 'investigate'.
+
+Then maybe I'll skin the whole thing and make it look pretty.  :)
+Actually I'm not very good at making things look pretty, but I'm
+pretty good at making things functional.
+
+--  Morgan Schweers, Cyber*FOX*!
+
+p.s.  You'll need to create your own site_keys.rb in config/initializers
+with:
+
+<pre><code>REST_AUTH_SITE_KEY         = 'somereallylonghexstringincludedhere'
+REST_AUTH_DIGEST_STRETCHES = 10</code></pre>
