@@ -17,10 +17,10 @@ ActionController::Routing::Routes.draw do |map|
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
 
-  map.projects 'projects/:action/:id', :controller => 'projects'
-  map.bins     'projects/:project_id/bins/:action', :controller => 'bins'
+  map.projects 'projects', :controller => 'projects', :action => 'index'
+  map.bins     'projects/:project_id/bins', :controller => 'bins'
+  map.ticket   'projects/:project_id/bins/:bin_id/tickets/:action/:ticket_id', :controller => 'tickets'
   map.tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
-  map.ticket  'projects/:project_id/bins/:bin_id/tickets/:action/:ticket_id', :controller => 'tickets'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+  map.root :controller => "projects"
 
   # See how all your routes lay out with "rake routes"
 
