@@ -14,30 +14,30 @@ class BucketsControllerTest < ActionController::TestCase
 
   test "should create bucket" do
     assert_difference('Bucket.count') do
-      post :create, :bucket => { }
+      post :create, :bucket => { :tag => 'frippery', :user => users(:quentin) }
     end
 
     assert_redirected_to bucket_path(assigns(:bucket))
   end
 
   test "should show bucket" do
-    get :show, :id => buckets(:one).id
+    get :show, :id => buckets(:details).id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => buckets(:one).id
+    get :edit, :id => buckets(:acknowledged).id
     assert_response :success
   end
 
   test "should update bucket" do
-    put :update, :id => buckets(:one).id, :bucket => { }
+    put :update, :id => buckets(:feature).id, :bucket => { :state => 'feature' }
     assert_redirected_to bucket_path(assigns(:bucket))
   end
 
   test "should destroy bucket" do
     assert_difference('Bucket.count', -1) do
-      delete :destroy, :id => buckets(:one).id
+      delete :destroy, :id => buckets(:invalid).id
     end
 
     assert_redirected_to buckets_path

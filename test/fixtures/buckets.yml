@@ -1,13 +1,33 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  tag: MyString
-  state: MyString
-  boilerplate: MyText
-  user_id: 1
+details:
+  tag: details
+  state: open
+  boilerplate: I need more information on this before I can investigate.
+  user: quentin
 
-two:
-  tag: MyString
-  state: MyString
-  boilerplate: MyText
-  user_id: 1
+investigate:
+  tag: investigate
+  state: open
+  user: quentin
+
+acknowledged:
+  tag: acknowledged
+  state: open
+  user: quentin
+
+# TODO -- Be able to set a 'milestone' here.
+feature:
+  tag: featurerequest
+  state: open
+  user: quentin
+
+duplicate:
+  tag: duplicate
+  state: duplicate
+  user: quentin
+
+invalid:
+  tag: invalid
+  state: invalid
+  user: quentin
