@@ -38,4 +38,8 @@ class Test::Unit::TestCase
   def from_yaml(details)
     YAML.load(open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml"))
   end
+
+  def login_as(username)
+    @request.session[:user_id] = users(username).id
+  end
 end
