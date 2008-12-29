@@ -1,11 +1,18 @@
+<%
+def fixture_data(name)
+  render_binary("#{RAILS_ROOT}/test/fixtures/yaml/#{name}.yml")
+end
+
+def render_binary(filename)
+  data = File.open(filename,'rb').read
+  "!binary | #{[data].pack('m').gsub(/\n/,"\n    ")}\n"
+end
+%>
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  project_id: 1
-  name: MyString
-  data: MyText
-
-two:
-  project_id: 1
-  name: MyString
-  data: MyText
+jbidwatcher:
+  lighthouse_id: 8037
+  user: quentin
+  name: JBidwatcher
+  data: <%= fixture_data('project') %>
