@@ -1,7 +1,12 @@
 require 'yaml'
 require 'ostruct'
 
-OpenStruct.class_eval { undef :id, :type }
+OpenStruct.class_eval do
+  undef :id, :type
+  def bins
+    @@bins = Lighthouse.from_yaml(:bins)
+  end
+end
 
 module Lighthouse
   mattr_accessor :token, :account
@@ -46,15 +51,12 @@ module Lighthouse
     def self.find(condition)
       init
       case condition
-      when :all: return @@projects
+      when :all:
+          return [] if Lighthouse.account == 'empty'
+          return @@projects
       else
+        return nil if Lighthouse.account == 'empty'
         project = @@projects.find { |project| project.id.to_s == condition.to_s }
-        if project
-          def project.bins
-            @@bins = Lighthouse.from_yaml(:bins)
-          end
-        end
-        project
       end
     end
   end

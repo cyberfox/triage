@@ -3,7 +3,7 @@ class BinsController < ApplicationController
   before_filter :get_token
 
   def index
-    @project = Lighthouse::Project.find(params[:project_id])
+    @project = Project.find_by_lighthouse_project(current_user, params[:project_id])
     @bins = @project.bins
   end
 end

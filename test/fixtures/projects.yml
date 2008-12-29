@@ -16,3 +16,11 @@ jbidwatcher:
   user: quentin
   name: JBidwatcher
   data: <%= fixture_data('project') %>
+  updated_at: <%= 10.minutes.ago %>
+
+out_of_date:
+  lighthouse_id: 8037
+  user: jim
+  name: JBidwatcher
+  data: <%= fixture_data('project') %>
+  updated_at: <%= 15.days.ago %>

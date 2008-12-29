@@ -1,5 +1,4 @@
 quentin:
-  id:                        1
   login:                     quentin
   email:                     quentin@example.com
   salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
@@ -11,20 +10,39 @@ quentin:
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
       
 aaron:
-  id:                        2
   login:                     aaron
   email:                     aaron@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
   crypted_password:          8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
-  api_key:                   foo
-  subdomain:                 bar
+  api_key:                   invalid
+  subdomain:                 empty
   created_at:                <%= 1.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
 
+joe:
+  login:                     joe
+  email:                     joe@example.com
+  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
+  crypted_password:          8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
+  api_key:                   valid
+  subdomain:                 initially_empty
+  created_at:                <%= 1.days.ago.to_s :db %>
+  remember_token_expires_at: 
+  remember_token:            
+
+jim:
+  login:                     jim
+  email:                     jim@example.com
+  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
+  crypted_password:          8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
+  api_key:                   valid
+  subdomain:                 foo
+  created_at:                <%= 1.days.ago.to_s :db %>
+  remember_token_expires_at: 
+  remember_token:            
 
 old_password_holder:
-  id:                        3
   login:                     old_password_holder
   email:                     salty_dog@example.com
   salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
