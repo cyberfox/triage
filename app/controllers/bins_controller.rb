@@ -6,7 +6,4 @@ class BinsController < ApplicationController
     @project = Lighthouse::Project.find(params[:project_id])
     @bins = @project.bins
   end
-
-  def choose
-  end
 end
