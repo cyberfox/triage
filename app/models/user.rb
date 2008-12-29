@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 
   has_many :buckets
+  has_many :projects
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40

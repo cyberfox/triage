@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  search_id: 1
+  ticket_number: 1
+  title: MyString
+  data: MyText
+
+two:
+  search_id: 1
+  ticket_number: 1
+  title: MyString
+  data: MyText
