@@ -9,13 +9,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081228221135) do
+ActiveRecord::Schema.define(:version => 20081229100440) do
 
   create_table "buckets", :force => true do |t|
     t.string   "tag"
     t.string   "state"
     t.text     "boilerplate"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "milestones", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.integer  "lighthouse_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "search_results", :force => true do |t|
+    t.integer  "search_id"
+    t.integer  "ticket_number"
+    t.string   "title"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "searches", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "query"
+    t.string   "name"
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,6 +64,15 @@ ActiveRecord::Schema.define(:version => 20081228221135) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "tickets", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "number"
+    t.string   "title"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
