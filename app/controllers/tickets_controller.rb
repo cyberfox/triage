@@ -5,12 +5,14 @@ class TicketsController < ApplicationController
   def index
     @project = Project.find_by_lighthouse_project(current_user, params[:project_id])
     @bin = @project.bins.find {|bin| bin.id.to_s == params[:bin_id].to_s}
-    @tickets = Lighthouse::Ticket.find(:all, :params => { :project_id => @project.id, :q => @bin.query })
+    @cached_project = Project.find_by_lighthouse_id(@project.id)
+    @tickets = Ticket.search(@cached_project, @bin.query)
   end
 
   def show
     @project = Project.find_by_lighthouse_project(current_user, params[:project_id])
-    @ticket = Lighthouse::Ticket.find(params[:ticket_id], :params => { :project_id => @project.id})
+    @cached_project = Project.find_by_lighthouse_id(@project.id)
+    @ticket = Ticket.find_by_project_and_ticket(@cached_project, params[:ticket_id])
     @title = @ticket.title
     @users = @ticket.versions.collect(&:user_id).uniq
     @user_map = @users.inject({}) {|accum, user_id| accum[user_id] = Lighthouse::User.find(user_id); accum}

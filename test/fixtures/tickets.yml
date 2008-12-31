@@ -1,13 +1,33 @@
+<%
+def fixture_data(name)
+  render_binary("#{RAILS_ROOT}/test/fixtures/yaml/#{name}.yml")
+end
+
+def render_binary(filename)
+  data = File.open(filename,'rb').read
+  "!binary | #{[data].pack('m').gsub(/\n/,"\n    ")}\n"
+end
+%>
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  project_id: 1
-  number: 1
-  title: MyString
-  data: MyText
+snipe_error:
+  project: jbidwatcher
+  number: 254
+  title: Snipe error
+  data: empty
+  updated_at: <%= 2.minutes.ago %>
 
-two:
-  project_id: 1
-  number: 1
-  title: MyString
-  data: MyText
+out_of_date_snipe_error:
+  project: out_of_date
+  number: 254
+  title: Snipe error
+  data: <%= fixture_data('raw_ticket') %>
+  updated_at: <%= 2.days.ago %>
+
+up_to_date_snipe_error:
+  project: current
+  number: 254
+  title: Snipe error
+  data: <%= fixture_data('raw_ticket') %>
+  updated_at: <%= 10.hours.ago %>

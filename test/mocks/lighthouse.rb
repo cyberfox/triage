@@ -16,6 +16,7 @@ module Lighthouse
     if rval.is_a? Array
       rval = rval.collect { |x| OpenStruct.new(x) }
     end
+    return rval
   end
 
   class User
@@ -31,11 +32,7 @@ module Lighthouse
         when :all: return @@tickets
       else
         ticket = @@tickets.find { |ticket| ticket.number.to_s == condition.to_s }
-        if ticket
-          def ticket.versions
-            @@versions ||= Lighthouse.from_yaml(:ticket_254)
-          end if ticket.number.to_s == '254'
-        end
+        ticket = Lighthouse.from_yaml(:raw_ticket) if ticket.number.to_s == '254'
         ticket
       end
     end

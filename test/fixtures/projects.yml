@@ -24,3 +24,10 @@ out_of_date:
   name: JBidwatcher
   data: <%= fixture_data('project') %>
   updated_at: <%= 15.days.ago %>
+
+current:
+  lighthouse_id: 8037
+  user: old_password_holder
+  name: JBidwatcher
+  data: <%= fixture_data('project') %>
+  updated_at: <%= 10.hours.ago %>
