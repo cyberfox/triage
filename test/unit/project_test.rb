@@ -2,12 +2,12 @@ require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
   test "All projects for a user without projects comes back empty" do
-    projects = Project.all(users(:aaron))
+    projects = Project.all_lighthouse(users(:aaron))
     assert_equal [], projects
   end
 
   test "All projects for a user with projects does not come back empty" do
-    projects = Project.all(users(:quentin))
+    projects = Project.all_lighthouse(users(:quentin))
     assert_not_equal [], projects
     assert_equal "JBidwatcher", projects.first.name
   end
@@ -16,14 +16,14 @@ class ProjectTest < ActiveSupport::TestCase
     # Initialize the variable
     projects = nil
     assert_difference('users(:joe).projects.count') do
-      projects = Project.all(users(:joe))
+      projects = Project.all_lighthouse(users(:joe))
     end
     assert_not_equal [], projects
     assert_equal "JBidwatcher", projects.first.name
   end
 
   test "All projects for a user with an outdated project reloads & updates it" do
-    projects = Project.all(users(:jim))
+    projects = Project.all_lighthouse(users(:jim))
     assert_not_equal [], projects
     assert_equal "JBidwatcher", projects.first.name
 

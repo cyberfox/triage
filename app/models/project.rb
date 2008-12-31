@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :user
+  has_many :tickets
+
   UPDATE_FREQUENCY = 7.days.ago
 
   def self.init_lighthouse(user)
@@ -7,7 +9,7 @@ class Project < ActiveRecord::Base
     Lighthouse.token = user.api_key
   end
 
-  def self.all(user)
+  def self.all_lighthouse(user)
     projects = user.projects.find(:all)
     if projects.blank?
       init_lighthouse(user)

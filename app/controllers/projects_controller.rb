@@ -3,6 +3,6 @@ class ProjectsController < ApplicationController
   before_filter :get_token
 
   def index
-    @projects = Project.all(current_user)
+    @projects = Project.all_lighthouse(current_user)
   end
 end
