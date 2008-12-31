@@ -1,5 +1,5 @@
 --- !ruby/object:Gem::Specification 
-name: Caged-lighthouse-api
+name: cyberfox-lighthouse-api
 version: !ruby/object:Gem::Version 
   version: 1.0.0
 platform: ruby

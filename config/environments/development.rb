@@ -15,5 +15,5 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
-config.gem "Caged-lighthouse-api", :lib => 'lighthouse'
+config.gem "cyberfox-lighthouse-api", :lib => 'lighthouse'
 require 'lighthouse'
