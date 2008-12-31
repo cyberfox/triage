@@ -2,7 +2,9 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :tickets
 
-  UPDATE_FREQUENCY = 7.days.ago
+  def self.update_frequency
+    7.days.ago
+  end
 
   def self.init_lighthouse(user)
     Lighthouse.account = user.subdomain
@@ -22,7 +24,7 @@ class Project < ActiveRecord::Base
     else
       first = true
       real = projects.collect do |project|
-        if project.updated_at < UPDATE_FREQUENCY
+        if project.updated_at < update_frequency
           if first
             init_lighthouse(user)
             first = false
@@ -42,7 +44,7 @@ class Project < ActiveRecord::Base
 
   def self.find_by_lighthouse_project(user, project_number)
     project = find_by_user_id_and_lighthouse_id(user.id, project_number)
-    if project.blank? || project.updated_at < UPDATE_FREQUENCY
+    if project.blank? || project.updated_at < update_frequency
       init_lighthouse(user)
       real = Lighthouse::Project.find(project_number)
       if real
