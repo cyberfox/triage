@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  lighthouse_id: 1
+  website: MyString
+  job: MyString
+
+two:
+  name: MyString
+  lighthouse_id: 1
+  website: MyString
+  job: MyString
