@@ -3,10 +3,16 @@
 morgan:
   name: Morgan Schweers
   lighthouse_id: 13969
-  website: www.jbidwatcher.com
+  website: forum.jbidwatcher.com
   job: Primary Developer
 
 therese:
   name: Therese Telepski
   lighthouse_id: 18613
   website: www.art-promo.de
+
+random:
+  name: Random User
+  lighthouse_id: 1337
+  website: crazy.edd.ie
+  updated_at: <%= 8.days.ago %>

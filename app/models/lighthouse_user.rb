@@ -3,10 +3,10 @@ class LighthouseUser < ActiveRecord::Base
     7.days.ago
   end
 
-  def self.get(current_user, lh_id)
+  def self.get(lh_id)
     user = cached_user = find_by_lighthouse_id(lh_id)
     if cached_user.nil? || cached_user.updated_at < update_frequency
-      Lighthouse.account = current_user.subdomain
+      Lighthouse.account = 'rails'
       user = Lighthouse::User.find(lh_id)
     end
 
