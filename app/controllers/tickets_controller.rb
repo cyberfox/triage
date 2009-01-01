@@ -15,6 +15,6 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_project_and_ticket(@cached_project, params[:ticket_id])
     @title = @ticket.title
     @users = @ticket.versions.collect(&:user_id).uniq
-    @user_map = @users.inject({}) {|accum, user_id| accum[user_id] = Lighthouse::User.find(user_id); accum}
+    @user_map = @users.inject({}) {|accum, user_id| accum[user_id] = LighthouseUser.get(current_user, user_id); accum}
   end
 end

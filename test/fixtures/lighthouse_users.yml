@@ -1,13 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  lighthouse_id: 1
-  website: MyString
-  job: MyString
+morgan:
+  name: Morgan Schweers
+  lighthouse_id: 13969
+  website: www.jbidwatcher.com
+  job: Primary Developer
 
-two:
-  name: MyString
-  lighthouse_id: 1
-  website: MyString
-  job: MyString
+therese:
+  name: Therese Telepski
+  lighthouse_id: 18613
+  website: www.art-promo.de

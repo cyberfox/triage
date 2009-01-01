@@ -9,13 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081229100440) do
+ActiveRecord::Schema.define(:version => 20090101063525) do
 
   create_table "buckets", :force => true do |t|
     t.string   "tag"
     t.string   "state"
     t.text     "boilerplate"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lighthouse_users", :force => true do |t|
+    t.string   "name"
+    t.integer  "lighthouse_id"
+    t.string   "website"
+    t.string   "job"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

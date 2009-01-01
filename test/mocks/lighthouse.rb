@@ -21,7 +21,7 @@ module Lighthouse
 
   class User
     def self.find(condition)
-      OpenStruct.new(:name => 'Morgan Schweers')
+      OpenStruct.new(:name => 'Morgan Schweers', :subdomain => 'jbidwatcher', :website => 'www.jbidwatcher.com', :job => 'Primary Developer')
     end
   end
 
