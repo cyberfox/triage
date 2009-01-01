@@ -6,7 +6,7 @@ class LighthouseUser < ActiveRecord::Base
   def self.get(lh_id)
     user = cached_user = find_by_lighthouse_id(lh_id)
     if cached_user.nil? || cached_user.updated_at < update_frequency
-      Lighthouse.account = 'rails'
+      Lighthouse.account = 'rails' if Lighthouse.account.nil?
       user = Lighthouse::User.find(lh_id)
     end
 
