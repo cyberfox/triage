@@ -10,17 +10,20 @@ speed through those tickets.  The truth is that it usually takes me
 core set of 'investigate' issues quickly, then I could take my time
 with those.
 
-I decided I wanted a way to search for auctions (preferrably using the
+I decided I wanted a way to search for tickets (preferrably using the
 existing search bins), show the first ticket result, and click Skip,
-or one of 'details', 'investigate', 'acknowledged', 'feature',
-'duplicate', or 'invalid'.  This set of 'buckets' is what I use; the
-idea is that everybody'd have their own, and whether it changes the
-state of the ticket (and what to), would be customizable per-bucket.
+or one of '<code>details</code>', '<code>investigate</code>',
+'<code>acknowledged</code>', '<code>feature</code>',
+'<code>duplicate</code>', or '<code>invalid</code>'.  This set of
+buckets is what I use; the idea is that everybody'd have their own,
+and whether it changes the state of the ticket (and what to), or
+milestone would be customizable per-bucket.
 
 This magic application would then apply that tag, change it from 'new'
 to 'open' (or closed in the case of the last two), and move to showing
 the next ticket in the Lighthouse search results.  The buttons would
-be in the same place for each ticket, for minimal mouse movement.
+be in the same place for each ticket, for minimal and predictable
+mouse movement.
 
 Eventually, I'd love to offer niceties like applying tags to multiple
 items at once, perhaps with some simple gmail like multiple selection.
@@ -30,18 +33,27 @@ useful to many developers.
 
 For now, I'm working on the simple things.  Getting a list of projects,
 then a list of search bins, then a list of tickets, then an individual
-ticket.  That all works, right now.
+ticket.  That all works, right now, and caches the results in a local
+database.
 
-Next, I'll try adding a button to quickly tag something as 'investigate'.
+Searches aren't cached, but the ticket retrievals are, and cache
+expiry is handled using the updated_at field.
+
+Triage uses #to_yaml on the Lighthouse API objects to store original
+responses, so the app can manipulate the data without needing to
+differentiate between cached and non-cached, and so I don't have to
+re-implement the entire database structure of Lighthouse.  This
+required a small change to the Lighthouse API library, so it's bundled
+as a packed gem (cyberfox-lighthouse-api on http://gems.github.com ).
+
+Soon I'll try adding a button to quickly tag something as 'investigate'.
 
 Then maybe I'll skin the whole thing and make it look pretty.  :)
 Actually I'm not very good at making things look pretty, but I'm
-pretty good at making things functional.
+pretty good at making things functional...
 
 --  Morgan Schweers, Cyber*FOX*!
 
 p.s.  You'll need to create your own site_keys.rb in config/initializers
 with:
-
-<pre><code>REST_AUTH_SITE_KEY         = 'somereallylonghexstringincludedhere'
-REST_AUTH_DIGEST_STRETCHES = 10</code></pre>
+  rake auth:gen:site_key
