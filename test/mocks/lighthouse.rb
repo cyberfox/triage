@@ -12,7 +12,9 @@ module Lighthouse
   mattr_accessor :token, :account
 
   def self.from_yaml(details)
-    rval = YAML.load(open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml"))
+    body = open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml").read
+    body = ERB.new(body).result
+    rval = YAML.load(body)
     if rval.is_a? Array
       rval = rval.collect { |x| OpenStruct.new(x) }
     end
