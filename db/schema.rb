@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090101063525) do
+ActiveRecord::Schema.define(:version => 20090101224832) do
 
   create_table "buckets", :force => true do |t|
     t.string   "tag"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20090101063525) do
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "lighthouse_id"
   end
 
   create_table "projects", :force => true do |t|
