@@ -11,6 +11,14 @@ end
 module Lighthouse
   mattr_accessor :token, :account
 
+  def self.require_account
+    throw Exception.new('Account is not set!') if Lighthouse::account.nil?
+  end
+
+  def self.require_token
+    throw Exception.new('Token is not set!') if Lighthouse::token.nil?
+  end
+
   def self.from_yaml(details)
     body = open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml").read
     body = ERB.new(body).result
@@ -21,25 +29,19 @@ module Lighthouse
 
   class Milestone
     def self.find(condition, params)
-      case(params[:params][:project_id])
-      when 8037:
-          case(condition)
-          when 7468: Lighthouse.from_yaml(:milestone_full)
-          when 7919: Lighthouse.from_yaml(:milestone_beta)
-          when :all: Lighthouse.from_yaml(:milestones)
-          end
-      when 80371:
-          case(condition)
-          when 7468: Lighthouse.from_yaml(:milestone_full_recent)
-          when 7919: Lighthouse.from_yaml(:milestone_beta)
-          when :all: Lighthouse.from_yaml(:milestones_ood)
-          end
+      Lighthouse.require_account
+      Lighthouse.require_token
+      case(condition)
+      when 7468: Lighthouse.from_yaml(:milestone_full)
+      when 7919: Lighthouse.from_yaml(:milestone_beta)
+      when :all: Lighthouse.from_yaml(:milestones)
       end
     end
   end
 
   class User
     def self.find(condition)
+      Lighthouse.require_account
       if(condition != 2989)
         OpenStruct.new(:name => 'Morgan Schweers', :website => 'www.jbidwatcher.com', :job => 'Primary Developer')
       else
@@ -50,6 +52,9 @@ module Lighthouse
 
   class Ticket
     def self.find(condition, params)
+      Lighthouse.require_account
+      Lighthouse.require_token
+
       @@tickets ||= Lighthouse.from_yaml(:tickets)
       case condition
         when :all: return @@tickets
@@ -63,8 +68,8 @@ module Lighthouse
 
   class Project
     def self.init
-      throw Exception.new('Account is not set!') if Lighthouse::account.nil?
-      throw Exception.new('Token is not set!') if Lighthouse::token.nil?
+      Lighthouse.require_account
+      Lighthouse.require_token
       @@projects ||= Lighthouse.from_yaml(:projects)
     end
 
