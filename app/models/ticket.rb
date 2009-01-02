@@ -1,4 +1,6 @@
 class Ticket < ActiveRecord::Base
+  include Caching
+
   belongs_to :project
 
   def self.search(project, query, page=1)
@@ -10,16 +12,8 @@ class Ticket < ActiveRecord::Base
 
   def self.find_by_project_and_ticket(project, ticket_number, latest_update = nil)
     cached = project.tickets.find_by_number(ticket_number)
-    if cached
-      if  (latest_update && latest_update > cached.updated_at) ||
-          (cached.updated_at < update_frequency)
-        cached.refresh
-      else
-        YAML.load(cached.data)
-      end
-    else
-      create_from_lighthouse(project, ticket_number)
-    end
+    cached.updated_at = Time.at(0) if cached && latest_update && latest_update > cached.updated_at
+    optional_refresh(cached, project, ticket_number)
   end
 
   # This takes a long time; it first loads the search-level ticket information

@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :user
   has_many :tickets
+  has_many :milestones
 
   def self.update_frequency
     7.days.ago
