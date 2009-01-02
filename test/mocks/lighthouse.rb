@@ -15,11 +15,28 @@ module Lighthouse
     body = open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml").read
     body = ERB.new(body).result
     rval = YAML.load(body)
-    if rval.is_a? Array
-      rval = rval.collect { |x| OpenStruct.new(x) }
-    end
+    rval = rval.collect { |x| x.instance_of?(OpenStruct) ? x : OpenStruct.new(x) } if rval.is_a? Array
     return rval
   end
+
+#  class Milestone
+#    def self.find(condition, params)
+#      case(params[:project_id])
+#      when 8037:
+#          case(condition)
+#          when 7468: Lighthouse.from_yaml(:milestone_full)
+#          when 7919: Lighthouse.from_yaml(:milestone_beta)
+#          when :all: Lighthouse.from_yaml(:milestones)
+#          end
+#      when 80371:
+#          case(condition)
+#          when 7468: Lighthouse.from_yaml(:milestone_full_recent)
+#          when 7919: Lighthouse.from_yaml(:milestone_beta)
+#          when :all: Lighthouse.from_yaml(:milestones_ood)
+#          end
+#      end
+#    end
+#  end
 
   class User
     def self.find(condition)
@@ -55,8 +72,11 @@ module Lighthouse
       init
       case condition
       when :all:
-          return [] if Lighthouse.account == 'empty'
-          return @@projects
+          if Lighthouse.account == 'empty'
+            return []
+          else
+            return @@projects
+          end
       else
         return nil if Lighthouse.account == 'empty'
         project = @@projects.find { |project| project.id.to_s == condition.to_s }
