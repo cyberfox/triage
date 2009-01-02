@@ -1,11 +1,14 @@
+<% require "#{Rails.root}/test/fixtures/binary_fixtures" %>
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  project_id: 1
-  title: MyString
-  data: MyText
+beta_release:
+  project: jbidwatcher
+  lighthouse_id: 7919
+  title: 2.0 Beta Release
+  data: <%= fixture_data :milestone_beta %>
 
-two:
-  project_id: 1
-  title: MyString
-  data: MyText
+full_release:
+  project: jbidwatcher
+  lighthouse_id: 7468
+  title: JBidwatcher 2.0 Full Release
+  data: <%= fixture_data :milestone_full %>
