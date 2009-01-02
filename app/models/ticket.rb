@@ -42,10 +42,8 @@ class Ticket < ActiveRecord::Base
     end
   end
 
-  def refresh
-    ticket = Ticket.retrieve(project, number)
-
-    # Assumption: Ticket numbers don't change.
+  def update_from_lighthouse(ticket)
+    # Assumption: Project & Ticket numbers don't change.
     update_attributes(:title => ticket.title, :data => ticket.to_yaml)
     return ticket
   end
@@ -55,17 +53,11 @@ class Ticket < ActiveRecord::Base
     1.day.ago
   end
 
-  def self.create_from_lighthouse(project, ticket_number)
-    ticket = retrieve(project, ticket_number)
+  def self.create_from_lighthouse(project, ticket)
     project.tickets.create(:number => ticket.number,
                            :title => ticket.title,
                            :data => ticket.to_yaml)
     return ticket
-  end
-
-  def self.init_lighthouse(project)
-    Lighthouse.account = project.user.subdomain
-    Lighthouse.token = project.user.api_key
   end
 
   def self.query(project, q, page)
