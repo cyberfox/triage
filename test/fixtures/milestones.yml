@@ -12,3 +12,24 @@ full_release:
   lighthouse_id: 7468
   title: JBidwatcher 2.0 Full Release
   data: <%= fixture_data :milestone_full %>
+
+beta_out_of_date:
+  project: out_of_date
+  lighthouse_id: 7919
+  title: 2.0 Beta Release
+  data: <%= fixture_data :milestone_beta_ood %>
+  updated_at: <%= 2.weeks.ago %>
+
+full_out_of_date:
+  project: out_of_date
+  lighthouse_id: 7468
+  title: JBidwatcher 2.0 Full
+  data: <%= fixture_data :milestone_full_ood %>
+  updated_at: <%= 2.days.ago %>
+
+beta_missing:
+  project: missing
+  title: 2.0 Beta!
+  lighthouse_id: 7919
+  data: <%= fixture_data :milestone_beta %>
+  updated_at: <%= 12.hours.ago %>

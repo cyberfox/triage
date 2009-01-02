@@ -1,0 +1,15 @@
+--- !ruby/object:OpenStruct
+table: 
+  :permalink: 2-0-beta-release
+  :updated_at: <%= 2.weeks.ago %>
+  :tickets_count: 36
+  :title: 2.0 Beta Release
+  :goals: Public release of the 2.0 series.
+  :id: 7919
+  :open_tickets_count: 0
+  :created_at: 2008-03-10 08:25:21 Z
+  :due_on: 2008-03-31 07:00:00 Z
+  :goals_html: |-
+    <div><p>
+    Public release of the 2.0 series to a broader audience.
+    </p></div>

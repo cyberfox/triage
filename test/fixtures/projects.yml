@@ -1,7 +1,4 @@
 <% require "#{Rails.root}/test/fixtures/binary_fixtures" %>
-
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 jbidwatcher:
   lighthouse_id: 8037
   user: quentin
@@ -15,6 +12,13 @@ out_of_date:
   name: JBidwatcher
   data: <%= fixture_data('project') %>
   updated_at: <%= 15.days.ago %>
+
+missing:
+  lighthouse_id: 8037
+  user: bob
+  name: Missing Project
+  data: <%= fixture_data('project') %>
+  updated_at: <%= 3.days.ago %>
 
 current:
   lighthouse_id: 8037

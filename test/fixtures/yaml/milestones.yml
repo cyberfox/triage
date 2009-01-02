@@ -3,7 +3,7 @@
   table: 
     :permalink: 2-0-beta-release
     :tickets_count: 36
-    :updated_at: 2008-06-01 08:34:07 Z
+    :updated_at: <%= 1.week.ago.to_datetime %>
     :title: 2.0 Beta Release
     :goals: Public release of the 2.0 series to a broader audience.
     :id: 7919
@@ -18,7 +18,7 @@
   table: 
     :permalink: 2-0-full-release
     :tickets_count: 406
-    :updated_at: 2008-12-31 10:48:12 Z
+    :updated_at: <%= 1.day.ago.to_datetime %>
     :title: 2.0 Full Release
     :goals: Get the final release of 2.0 out the door.  :)
     :id: 7468

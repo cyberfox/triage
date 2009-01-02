@@ -19,24 +19,24 @@ module Lighthouse
     return rval
   end
 
-#  class Milestone
-#    def self.find(condition, params)
-#      case(params[:project_id])
-#      when 8037:
-#          case(condition)
-#          when 7468: Lighthouse.from_yaml(:milestone_full)
-#          when 7919: Lighthouse.from_yaml(:milestone_beta)
-#          when :all: Lighthouse.from_yaml(:milestones)
-#          end
-#      when 80371:
-#          case(condition)
-#          when 7468: Lighthouse.from_yaml(:milestone_full_recent)
-#          when 7919: Lighthouse.from_yaml(:milestone_beta)
-#          when :all: Lighthouse.from_yaml(:milestones_ood)
-#          end
-#      end
-#    end
-#  end
+  class Milestone
+    def self.find(condition, params)
+      case(params[:params][:project_id])
+      when 8037:
+          case(condition)
+          when 7468: Lighthouse.from_yaml(:milestone_full)
+          when 7919: Lighthouse.from_yaml(:milestone_beta)
+          when :all: Lighthouse.from_yaml(:milestones)
+          end
+      when 80371:
+          case(condition)
+          when 7468: Lighthouse.from_yaml(:milestone_full_recent)
+          when 7919: Lighthouse.from_yaml(:milestone_beta)
+          when :all: Lighthouse.from_yaml(:milestones_ood)
+          end
+      end
+    end
+  end
 
   class User
     def self.find(condition)
