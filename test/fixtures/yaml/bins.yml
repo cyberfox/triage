@@ -1,31 +1,34 @@
 --- 
-- 
-  name: New tickets
-  tickets_count: 120
-  default: false
-  updated_at: 2008-11-13 09:35:27 Z
-  shared: true
-  id: 5933
-  user_id: 13969
-  query: milestone:next state:new sort:oldest
-  position: 1
-- 
-  name: Open tickets
-  tickets_count: 227
-  default: false
-  updated_at: 2008-11-13 09:35:46 Z
-  shared: true
-  id: 6109
-  user_id: 13969
-  query: state:open milestone:next sort:oldest
-  position: 2
-- 
-  name: All new
-  tickets_count: 127
-  default: false
-  updated_at: 2008-07-07 09:28:16 Z
-  shared: true
-  id: 7709
-  user_id: 13969
-  query: state:new
-  position: 3
+- !ruby/object:OpenStruct 
+  table: 
+    :user_id: 13969
+    :position: 1
+    :tickets_count: 120
+    :name: New tickets
+    :shared: true
+    :default: false
+    :updated_at: 2008-11-13 09:35:27 Z
+    :id: 5933
+    :query: milestone:next state:new sort:oldest
+- !ruby/object:OpenStruct 
+  table: 
+    :user_id: 13969
+    :position: 2
+    :tickets_count: 227
+    :name: Open tickets
+    :shared: true
+    :default: false
+    :updated_at: 2008-11-13 09:35:46 Z
+    :id: 6109
+    :query: state:open milestone:next sort:oldest
+- !ruby/object:OpenStruct 
+  table: 
+    :user_id: 13969
+    :position: 3
+    :tickets_count: 127
+    :name: All new
+    :shared: true
+    :default: false
+    :updated_at: 2008-07-07 09:28:16 Z
+    :id: 7709
+    :query: state:new

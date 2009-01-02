@@ -1,0 +1,84 @@
+--- 
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: 2-0-beta-release
+    :tickets_count: 36
+    :updated_at: <%= Time.now %>
+    :title: 2.0 Beta Release
+    :goals: Public release of the 2.0 series to a broader audience.
+    :id: 7919
+    :open_tickets_count: 0
+    :created_at: 2008-03-10 08:25:21 Z
+    :due_on: 2008-03-31 07:00:00 Z
+    :goals_html: |-
+      <div><p>
+      Public release of the 2.0 series to a broader audience.
+      </p></div>
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: 2-0-beta-4
+    :tickets_count: 3
+    :updated_at: 2009-01-02 01:13:40 Z
+    :title: 2.0 Beta 4
+    :goals: Get an intermediate beta out so folks can beat on it, and to resolve a bunch of the existing issues with 2.0 beta 3...
+    :id: 14301
+    :open_tickets_count: 0
+    :created_at: 2008-07-07 07:50:31 Z
+    :due_on: 2008-07-11 07:00:00 Z
+    :goals_html: |-
+      <div><p>Get an intermediate beta out so folks can beat on it, and to
+      resolve a bunch of the existing issues with 2.0 beta 3...</p></div>
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: 2-0-full-release
+    :tickets_count: 406
+    :updated_at: 2008-12-31 10:48:12 Z
+    :title: 2.0 Full Release
+    :goals: Get the final release of 2.0 out the door.  :)
+    :id: 7468
+    :open_tickets_count: 231
+    :created_at: 2008-02-22 23:06:48 Z
+    :due_on: 2008-09-30 07:00:00 Z
+    :goals_html: <div><p>Get the final release of 2.0 out the door. :)</p></div>
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: my-jbidwatcher
+    :tickets_count: 2
+    :updated_at: 2008-08-26 19:51:51 Z
+    :title: My JBidwatcher
+    :goals: Create a web app that is useful for JBidwatcher users to view (and maybe alter) their auctions both remotely and safely, without worrying about firewalls or NAT.
+    :id: 14288
+    :open_tickets_count: 2
+    :created_at: 2008-07-07 01:39:15 Z
+    :due_on: 2008-09-30 07:00:00 Z
+    :goals_html: <div><p>Create a web app that is useful for JBidwatcher users to view (and maybe alter) their auctions both remotely and safely, without worrying about firewalls or NAT.</p></div>
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: support
+    :tickets_count: 62
+    :updated_at: 2008-10-24 21:49:59 Z
+    :title: Support
+    :goals: This is a catch-all bucket for support issues and bug reports that don't have a specific milestone release targeted.
+    :id: 7469
+    :open_tickets_count: 29
+    :created_at: 2008-02-22 23:08:54 Z
+    :due_on: 2013-12-31 08:00:00 Z
+    :goals_html: |-
+      <div><p>
+      This is a catch-all bucket for support issues and bug reports that don't have a specific milestone release targeted.
+      </p></div>
+- !ruby/object:OpenStruct 
+  table: 
+    :permalink: features
+    :tickets_count: 50
+    :updated_at: 2008-12-27 10:37:26 Z
+    :title: Features
+    :goals: Feature requests; a source of ideas that can be moved into other milestones when it becomes apparent how to implement them.
+    :id: 7471
+    :open_tickets_count: 45
+    :created_at: 2008-02-22 23:30:28 Z
+    :due_on: 2013-12-31 08:00:00 Z
+    :goals_html: |-
+      <div><p>
+      Feature requests; a source of ideas that can be moved into other milestones when it becomes apparent how to implement them.
+      </p></div>

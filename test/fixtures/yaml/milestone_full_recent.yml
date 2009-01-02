@@ -1,0 +1,12 @@
+--- !ruby/object:OpenStruct
+table: 
+  :permalink: 2-0-full-release
+  :updated_at: <%= Time.now %>
+  :tickets_count: 406
+  :title: 2.0 Full Release
+  :goals: Get the final release of 2.0 out the door.  :)
+  :id: 7468
+  :open_tickets_count: 231
+  :created_at: 2008-02-22 23:06:48 Z
+  :due_on: 2008-09-30 07:00:00 Z
+  :goals_html: <div><p>Get the final release of 2.0 out the door. :)</p></div>
