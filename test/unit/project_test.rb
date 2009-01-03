@@ -45,7 +45,7 @@ class ProjectTest < ActiveSupport::TestCase
     project = Project.find_by_lighthouse_project(users(:jim), 8037)
     assert_not_nil project
     assert_equal "JBidwatcher", project.name
-    assert users(:jim).projects.first.updated_at > 1.second.ago
+    assert users(:jim).projects.first.updated_at > 2.seconds.ago
   end
 
   test "Finding a specific lighthouse project for a user that has none should return nil" do
