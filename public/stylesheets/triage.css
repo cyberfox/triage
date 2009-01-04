@@ -1,0 +1,63 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#top_line {
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  background-color: #dc8c2b;
+  width: 100%;
+}
+
+#status_bar .logo {
+  color: #7a1f00
+}
+
+.logo {
+  color: #dc8c2b;
+}
+
+#status_bar {
+  margin-left: 2px;
+}
+
+#user_controls {
+  float: right;
+  margin-right: 2px;
+}
+
+.disabled_project_select {
+  color: #c0c0c0;
+}
+
+#minimized {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.byline {
+  margin-right: 3px;
+}
+
+.byline a {
+  text-decoration: none;
+}
+
+.byline a:hover {
+  text-decoration: underline;
+}
+
+.flash {
+  width: 100%;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  background-color: #c0c080;
+  text-align: center;
+}
+
+#main {
+  margin-left: 2px;
+  margin-right: 2px;
+}

@@ -4,13 +4,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Triage | <%= controller.singular_class_name(controller).gsub('_controller', '').capitalize %> | <%= controller.action_name %></title>
+  <title>Triage | <%= controller.singular_class_name(controller).gsub('_controller', '').capitalize %> <% if controller.action_name != 'index' %>| <%= controller.action_name %><% end %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'triage' %>
 </head>
 <body>
 
-<p style="color: green"><%= flash[:notice] %></p>
+<div id="top_line">
+  <span id="user_controls">
+    Settings | <%= logged_in? ? link_to('Sign Out', logout_path) : link_to('Sign In', login_path) %>
+  </span>
+<% if logged_in? -%>
+  <div id="status_bar">
+    <%= current_user.name.empty? ? current_user.login : current_user.name %> |
+    <%= @current_project ? @current_project.name : "No project selected" %> |
+    <span class="disabled_project_select">Choose a project</span>
+  </div>
+  <%= render :partial => '/shared/byline', :locals => { :location => 'minimized' } %>
+<% else -%>
+  <%= render :partial => '/shared/byline', :locals => { :location => 'status_bar' } %>
+<% end -%>
+</div>
+<% if flash[:notice] %><div class="flash"><span style="color: green"><%= flash[:notice] %></span></div><% end %>
 
+<div id="main">
 <%= yield  %>
-
+</div>
 </body>
 </html>
