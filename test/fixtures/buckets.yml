@@ -21,6 +21,7 @@ feature:
   tag: featurerequest
   state: open
   user: quentin
+  milestone: features
 
 duplicate:
   tag: duplicate

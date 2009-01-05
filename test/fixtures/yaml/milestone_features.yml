@@ -1,0 +1,12 @@
+--- !ruby/object:OpenStruct
+table: 
+  :permalink: features
+  :updated_at: 2008-12-27 10:37:26 Z
+  :tickets_count: 50
+  :title: Features
+  :goals: Feature requests; a source of ideas that can be moved into other milestones when it becomes apparent how to implement them.
+  :id: 7471
+  :open_tickets_count: 45
+  :created_at: 2008-02-22 23:30:28 Z
+  :due_on: 2013-12-31 08:00:00 Z
+  :goals_html: <div><p>Feature requests; a source of ideas that can be moved into other milestones when it becomes apparent how to implement them.</p></div>

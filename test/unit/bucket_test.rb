@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class BucketTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "Applying a bucket to a ticket updates that ticket" do
+    buckets(:feature).apply(tickets(:snipe_error))
   end
 end

@@ -13,6 +13,12 @@ full_release:
   title: JBidwatcher 2.0 Full Release
   data: <%= fixture_data :milestone_full %>
 
+features:
+  project: jbidwatcher
+  lighthouse_id: 7471
+  title: Features
+  data: <%= fixture_data :milestone_features %>
+
 beta_out_of_date:
   project: out_of_date
   lighthouse_id: 7919
