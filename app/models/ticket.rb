@@ -49,7 +49,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def raw
-    optional_refresh(self, project, number)
+    Ticket.optional_refresh(self, project, number)
   end
 
   private
