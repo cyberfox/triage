@@ -1,6 +1,19 @@
 require 'yaml'
 require 'ostruct'
 
+require "#{Rails.root}/app/models/ticket"
+
+# Redefine the 'raw' method (and 'tags' on that) in a way that
+# preserves the data used afterwards, so we can check updates.
+
+class Ticket < ActiveRecord::Base
+  def raw
+    ticket = @ticket || YAML.load(data)
+    def ticket.tags; @test_tags ||= tag.split(' '); end
+    @ticket = ticket
+  end
+end
+
 OpenStruct.class_eval do
   undef :id, :type
   def bins

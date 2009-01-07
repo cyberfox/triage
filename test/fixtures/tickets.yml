@@ -9,6 +9,13 @@ snipe_error:
   data: empty
   updated_at: <%= 2.minutes.ago %>
 
+bad_sort:
+  project: jbidwatcher
+  number: 580
+  title: Sorting with columns 'Current' or 'Price' give unsorted result
+  data: <%= fixture_data('bad_sort_ticket') %>
+  updated_at: <%= 10.minutes.ago %>
+
 out_of_date_snipe_error:
   project: out_of_date
   number: 254

@@ -1,0 +1,92 @@
+---  !ruby/object:OpenStruct
+table:
+  :permalink: sorting-with-columns-current-or-price-give-unsorted-result
+  :updated_at: 2009-01-06 19:22:14 Z
+  :title: Sorting with columns 'Current' or 'Price' give unsorted result
+  :number: 580
+  :creator_id: 42487
+  :attachments_count: 1
+  :tag: 2.0beta8 columns currency interface sorting
+  :priority: 622
+  :versions: 
+  - !ruby/object:OpenStruct
+    table:
+      :permalink: sorting-with-columns-current-or-price-give-unsorted-result
+      :updated_at: 2009-01-06 07:08:30 Z
+      :body_html: |-
+        <div><p>If I try to sort lines with Current or Price column, result is
+        unknown sort order. (check the picture)</p>
+        <p>I would understand IF those different currencies would be sorted
+        as "subgroups" (and inside that subgroup those lines would be
+        sorted) but now there is no logic how system sorts. Of course BEST
+        solution would be that, that user could put "home currency f.ex.
+        &#8364;" and then tell system that US$=&#8364; 1.4=1,
+        &pound;=&#8364; 1.04=1 and so on... MOST greatest feature would be
+        that system automatically checks some exchange site like <a href="http://www.xe.com">http://www.xe.com</a> drag out XML information
+        of exchange values between different currencies.</p>
+        <hr>
+        <p>java version "1.6.0_11" Java(TM) SE Runtime Environment (build
+        1.6.0_11-b03) Java HotSpot(TM) Client VM (build 11.0-b16, mixed
+        mode, sharing) JBidwatcher 2.0(Beta8)</p>
+        <h2>Linux gandalf 2.6.23.14 <a href="/projects/8037/tickets/1" title="Ticket #1">#1</a> SMP PREEMPT Sun Jan 4 10:21:29 EET 2009
+        i686 AMD Athlon(tm) 64 Processor 3400+ AuthenticAMD GNU/Linux</h2></div>
+      :project_id: 8037
+      :title: Sorting with columns 'Current' or 'Price' give unsorted result
+      :number: 580
+      :body: "If I try to sort lines with Current or Price column, result is unknown sort \n\
+        order. (check the picture)\n\n\
+        I would understand IF those different currencies would be sorted as \"subgroups\" (and inside that subgroup those lines would be sorted) but now there is no logic how system sorts.\n\
+        Of course BEST solution would be that, that user could put \"home currency f.ex. \xE2\x82\xAC\" and then tell system that US$=\xE2\x82\xAC 1.4=1, \xC2\xA3=\xE2\x82\xAC 1.04=1 and so on... MOST greatest feature would be that system automatically checks some exchange site like http://www.xe.com drag out XML information of exchange values between different currencies.\n\n\
+        ---------------------------------\n\
+        java version \"1.6.0_11\" Java(TM) SE Runtime Environment (build 1.6.0_11-b03) Java HotSpot(TM) Client VM (build 11.0-b16, mixed mode, sharing)\n\
+        JBidwatcher 2.0(Beta8)\n\
+        Linux gandalf 2.6.23.14 #1 SMP PREEMPT Sun Jan 4 10:21:29 EET 2009 i686 AMD Athlon(tm) 64 Processor 3400+ AuthenticAMD GNU/Linux\n\
+        ----------------------------------"
+      :creator_id: 42487
+      :attachments_count: 0
+      :tag: 2.0beta8 columns currency interface sorting
+      :type: Ticket::Version
+      :closed: false
+      :assigned_user_id: 13969
+      :user_id: 42487
+      :state: new
+      :created_at: 2009-01-06 07:08:25 Z
+      :milestone_id: 7468
+  - !ruby/object:OpenStruct
+    table:
+      :permalink: sorting-with-columns-current-or-price-give-unsorted-result
+      :updated_at: 2009-01-06 19:22:14 Z
+      :body_html: |-
+        <div><p>In JBW 2.0 Beta 10 the sort oder is going to work again, however
+        unfortunately some more debugging has to bed done to get bidding
+        and sniping going again internationally.</p>
+        <p>Please see e.g. ticket <a href="/projects/8037/tickets/508" title="Ticket #508">#508</a> for explanation and details.</p>
+        <p>Sincerely,</p>
+        <p>Therese</p></div>
+      :project_id: 8037
+      :title: Sorting with columns 'Current' or 'Price' give unsorted result
+      :number: 580
+      :body: |-
+        In JBW 2.0 Beta 10 the sort oder is going to work again, however unfortunately some more debugging has to bed done to get bidding and sniping going again internationally.
+        
+        Please see e.g. ticket #508 for explanation and details.
+        
+        Sincerely,
+        
+        Therese
+      :creator_id: 42487
+      :attachments_count: 1
+      :tag: 2.0beta8 columns currency interface sorting
+      :type: Ticket::Version
+      :closed: false
+      :assigned_user_id: 13969
+      :user_id: 18613
+      :state: new
+      :created_at: 2009-01-06 19:22:07 Z
+      :milestone_id: 7468
+  :closed: false
+  :assigned_user_id: 13969
+  :user_id: 18613
+  :state: new
+  :created_at: 2009-01-06 07:08:25 Z
+  :milestone_id: 7468

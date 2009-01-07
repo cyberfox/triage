@@ -39,6 +39,10 @@ class Test::Unit::TestCase
     YAML.load(open("#{Rails.root}/test/fixtures/yaml/#{details.to_s}.yml"))
   end
 
+  def deny(exp, message=nil)
+    assert !exp, message
+  end
+
   def login_as(username)
     @request.session[:user_id] = users(username).id
   end

@@ -48,6 +48,10 @@ class Ticket < ActiveRecord::Base
     return ticket
   end
 
+  def raw
+    optional_refresh(self, project, number)
+  end
+
   private
   def self.update_frequency
     1.day.ago
