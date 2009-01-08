@@ -57,3 +57,6 @@ pretty good at making things functional...
 p.s.  You'll need to create your own site_keys.rb in config/initializers
 with:
   rake auth:gen:site_key
+
+<center><small>Copyright (c) 2009 Morgan Schweers, CyberFOX Software, Inc.
+Under the MIT License</small></center>
