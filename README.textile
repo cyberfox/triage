@@ -58,5 +58,4 @@ p.s.  You'll need to create your own site_keys.rb in config/initializers
 with:
 <pre><code>  rake auth:gen:site_key</code></pre>
 
-<p align="center"><small>Copyright (c) 2009 Morgan Schweers, CyberFOX Software, Inc.</small></p>
-<p align="center"><small>Under the MIT License</small></p>
+p=. <small>Copyright (c) 2009 Morgan Schweers, CyberFOX Software, Inc. under the MIT License</small>
