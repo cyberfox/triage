@@ -25,7 +25,7 @@
   <%= render :partial => '/shared/byline', :locals => { :location => 'status_bar' } %>
 <% end -%>
 </div>
-<% if flash[:notice] %><div class="flash"><span style="color: green"><%= flash[:notice] %></span></div><% end %>
+<% if flash[:notice] %><div class="flash"><span class="flash_notice"><%= flash[:notice] %></span></div><% end %>
 
 <div id="main">
 <%= yield  %>

@@ -57,6 +57,14 @@ body {
   text-align: center;
 }
 
+.flash_notice {
+  color: green;
+}
+
+.indent {
+  margin-left: 3px;
+}
+
 #main {
   margin-left: 2px;
   margin-right: 2px;
