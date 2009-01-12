@@ -3,6 +3,7 @@ require 'test_helper'
 class MilestoneTest < ActiveSupport::TestCase
   test "Can retrieve all milestones for a project" do
     milestones = Milestone.all_lighthouse(projects(:jbidwatcher))
+    assert_not_equal 0, milestones.length, "There should be at least 1 milestone for the :jbidwatcher project."
   end
 
   test "Retrieving all milestones when one is missing adds it" do
