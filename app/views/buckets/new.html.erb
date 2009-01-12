@@ -7,18 +7,22 @@
     <%= f.label :tag %><br />
     <%= f.text_field :tag %>
   </p>
+
   <p>
     <%= f.label :state %><br />
-    <%= f.text_field :state %>
+    <%= select_tag :state, options_for_select(@states, "-do not change") %>
   </p>
+
+  <p>
+    <%= f.label :milestone %><br />
+    <%= collection_select :milestone, :title, @milestones, :id, :title, options ={:prompt => "-do not change"} %>
+  </p>
+
   <p>
     <%= f.label :boilerplate %><br />
     <%= f.text_area :boilerplate %>
   </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
+
   <p>
     <%= f.submit "Create" %>
   </p>

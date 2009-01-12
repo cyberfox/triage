@@ -3,6 +3,13 @@ class Project < ActiveRecord::Base
   has_many :tickets
   has_many :milestones
 
+  def states
+    @states ||= begin
+                  ydata = YAML.load(data)
+                  "#{ydata.open_states_list},#{ydata.closed_states_list}".split(',')
+                end
+  end
+
   def self.update_frequency
     7.days.ago
   end

@@ -4,3 +4,12 @@
 <li><%= link_to(project.name, bins_path(:project_id => project.id, :action => 'index')) %></li>
 <% end -%>
 </ul>
+<h1>Bucket Management</h1>
+<ul>
+<% if @buckets -%>
+<% @buckets.each do |bucket| -%>
+<li><%= link_to(bucket.tag, edit_bucket_path(:id => bucket.id)) %></li>
+<% end -%>
+<% end -%>
+</ul>
+<%= link_to 'Create new bucket', new_bucket_path %>

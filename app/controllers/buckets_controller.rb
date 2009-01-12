@@ -25,6 +25,9 @@ class BucketsController < ApplicationController
   # GET /buckets/new.xml
   def new
     @bucket = Bucket.new
+    project = current_user.projects.first
+    @milestones = project.milestones
+    @states = ["-do not change"] + project.states
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +43,7 @@ class BucketsController < ApplicationController
   # POST /buckets
   # POST /buckets.xml
   def create
-    @bucket = Bucket.new(params[:bucket])
+    @bucket = current_user.buckets.new(params[:bucket])
 
     respond_to do |format|
       if @bucket.save

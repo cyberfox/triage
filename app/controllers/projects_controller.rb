@@ -4,5 +4,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all_lighthouse(current_user)
+    @buckets = current_user.buckets
   end
 end
