@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+quentins_key:
+  token: foo
+  subdomain: bar
+  user: quentin
+
+aarons_key:
+  token: invalid
+  subdomain: empty
+  user: aaron
+
+joes_key:
+  token: valid
+  subdomain: initially_empty
+  user: joe
+
+jims_key:
+  token: valid
+  subdomain: foo
+  user: jim
+
+bobs_key:
+  token: valid
+  subdomain: foo
+  user: bob
+
+old_user_key:
+  token: foo
+  subdomain: bar
+  user: old_password_holder

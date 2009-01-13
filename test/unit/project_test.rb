@@ -3,6 +3,7 @@ require 'test_helper'
 class ProjectTest < ActiveSupport::TestCase
   test "All projects for a user without projects comes back empty" do
     projects = Project.all_lighthouse(users(:aaron))
+    assert_not_nil projects
     assert_equal [], projects
   end
 
@@ -18,6 +19,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert_difference('users(:joe).projects.count') do
       projects = Project.all_lighthouse(users(:joe))
     end
+    assert_not_nil projects
     assert_not_equal [], projects
     assert_equal "JBidwatcher", projects.first.name
   end

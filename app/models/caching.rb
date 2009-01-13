@@ -20,8 +20,8 @@ module Caching
     end
 
     def init_lighthouse(project)
-      Lighthouse.account = project.user.subdomain
-      Lighthouse.token = project.user.api_key
+      Lighthouse.account = project.api_key.subdomain
+      Lighthouse.token = project.api_key.token
     end
   end
 

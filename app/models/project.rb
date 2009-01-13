@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :user
+  belongs_to :api_key
   has_many :tickets
   has_many :milestones
 
@@ -14,30 +15,27 @@ class Project < ActiveRecord::Base
     7.days.ago
   end
 
-  def self.init_lighthouse(user)
-    Lighthouse.account = user.subdomain
-    Lighthouse.token = user.api_key
-  end
-
   def self.all_lighthouse(user)
     projects = user.projects.find(:all)
     if projects.blank?
-      init_lighthouse(user)
-      real = Lighthouse::Project.find(:all)
-      real.each do |project|
-        user.projects.create(:lighthouse_id => project.id,
-                       :name => project.name,
-                       :data => project.to_yaml)
+      keys = user.api_keys
+      accum = []
+      keys.each do |key|
+        real = key.lighthouse.Project.find(:all)
+        accum = accum + real
+        real.each do |project|
+          user.projects.create(:lighthouse_id => project.id,
+                               :name => project.name,
+                               :data => project.to_yaml,
+                               :api_key => key)
+        end
       end
+      real = accum
     else
       first = true
       real = projects.collect do |project|
         if project.updated_at < update_frequency
-          if first
-            init_lighthouse(user)
-            first = false
-          end
-          actual = Lighthouse::Project.find(project.lighthouse_id)
+          actual = project.api_key.lighthouse.Project.find(project.lighthouse_id)
           project.data = actual.to_yaml
           project.updated_at = Time.now
           project.save
@@ -52,9 +50,20 @@ class Project < ActiveRecord::Base
 
   def self.find_by_lighthouse_project(user, project_number)
     project = find_by_user_id_and_lighthouse_id(user.id, project_number)
+    real = nil
     if project.blank? || project.updated_at < update_frequency
-      init_lighthouse(user)
-      real = Lighthouse::Project.find(project_number)
+      if project.blank?
+        user.api_keys.each do |key|
+          begin
+            real ||= key.lighthouse.Project.find(project_number)
+          rescue ActiveResource::ResourceNotFound => rnf
+            real = nil
+          end
+        end
+      else
+        real = project.api_key.lighthouse.Project.find(project_number)
+      end
+
       if real
         if project.blank?
           user.projects.create(:lighthouse_id => real.id,

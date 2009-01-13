@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  after_filter :store_current_project
   include AuthenticatedSystem
   helper :all # include all helpers, all the time
 
@@ -14,11 +15,23 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   filter_parameter_logging :password
 
+  protected
+  def current_project
+    @project = Project.find_by_id(session[:project_id]) if session[:project_id]
+    return @project
+  end
+
   private
+  def store_current_project
+    session[:project_id] = @project ? @project.id : nil;
+  end
+
   def get_token
     if logged_in?
-      Lighthouse.account = current_user.subdomain
-      Lighthouse.token = @token = current_user.api_key
+      if current_project
+        Lighthouse.account = current_project.api_key.subdomain
+        Lighthouse.token = @token = current_project.api_key.token
+      end
     end
   end
 end

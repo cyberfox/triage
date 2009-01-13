@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090105100118) do
+ActiveRecord::Schema.define(:version => 20090113013405) do
+
+  create_table "api_keys", :force => true do |t|
+    t.string   "subdomain"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "buckets", :force => true do |t|
     t.string   "tag"
@@ -46,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20090105100118) do
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "api_key_id"
   end
 
   create_table "search_results", :force => true do |t|
@@ -89,8 +98,6 @@ ActiveRecord::Schema.define(:version => 20090105100118) do
     t.string   "login",                     :limit => 40
     t.string   "name",                      :limit => 100, :default => ""
     t.string   "email",                     :limit => 100
-    t.string   "api_key",                   :limit => 100
-    t.string   "subdomain",                 :limit => 100
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.datetime "created_at"

@@ -3,8 +3,6 @@ quentin:
   email:                     quentin@example.com
   salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('1')
   crypted_password:          <%= User.password_digest('monkey', Digest::SHA1.hexdigest('1')) %> # 82eaaf8d780af80ee68641e1251db0035eb2fd3c # 'monkey'
-  api_key:                   foo
-  subdomain:                 bar
   created_at:                <%= 5.days.ago.to_s :db  %>
   remember_token_expires_at: <%= 1.days.from_now.to_s %>
   remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
@@ -14,8 +12,6 @@ aaron:
   email:                     aaron@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('2')
   crypted_password:          <%= User.password_digest('monkey', Digest::SHA1.hexdigest('2')) %> # 8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
-  api_key:                   invalid
-  subdomain:                 empty
   created_at:                <%= 1.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
@@ -25,8 +21,6 @@ joe:
   email:                     joe@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('2')
   crypted_password:          <%= User.password_digest('monkey', Digest::SHA1.hexdigest('2')) %> # 8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
-  api_key:                   valid
-  subdomain:                 initially_empty
   created_at:                <%= 1.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
@@ -36,8 +30,6 @@ jim:
   email:                     jim@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('2')
   crypted_password:          <%= User.password_digest('monkey', Digest::SHA1.hexdigest('2')) %> # 8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
-  api_key:                   valid
-  subdomain:                 foo
   created_at:                <%= 1.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
@@ -47,8 +39,6 @@ bob:
   email:                     bob@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('2')
   crypted_password:          <%= User.password_digest('monkey', Digest::SHA1.hexdigest('2')) %> # 8d8c6e5c0c7e1816059f2dff80b18a1adb8c053a # 'monkey'
-  api_key:                   valid
-  subdomain:                 foo
   created_at:                <%= 2.days.ago.to_s :db %>
   remember_token_expires_at: 
   remember_token:            
@@ -58,8 +48,6 @@ old_password_holder:
   email:                     salty_dog@example.com
   salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  api_key:                   foo
-  subdomain:                 bar
   created_at:                <%= 1.days.ago.to_s :db %>
 
 

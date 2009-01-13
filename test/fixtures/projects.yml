@@ -5,6 +5,7 @@ jbidwatcher:
   name: JBidwatcher
   data: <%= fixture_data('project') %>
   updated_at: <%= 10.minutes.ago %>
+  api_key: quentins_key
 
 out_of_date:
   lighthouse_id: 8037
@@ -12,6 +13,7 @@ out_of_date:
   name: JBidwatcher
   data: <%= fixture_data('project') %>
   updated_at: <%= 15.days.ago %>
+  api_key: jims_key
 
 missing:
   lighthouse_id: 8037
@@ -19,6 +21,7 @@ missing:
   name: Missing Project
   data: <%= fixture_data('project') %>
   updated_at: <%= 3.days.ago %>
+  api_key: bobs_key
 
 current:
   lighthouse_id: 8037
@@ -26,3 +29,4 @@ current:
   name: JBidwatcher
   data: <%= fixture_data('project') %>
   updated_at: <%= 10.hours.ago %>
+  api_key: old_user_key
