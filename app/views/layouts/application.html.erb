@@ -17,7 +17,7 @@
 <% if logged_in? -%>
   <div id="status_bar">
     <%= current_user.name.empty? ? current_user.login : current_user.name %> |
-    <%= @current_project ? @current_project.name : "No project selected" %> |
+    <%= current_project ? current_project.name : "No project selected" %> |
     <span class="disabled_project_select">Choose a project</span>
   </div>
   <%= render :partial => '/shared/byline', :locals => { :location => 'minimized' } %>
