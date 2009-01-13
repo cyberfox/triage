@@ -1,16 +1,30 @@
 require 'test_helper'
 
 class BinsControllerTest < ActionController::TestCase
-  test "Getting the bin list for a project fails if not logged in" do
-    get :index
-    assert_response :redirect
-    assert_redirected_to :controller => 'sessions', :action => 'new'
+  context "Accessing the list of bins for a project without logging in" do
+    setup do
+      get :index
+    end
+
+    should_respond_with :redirect
+
+    should "redirect to new session (login)" do
+      assert_redirected_to :controller => 'sessions', :action => 'new'
+    end
   end
 
-  test "Get a list of bins" do
-    login_as(:quentin)
-    get :index, :project_id => 8037
-    assert_equal 3, assigns(:bins).length
-    assert_equal "New tickets", assigns(:bins).first.name
+  context "Listing the bins for the JBidwatcher project" do
+    setup do
+      login_as(:quentin)
+      get :index, :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+
+    should "return three bins" do
+      assert_equal 3, assigns(:bins).length
+    end
+
+    should "have 'New tickets' as the first bin" do
+      assert_equal "New tickets", assigns(:bins).first.name
+    end
   end
 end

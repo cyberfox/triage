@@ -7,12 +7,12 @@
 
   <p>
     <%= f.label :state %><br />
-    <%= select_tag :state, options_for_select(@states, @bucket.state.blank? ? "-do not change" : @bucket.state ) %>
+    <%= select :bucket, :state, @states, { :include_blank => "-do not change" } %>
   </p>
 
   <p>
     <%= f.label :milestone %><br />
-    <%= collection_select :milestone, :id, @milestones, :id, :title, { :prompt => (@bucket.milestone_id.blank? ? "-do not change" : @bucket.milestone.title) } %>
+    <%= collection_select :bucket, :milestone_id, @milestones, :id, :title, { :include_blank => "-do not change" } %>
   </p>
 
   <p>

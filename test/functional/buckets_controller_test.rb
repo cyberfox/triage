@@ -5,17 +5,16 @@ class BucketsControllerTest < ActionController::TestCase
     login_as :quentin
   end
 
-  context "Index" do
+  context "Getting the list of buckets" do
     setup do
       get :index
     end
 
-    should "be successful" do
-      assert_response :success
-    end
+    should_respond_with :success
 
-    should "get list of buckets" do
+    should "provide a non-empty array" do
       assert_not_nil assigns(:buckets)
+      assert assigns(:buckets).length > 0
     end
   end
 
@@ -24,9 +23,7 @@ class BucketsControllerTest < ActionController::TestCase
       get :new
     end
 
-    should "be successful" do
-      assert_response :success
-    end
+    should_respond_with :success
 
     should "assign a bucket variable that is a new record" do
       assert_not_nil assigns(:bucket)
@@ -40,16 +37,41 @@ class BucketsControllerTest < ActionController::TestCase
 
     should "assign states that include all the open and closed states for the project" do
       assert_not_nil assigns(:states)
-      assert_same_elements ["-do not change"] + ["open", "resolved", "invalid", "reopened", "duplicate", "hold", "closed", "new"], assigns(:states)
+      assert_same_elements ["open", "resolved", "invalid", "reopened", "duplicate", "hold", "closed", "new"], assigns(:states)
     end
   end
 
-  should "create a bucket" do
-    assert_difference('Bucket.count') do
-      post :create, :bucket => { :tag => 'frippery' }
+  context "Creating a bucket" do
+    should "increase the number of buckets by one" do
+      assert_difference('Bucket.count') do
+        post :create, :bucket => { :tag => 'frippery' }
+      end
     end
 
-    assert_redirected_to bucket_path(assigns(:bucket))
+    should "redirect to the 'show' action for the new bucket" do
+      post :create, :bucket => { :tag => 'frippery' }
+      assert_redirected_to bucket_path(assigns(:bucket))
+    end
+
+    should "set the state correctly" do
+      post :create, :bucket => { :tag => 'frippery', :state => 'open' }
+      assert_equal 'open', assigns(:bucket).state
+    end
+
+    should "leave the state nil if 'do not change' is selected" do
+      post :create, :bucket => { :tag => 'frippery', :state => '' }
+      assert_nil assigns(:bucket).state
+    end
+
+    should "set the milestone correctly" do
+      post :create, :bucket => { :tag => 'frippery', :milestone_id => milestones(:features).id }
+      assert_equal milestones(:features).id, assigns(:bucket).milestone_id
+    end
+
+    should "leave the milestone nil if 'do not change' is selected" do
+      post :create, { :bucket => { :tag => 'frippery' }, :milestone => { :id => '' } }
+      assert_nil assigns(:bucket).milestone_id
+    end
   end
 
   should "show bucket" do
@@ -57,14 +79,37 @@ class BucketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  should "get the edit page for the 'acknowledged' bucket" do
+  should "successfully get the edit page for the 'acknowledged' bucket" do
     get :edit, :id => buckets(:acknowledged).id
     assert_response :success
   end
 
-  should "update the feature bucket to assign the state to 'feature'" do
-    put :update, :id => buckets(:feature).id, :bucket => { :state => 'feature' }
-    assert_redirected_to bucket_path(assigns(:bucket))
+  context "Updating the feature bucket" do
+    should "allow setting an empty state" do
+      put :update, :id => buckets(:feature).id, :bucket => { :state => '' }
+      assert_nil assigns(:bucket).state
+    end
+
+    should "allow setting an empty milestone" do
+      put :update, :id => buckets(:feature).id, :bucket => { :milestone_id => '' }
+      assert_nil assigns(:bucket).milestone_id
+    end
+
+    context "to a state of 'duplicate'" do
+      setup do
+        put :update, :id => buckets(:feature).id, :bucket => { :state => 'duplicate' }
+      end
+
+      should_respond_with :redirect
+
+      should "redirect to the 'show bucket' page" do
+        assert_redirected_to bucket_path(assigns(:bucket))
+      end
+
+      should "be able to set the state to 'duplicate'" do
+        assert_equal 'duplicate', assigns(:bucket).state
+      end
+    end
   end
 
   should "be able to destroy a bucket" do

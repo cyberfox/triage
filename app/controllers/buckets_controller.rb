@@ -27,7 +27,7 @@ class BucketsController < ApplicationController
     @bucket = Bucket.new
     project = current_user.projects.first
     @milestones = project.milestones
-    @states = ["-do not change"] + project.states
+    @states = project.states
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,14 +40,18 @@ class BucketsController < ApplicationController
     @bucket = Bucket.find(params[:id])
     project = current_user.projects.first
     @milestones = project.milestones
-    @states = ["-do not change"] + project.states
+    @milestone = @bucket.milestone
+    @states = project.states
   end
 
   # POST /buckets
   # POST /buckets.xml
   def create
-    @bucket = current_user.buckets.new(params[:bucket])
+    modified = params[:bucket]
+    modified[:milestone_id] = nil if modified[:milestone_id].blank?
+    modified[:state] = nil if modified[:state].blank?
 
+    @bucket = current_user.buckets.new(modified)
     respond_to do |format|
       if @bucket.save
         flash[:notice] = 'Bucket was successfully created.'
@@ -66,8 +70,8 @@ class BucketsController < ApplicationController
     @bucket = Bucket.find(params[:id])
 
     modified = params[:bucket]
-    modified[:state] = params[:state] if params[:state]
-    modified[:milestone_id] = params[:milestone][:id] if params[:milestone] && params[:milestone][:id]
+    modified[:milestone_id] = nil if modified[:milestone_id].blank?
+    modified[:state] = nil        if modified[:state].blank?
 
     respond_to do |format|
       if @bucket.update_attributes(modified)
