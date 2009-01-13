@@ -1,18 +1,25 @@
 require 'test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
-  test "Accessing projects without logging in should fail" do
-    get :index
-    assert_response :redirect
-    assert_redirected_to :controller => 'sessions', :action => 'new'
+  context "Accessing projects without logging in" do
+    setup do
+      get :index
+    end
+
+    should_respond_with :redirect
+
+    should "redirect to new session (login)" do
+      assert_redirected_to :controller => 'sessions', :action => 'new'
+    end
   end
 
   context "Project list" do
     setup do
       login_as(:quentin)
       get :index
-      assert_response :success
     end
+
+    should_respond_with :success
 
     should "have JBidwatcher as the first project" do
       assert_not_nil assigns(:projects)
