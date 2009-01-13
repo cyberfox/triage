@@ -1,24 +1,7 @@
 <h1>Editing bucket</h1>
 
 <% form_for(@bucket) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :tag %><br />
-    <%= f.text_field :tag %>
-  </p>
-  <p>
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </p>
-  <p>
-    <%= f.label :boilerplate %><br />
-    <%= f.text_area :boilerplate %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
+<%= render :partial => 'modify', :locals => { :f => f } -%>
   <p>
     <%= f.submit "Update" %>
   </p>

@@ -1,28 +1,7 @@
 <h1>New bucket</h1>
 
 <% form_for(@bucket) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :tag %><br />
-    <%= f.text_field :tag %>
-  </p>
-
-  <p>
-    <%= f.label :state %><br />
-    <%= select_tag :state, options_for_select(@states, "-do not change") %>
-  </p>
-
-  <p>
-    <%= f.label :milestone %><br />
-    <%= collection_select :milestone, :title, @milestones, :id, :title, options ={:prompt => "-do not change"} %>
-  </p>
-
-  <p>
-    <%= f.label :boilerplate %><br />
-    <%= f.text_area :boilerplate %>
-  </p>
-
+<%= render :partial => 'modify', :locals => { :f => f } -%>
   <p>
     <%= f.submit "Create" %>
   </p>

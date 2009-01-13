@@ -1,0 +1,21 @@
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag %>
+  </p>
+
+  <p>
+    <%= f.label :state %><br />
+    <%= select_tag :state, options_for_select(@states, @bucket.state.blank? ? "-do not change" : @bucket.state ) %>
+  </p>
+
+  <p>
+    <%= f.label :milestone %><br />
+    <%= collection_select :milestone, :id, @milestones, :id, :title, { :prompt => (@bucket.milestone_id.blank? ? "-do not change" : @bucket.milestone.title) } %>
+  </p>
+
+  <p>
+    <%= f.label :boilerplate %><br />
+    <%= f.text_area :boilerplate %>
+  </p>

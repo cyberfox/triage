@@ -38,6 +38,9 @@ class BucketsController < ApplicationController
   # GET /buckets/1/edit
   def edit
     @bucket = Bucket.find(params[:id])
+    project = current_user.projects.first
+    @milestones = project.milestones
+    @states = ["-do not change"] + project.states
   end
 
   # POST /buckets
@@ -62,8 +65,12 @@ class BucketsController < ApplicationController
   def update
     @bucket = Bucket.find(params[:id])
 
+    modified = params[:bucket]
+    modified[:state] = params[:state] if params[:state]
+    modified[:milestone_id] = params[:milestone][:id] if params[:milestone] && params[:milestone][:id]
+
     respond_to do |format|
-      if @bucket.update_attributes(params[:bucket])
+      if @bucket.update_attributes(modified)
         flash[:notice] = 'Bucket was successfully updated.'
         format.html { redirect_to(@bucket) }
         format.xml  { head :ok }
