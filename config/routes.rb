@@ -20,10 +20,10 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
 
   map.projects 'projects', :controller => 'projects', :action => 'index'
-  map.ticket   'projects/:project_id/bins/:bin_id/tickets/:action/:ticket_id', :controller => 'tickets'
-  map.tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
+  map.bin_tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
+  map.search   'projects/:project_id/tickets/search', :controller => 'tickets', :action => 'search'
   map.connect  'projects/:project_id/tickets/:action', :controller => 'tickets'
-  map.connect  'projects/:project_id/tickets/:action/:id', :controller => 'tickets'
+  map.ticket   'projects/:project_id/tickets/:action/:id', :controller => 'tickets'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products

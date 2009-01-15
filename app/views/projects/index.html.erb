@@ -1,14 +1,14 @@
 <h1>Choose a Project</h1>
 <ul>
 <% @projects.each do |project| -%>
-  <li><%= h project.name %>
+  <li><%= link_to(h(project.name), search_path(:project_id => project.id, :q => 'sort:number')) %>
     <ul>
 <% unless project.bins.blank? -%>
 <% project.bins.each do |bin| -%>
-      <li><%= link_to(bin.name, tickets_path(:project_id => project.id, :bin_id => bin.id)) %> (<%= bin.tickets_count %>)</li>
+      <li><%= link_to(bin.name, bin_tickets_path(:project_id => project.id, :bin_id => bin.id)) %> (<%= bin.tickets_count %>)</li>
 <% end -%>
 <% end -%>
-      <li><label style="float: left;">Search: &nbsp;<% form_tag({:controller => 'tickets', :action => 'search', :project_id => project.id}, :method => :get) do %><%= text_field_tag :q, '', :size => 30 %><% end %></label></li>
+      <li><label style="float: left;">Search: &nbsp;<% form_tag(search_path(:project_id => project.id), :method => :get) do %><%= text_field_tag :q, '', :size => 30 %><% end %></label></li>
     </ul>
 <% end -%>
 </ul>
