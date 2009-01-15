@@ -20,7 +20,6 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
 
   map.projects 'projects', :controller => 'projects', :action => 'index'
-  map.bins     'projects/:project_id/bins', :controller => 'bins'
   map.ticket   'projects/:project_id/bins/:bin_id/tickets/:action/:ticket_id', :controller => 'tickets'
   map.tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
   map.connect  'projects/:project_id/tickets/:action', :controller => 'tickets'

@@ -62,4 +62,23 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal "JBidwatcher", project.name
     assert users(:quentin).projects.first.updated_at < 1.second.ago
   end
+
+  context "Listing the bins for the JBidwatcher project" do
+    setup do
+      @project = Project.find_by_lighthouse_project(users(:quentin), projects(:jbidwatcher).lighthouse_id)
+      @bins = @project.bins
+    end
+
+    should "have found bins" do
+      deny @bins.blank?
+    end
+
+    should "return three bins" do
+      assert_equal 3, @bins.length
+    end
+
+    should "have 'New tickets' as the first bin" do
+      assert_equal "New tickets", @bins.first.name
+    end
+  end
 end

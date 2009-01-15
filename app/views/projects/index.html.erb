@@ -1,7 +1,7 @@
 <h1>Choose a Project</h1>
 <ul>
 <% @projects.each do |project| -%>
-  <li><%= link_to(project.name, bins_path(:project_id => project.id, :action => 'index')) -%>
+  <li><%= h project.name %>
     <ul>
 <% unless project.bins.blank? -%>
 <% project.bins.each do |bin| -%>

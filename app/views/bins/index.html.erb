@@ -1,6 +1,0 @@
-<h1>Bins for <%= @project.name %></h1>
-<ul>
-<% @bins.each do |bin| -%>
-<li><%= link_to(bin.name, tickets_path(:project_id => @project.id, :bin_id => bin.id)) %> (<%= bin.tickets_count %>)</li>
-<% end -%>
-</ul>
