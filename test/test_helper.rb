@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'shoulda'
+require 'quietbacktrace'
 
 class Test::Unit::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -47,4 +48,7 @@ class Test::Unit::TestCase
   def login_as(username)
     @request.session[:user_id] = users(username).id
   end
+
+  self.backtrace_silencers << :rails_vendor
+  self.backtrace_filters   << :rails_root
 end

@@ -10,6 +10,7 @@ class Ticket < ActiveRecord::Base
     end
   end
 
+  # Takes an ActiveRecord Project, a number, and an optional latest_update date.
   def self.find_by_project_and_ticket(project, ticket_number, latest_update = nil)
     cached = project.tickets.find_by_number(ticket_number)
     cached.updated_at = Time.at(0) if cached && latest_update && latest_update > cached.updated_at
@@ -71,6 +72,7 @@ class Ticket < ActiveRecord::Base
 
   def self.retrieve(project, ticket_number)
     init_lighthouse(project)
+#    puts "Lighthouse::Ticket.find(#{ticket_number}, :params => { :project_id => #{project.lighthouse_id} })"
     Lighthouse::Ticket.find(ticket_number, :params => { :project_id => project.lighthouse_id })
   end
 end

@@ -1,13 +1,22 @@
 class Project < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
+
   belongs_to :user
   has_many :tickets
   has_many :milestones
 
+  def lighthouse
+    YAML.load(data)
+  end
+  memoize :lighthouse
+
+  def bins
+    lighthouse.bins
+  end
+  memoize :bins
+
   def states
-    @states ||= begin
-                  ydata = YAML.load(data)
-                  "#{ydata.open_states_list},#{ydata.closed_states_list}".split(',')
-                end
+    @states ||= "#{lighthouse.open_states_list},#{lighthouse.closed_states_list}".split(',')
   end
 
   def self.update_frequency

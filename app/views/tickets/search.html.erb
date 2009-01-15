@@ -1,0 +1,2 @@
+<h1>Tickets for <%= @project.name %>, in search <span style="background-color: light-blue"><%= h @query %></span></h1>
+<%= render :partial => 'search_results', :locals => { :result => @result, :tickets => @tickets, :project => @project } %>

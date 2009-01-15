@@ -23,6 +23,8 @@ ActionController::Routing::Routes.draw do |map|
   map.bins     'projects/:project_id/bins', :controller => 'bins'
   map.ticket   'projects/:project_id/bins/:bin_id/tickets/:action/:ticket_id', :controller => 'tickets'
   map.tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
+  map.connect  'projects/:project_id/tickets/:action', :controller => 'tickets'
+  map.connect  'projects/:project_id/tickets/:action/:id', :controller => 'tickets'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
