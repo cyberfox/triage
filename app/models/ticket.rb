@@ -72,7 +72,6 @@ class Ticket < ActiveRecord::Base
 
   def self.retrieve(project, ticket_number)
     init_lighthouse(project)
-#    puts "Lighthouse::Ticket.find(#{ticket_number}, :params => { :project_id => #{project.lighthouse_id} })"
     Lighthouse::Ticket.find(ticket_number, :params => { :project_id => project.lighthouse_id })
   end
 end
