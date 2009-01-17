@@ -32,14 +32,12 @@ class Ticket < ActiveRecord::Base
       last = ticket_set.length
       all_tickets += ticket_set
       page += 1
-      puts "#{all_tickets.length}, #{count}, #{last}"
     end
 
     length = all_tickets.length
     mod = length / 10
     all_tickets.each do |ticket|
       ticket = find_by_project_and_ticket(project, ticket.number, ticket.updated_at)
-      puts "#{ticket.number}: #{ticket.title}" if (ticket.number % mod) == 0
     end
   end
 

@@ -69,8 +69,12 @@ module Lighthouse
       Lighthouse.require_token
 
       @@tickets ||= Lighthouse.from_yaml(:tickets)
-      case condition
-        when :all: return @@tickets
+      if condition == :all
+        if params[:params] && params[:params][:page] == 2
+          return @@tickets[0..7]
+        else
+          return @@tickets
+        end
       else
         ticket = @@tickets.find { |ticket| ticket.number.to_s == condition.to_s }
         ticket = Lighthouse.from_yaml(:raw_ticket) if ticket.number.to_s == '254'

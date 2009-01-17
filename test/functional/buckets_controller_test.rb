@@ -41,6 +41,14 @@ class BucketsControllerTest < ActionController::TestCase
     end
   end
 
+  context "Creating a bad bucket" do
+    should "not increase the number of buckets" do
+      assert_no_difference('Bucket.count') do
+        post :create
+      end
+    end
+  end
+
   context "Creating a bucket" do
     should "increase the number of buckets by one" do
       assert_difference('Bucket.count') do
@@ -85,6 +93,18 @@ class BucketsControllerTest < ActionController::TestCase
   end
 
   context "Updating the feature bucket" do
+    should "fail with bad data" do
+      put :update, :id => buckets(:feature).id, :bucket => { :tag => nil }
+    end
+
+    should "not change anything when no bucket is submitted" do
+      feature = buckets(:feature)
+      updated = feature.updated_at
+      put :update, :id => buckets(:feature).id
+      feature.reload
+      assert_equal feature.updated_at, updated
+    end
+
     should "allow setting an empty state" do
       put :update, :id => buckets(:feature).id, :bucket => { :state => '' }
       assert_nil assigns(:bucket).state

@@ -11,6 +11,12 @@ class UsersControllerTest < ActionController::TestCase
 
   fixtures :users
 
+  def test_should_allow_new_users
+    get :new
+    assert_not_nil assigns(:user)
+    assert assigns(:user).new_record?
+  end
+
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user
@@ -50,12 +56,9 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
   
-
-  
-
   protected
-    def create_user(options = {})
-      post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-        :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
-    end
+  def create_user(options = {})
+    post :create, :user => { :login => 'quire', :email => 'quire@example.com',
+      :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
+  end
 end

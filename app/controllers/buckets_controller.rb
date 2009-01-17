@@ -25,9 +25,7 @@ class BucketsController < ApplicationController
   # GET /buckets/new.xml
   def new
     @bucket = Bucket.new
-    project = current_user.projects.first
-    @milestones = project.milestones
-    @states = project.states
+    prep_form
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,18 +36,20 @@ class BucketsController < ApplicationController
   # GET /buckets/1/edit
   def edit
     @bucket = Bucket.find(params[:id])
-    project = current_user.projects.first
-    @milestones = project.milestones
     @milestone = @bucket.milestone
-    @states = project.states
+    prep_form
   end
 
   # POST /buckets
   # POST /buckets.xml
   def create
     modified = params[:bucket]
-    modified[:milestone_id] = nil if modified[:milestone_id].blank?
-    modified[:state] = nil if modified[:state].blank?
+    if modified
+      modified[:milestone_id] = nil if modified[:milestone_id].blank?
+      modified[:state] = nil if modified[:state].blank?
+    else
+      modified = {}
+    end
 
     @bucket = current_user.buckets.new(modified)
     respond_to do |format|
@@ -58,7 +58,10 @@ class BucketsController < ApplicationController
         format.html { redirect_to(@bucket) }
         format.xml  { render :xml => @bucket, :status => :created, :location => @bucket }
       else
-        format.html { render :action => "new" }
+        format.html do
+          prep_form
+          render :action => "new"
+        end
         format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
       end
     end
@@ -70,8 +73,12 @@ class BucketsController < ApplicationController
     @bucket = Bucket.find(params[:id])
 
     modified = params[:bucket]
-    modified[:milestone_id] = nil if modified[:milestone_id].blank?
-    modified[:state] = nil        if modified[:state].blank?
+    if modified
+      modified[:milestone_id] = nil if modified[:milestone_id].blank?
+      modified[:state] = nil        if modified[:state].blank?
+    else
+      modified = {}
+    end
 
     respond_to do |format|
       if @bucket.update_attributes(modified)
@@ -79,7 +86,10 @@ class BucketsController < ApplicationController
         format.html { redirect_to(@bucket) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html do
+          prep_form
+          render :action => "edit"
+        end
         format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
       end
     end
@@ -95,5 +105,12 @@ class BucketsController < ApplicationController
       format.html { redirect_to(buckets_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def prep_form
+    project = current_user.projects.first
+    @milestones = project.milestones
+    @states = project.states
   end
 end

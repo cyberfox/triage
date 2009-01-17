@@ -40,4 +40,10 @@ class TicketTest < ActiveSupport::TestCase
       ticket = Ticket.find_by_project_and_ticket(projects(:current), 254)
     end
   end
+
+  test "Import all tickets" do
+    assert_difference('Ticket.count', 29) do
+      Ticket.import_all(projects(:jbidwatcher))
+    end
+  end
 end
