@@ -47,7 +47,7 @@ class Ticket < ActiveRecord::Base
     return ticket
   end
 
-  def raw
+  def lighthouse
     Ticket.optional_refresh(self, project, number)
   end
 

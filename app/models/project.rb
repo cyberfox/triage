@@ -10,11 +10,6 @@ class Project < ActiveRecord::Base
   end
   memoize :lighthouse
 
-  def bins
-    lighthouse.bins
-  end
-  memoize :bins
-
   def states
     @states ||= "#{lighthouse.open_states_list},#{lighthouse.closed_states_list}".split(',')
   end
