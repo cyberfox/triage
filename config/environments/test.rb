@@ -22,5 +22,6 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 config.gem "thoughtbot-shoulda", :lib => 'shoulda'
+config.gem "thoughtbot-quietbacktrace", :lib => 'quietbacktrace'
 
 require "#{Rails.root}/test/mocks/lighthouse"
