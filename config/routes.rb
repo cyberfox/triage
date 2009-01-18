@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.search   'projects/:project_id/tickets/search', :controller => 'tickets', :action => 'search'
   map.connect  'projects/:project_id/tickets/:action', :controller => 'tickets'
   map.ticket   'projects/:project_id/tickets/:action/:id', :controller => 'tickets'
+  map.apply    'projects/:project_id/tickets/:ticket_number/apply/:bucket_id', :controller => 'tickets', :action => 'apply'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products

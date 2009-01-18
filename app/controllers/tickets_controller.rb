@@ -18,6 +18,20 @@ class TicketsController < ApplicationController
     @title = @ticket.title
     @users = @ticket.versions.collect(&:user_id).uniq
     @user_map = @users.inject({}) {|accum, user_id| accum[user_id] = LighthouseUser.get(user_id); accum}
+    @buckets = current_user.buckets
+  end
+
+  def apply
+    @project = current_user.projects.find_by_lighthouse_id(params[:project_id])
+    @bucket = current_user.buckets.find_by_id(params[:bucket_id])
+    @bucket.boilerplate = "Zarf is with you again."
+    @ticket = @project.tickets.find_by_number(params[:ticket_number])
+    @bucket.apply_one(@ticket)
+    # Pull the current search from the session, and get the next entry, and show it.
+  end
+
+  def next
+    # Pull the current search from the session, get the next entry, and show it.
   end
 
   def search

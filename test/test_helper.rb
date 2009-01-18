@@ -49,6 +49,10 @@ class Test::Unit::TestCase
     @request.session[:user_id] = users(username).id
   end
 
+  def set_project(project_name)
+    @request.session[:project_id] = projects(project_name).id
+  end
+
   self.backtrace_silencers << :rails_vendor
   self.backtrace_filters   << :rails_root
 end

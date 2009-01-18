@@ -8,6 +8,7 @@ class Bucket < ActiveRecord::Base
     lh_ticket = ticket.lighthouse
     lh_ticket.milestone_id = milestone.lighthouse_id if milestone
     lh_ticket.state = state if state
+    lh_ticket.body = boilerplate if boilerplate
     lh_ticket.tags << tag
     lh_ticket.save
   end

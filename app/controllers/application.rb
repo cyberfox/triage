@@ -17,12 +17,12 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   def current_project
-    @project = Project.find_by_id(session[:project_id]) if session[:project_id]
-    return @project
+    @session_project = Project.find_by_id(session[:project_id]) if session[:project_id]
+    return @session_project
   end
 
   def store_current_project
-    session[:project_id] = @project ? @project.id : nil;
+    session[:project_id] = @session_project ? @session_project.id : nil;
   end
 
   private

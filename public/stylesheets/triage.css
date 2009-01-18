@@ -32,13 +32,17 @@ body {
 }
 
 #minimized {
-  position: absolute;
+  position: fixed;
+  background-color: #ffffff;
+  z-order: 10;
   right: 0px;
   bottom: 0px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .byline {
-  margin-right: 3px;
+  padding-right: 3px;
 }
 
 .byline a {
@@ -68,4 +72,32 @@ body {
 #main {
   margin-left: 2px;
   margin-right: 2px;
+}
+
+.bucket_container {
+  border: 1px solid black;
+  padding: 2px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2px;
+  background-color: #e0e0ff;
+}
+
+.bucket {
+  width: 49%;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.button-to {
+  display: inline;
+}
+
+.button-to input {
+  display: inline;
+  float: left;
+  margin-right: 1em;
 }
