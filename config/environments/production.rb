@@ -24,3 +24,8 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 config.gem "cyberfox-lighthouse-api", :lib => 'lighthouse'
 require 'lighthouse'
+
+git_sha1_path = "#{RAILS_ROOT}/config/HEAD"
+GIT_SHA1 = if File.file?(git_sha1_path)
+             File.open(git_sha1_path).readlines[0]
+           end

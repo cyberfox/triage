@@ -1,0 +1,6 @@
+production:
+  adapter: mysql
+  database: triage
+  username: root
+  password: 
+  host: localhost
