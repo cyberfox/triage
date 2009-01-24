@@ -32,4 +32,12 @@ class ApplicationController < ActionController::Base
       Lighthouse.token = @token = current_user.api_key
     end
   end
+
+  protected
+  def prep_bucket_form
+    @bucket = Bucket.new unless @bucket
+    project = current_user.projects.first
+    @milestones = project.milestones
+    @states = project.states
+  end
 end

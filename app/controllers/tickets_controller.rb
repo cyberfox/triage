@@ -19,6 +19,7 @@ class TicketsController < ApplicationController
     @users = @ticket.versions.collect(&:user_id).uniq
     @user_map = @users.inject({}) {|accum, user_id| accum[user_id] = LighthouseUser.get(user_id); accum}
     @buckets = current_user.buckets
+    prep_bucket_form
   end
 
   def apply

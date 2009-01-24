@@ -24,21 +24,18 @@ class BucketsController < ApplicationController
   # GET /buckets/new
   # GET /buckets/new.xml
   def new
-    logger.warn request.inspect
     if request.xhr?
-      @bucket = Bucket.new
-      prep_form
+      prep_bucket_form
       new_page = render_to_string :action => 'new', :layout => false
 
       render :update do |page|
         page.replace_html :popup_bucket, new_page
-        page.visual_effect :toggle_slide, :popup_bucket
+        page.visual_effect :toggle_slide, :popup_bucket, :duration => 0.33
         page.show 'cancel_button'
         page.hide 'new_button'
       end
     else
-      @bucket = Bucket.new
-      prep_form
+      prep_bucket_form
 
       respond_to do |format|
         format.html # new.html.erb
@@ -51,7 +48,7 @@ class BucketsController < ApplicationController
   def edit
     @bucket = Bucket.find(params[:id])
     @milestone = @bucket.milestone
-    prep_form
+    prep_bucket_form
   end
 
   # POST /buckets
@@ -73,7 +70,7 @@ class BucketsController < ApplicationController
         format.xml  { render :xml => @bucket, :status => :created, :location => @bucket }
       else
         format.html do
-          prep_form
+          prep_bucket_form
           render :action => "new"
         end
         format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
@@ -101,7 +98,7 @@ class BucketsController < ApplicationController
         format.xml  { head :ok }
       else
         format.html do
-          prep_form
+          prep_bucket_form
           render :action => "edit"
         end
         format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
@@ -119,12 +116,5 @@ class BucketsController < ApplicationController
       format.html { redirect_to(buckets_url) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-  def prep_form
-    project = current_user.projects.first
-    @milestones = project.milestones
-    @states = project.states
   end
 end

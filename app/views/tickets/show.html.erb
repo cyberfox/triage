@@ -1,3 +1,13 @@
+<script type="text/javascript">
+function toggleBucketForm() {
+<%= update_page do |page|
+    page.toggle 'cancel_button'
+    page.toggle 'new_button'
+    page.visual_effect :toggle_slide, :popup_bucket, :duration => 0.33
+end %>
+}
+</script>
+
 <div style="width: 100%">
   <div class="bucket_container">
 <% unless @buckets.blank? -%>
@@ -6,18 +16,25 @@
 <% end -%>
 <% end -%>
     <div class="clear"></div>
-    <div class="bucket" id="new_button"><%= button_to_remote "New", { :action => 'new', :controller => 'buckets' } %>Create a new bucket</div>
+    <div class="bucket" id="new_button">
+      <%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'toggleBucketForm(); return false;' %>Create a new bucket
+    </div>
     <div class="bucket" id="cancel_button" style="display: none">
-      <%= button_to_function "Cancel" do |page|
-	    page.hide 'cancel_button'
-	    page.show 'new_button'
-            page.visual_effect :toggle_slide, :popup_bucket
-	  end %>Cancel new bucket creation</div>
+      <%= button_to "Cancel", nil, :onclick => 'toggleBucketForm(); return false;' %>Cancel new bucket creation
+    </div>
     <div class="bucket"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
     <div class="clear"></div>
   </div>
 </div>
-<div id="popup_bucket" style="display: none"></div>
+<div id="popup_bucket" style="display: none">
+  <% form_for(@bucket) do |f| %>
+    <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
+    <p id="bucket_submit_button">
+      <%= f.submit "Create" %>
+    </p>
+  <% end %>
+  <div class="clear"></div>
+</div>
 <br>
 <h1><%= @title %></h1>
 <% unless @ticket.tags.blank? -%>
