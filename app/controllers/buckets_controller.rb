@@ -33,6 +33,8 @@ class BucketsController < ApplicationController
       render :update do |page|
         page.replace_html :popup_bucket, new_page
         page.visual_effect :toggle_slide, :popup_bucket
+        page.show 'cancel_button'
+        page.hide 'new_button'
       end
     else
       @bucket = Bucket.new
