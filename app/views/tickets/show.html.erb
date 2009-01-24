@@ -1,14 +1,16 @@
-<% unless @buckets.blank? -%>
 <div style="width: 100%">
-<div class="bucket_container">
+  <div class="bucket_container">
+<% unless @buckets.blank? -%>
 <% @buckets.each do |bucket| -%>
-  <div class="bucket"><%= button_to bucket.tag, apply_path(:ticket_number => @ticket.number, :bucket_id => bucket.id) %><%= h(bucket.description) if bucket.description %></div>
+    <div class="bucket"><%= button_to bucket.tag, apply_path(:ticket_number => @ticket.number, :bucket_id => bucket.id) %><%= h(bucket.description) if bucket.description %></div>
 <% end -%>
-  <div class="bucket"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
-  <div class="clear"></div>
-</div>
-</div>
 <% end -%>
+    <div class="clear"></div>
+    <div class="bucket"><%= button_to "New", { :action => 'new', :controller => 'buckets' } %>Create a new bucket</div>
+    <div class="bucket"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
+    <div class="clear"></div>
+  </div>
+</div>
 <br>
 <h1><%= @title %></h1>
 <% unless @ticket.tags.blank? -%>
