@@ -2,9 +2,10 @@
 
 <% form_for(@bucket) do |f| %>
 <%= render :partial => 'modify', :locals => { :f => f } -%>
-  <p>
+  <p id="bucket_submit_button">
     <%= f.submit "Create" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', buckets_path %>
+<%= link_to 'Back', buckets_path, :class => 'buckets_back' %>
+<div class="clear"></div>

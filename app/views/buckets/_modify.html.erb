@@ -1,21 +1,22 @@
   <%= f.error_messages %>
 
-  <p>
+  <p id="bucket_tag">
     <%= f.label :tag %><br />
     <%= f.text_field :tag %>
   </p>
 
-  <p>
+  <p id="bucket_state">
     <%= f.label :state %><br />
     <%= select :bucket, :state, @states, { :include_blank => "-do not change" } %>
   </p>
 
-  <p>
+  <p id="bucket_milestone">
     <%= f.label :milestone %><br />
     <%= collection_select :bucket, :milestone_id, @milestones, :id, :title, { :include_blank => "-do not change" } %>
   </p>
 
-  <p>
+  <div class="clear"></div>
+  <p id="bucket_boilerplate">
     <%= f.label :boilerplate %><br />
-    <%= f.text_area :boilerplate %>
+    <%= f.text_area :boilerplate, :cols => 80, :rows => 5 %>
   </p>

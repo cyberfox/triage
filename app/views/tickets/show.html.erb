@@ -6,11 +6,12 @@
 <% end -%>
 <% end -%>
     <div class="clear"></div>
-    <div class="bucket"><%= button_to "New", { :action => 'new', :controller => 'buckets' } %>Create a new bucket</div>
+    <div class="bucket"><%= button_to_remote "New", { :action => 'new', :controller => 'buckets' } %>Create a new bucket</div>
     <div class="bucket"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
     <div class="clear"></div>
   </div>
 </div>
+<div id="popup_bucket" style="display: none"></div>
 <br>
 <h1><%= @title %></h1>
 <% unless @ticket.tags.blank? -%>

@@ -101,3 +101,42 @@ body {
   float: left;
   margin-right: 1em;
 }
+
+#popup_bucket {
+  margin-left: 15%;
+  margin-right: 15%;
+  border: 1px solid black;
+  border-top: 0px;
+  background-color: #e0ffff;
+  position: relative;
+}
+
+/*  Don't display the Back button for the popup version. */
+#popup_bucket .buckets_back {
+  display: none;
+}
+
+#popup_bucket h1 {
+  display: none;
+  font-size: 100%;
+  text-align: center;
+/*  display: inline; */
+}
+
+#popup_bucket form p {
+  margin-left: 5px;
+  float: left;
+}
+
+#popup_bucket form p#bucket_submit_button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: inline;
+}
+
+#popup_bucket form p#bucket_boilerplate {
+  display: inline;
+  margin-top: 0px;
+  float: left;
+}
