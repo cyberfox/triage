@@ -24,23 +24,11 @@ class BucketsController < ApplicationController
   # GET /buckets/new
   # GET /buckets/new.xml
   def new
-    if request.xhr?
-      prep_bucket_form
-      new_page = render_to_string :action => 'new', :layout => false
+    prep_bucket_form
 
-      render :update do |page|
-        page.replace_html :popup_bucket, new_page
-        page.visual_effect :toggle_slide, :popup_bucket, :duration => 0.33
-        page.show 'cancel_button'
-        page.hide 'new_button'
-      end
-    else
-      prep_bucket_form
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.xml  { render :xml => @bucket }
-      end
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @bucket }
     end
   end
 
