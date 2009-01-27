@@ -1,2 +1,2 @@
-<h1>Tickets for <%= @project.name %>, in search <span style="background-color: light-blue"><%= h @query %></span></h1>
-<%= render :partial => 'search_results', :locals => { :result => @result, :tickets => @tickets, :project => @project } %>
+<h1>Tickets for <%= @lh_project.name %>, in search <span style="background-color: light-blue"><%= h @query %></span></h1>
+<%= render :partial => 'search_results', :locals => { :result => @result, :tickets => @lh_tickets, :project => @lh_project } %>

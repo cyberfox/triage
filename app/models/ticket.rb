@@ -47,7 +47,8 @@ class Ticket < ActiveRecord::Base
     return ticket
   end
 
-  def lighthouse
+  def lighthouse(latest_update = nil)
+    updated_at = Time.at(0) if latest_update && latest_update > updated_at
     Ticket.optional_refresh(self, project, number)
   end
 
@@ -56,20 +57,20 @@ class Ticket < ActiveRecord::Base
     1.day.ago
   end
 
-  def self.create_from_lighthouse(project, ticket)
-    project.tickets.create(:number => ticket.number,
-                           :title => ticket.title,
-                           :data => ticket.to_yaml)
+  def self.create_from_lighthouse(db_project, ticket)
+    db_project.tickets.create(:number => ticket.number,
+                              :title => ticket.title,
+                              :data => ticket.to_yaml)
     return ticket
   end
 
-  def self.query(project, q, page)
-    init_lighthouse(project)
-    Lighthouse::Ticket.find(:all, :params => { :project_id => project.lighthouse_id, :page => page, :q => q })
+  def self.query(db_project, q, page)
+    init_lighthouse(db_project)
+    Lighthouse::Ticket.find(:all, :params => { :project_id => db_project.lighthouse_id, :page => page, :q => q })
   end
 
-  def self.retrieve(project, ticket_number)
-    init_lighthouse(project)
-    Lighthouse::Ticket.find(ticket_number, :params => { :project_id => project.lighthouse_id })
+  def self.retrieve(db_project, ticket_number)
+    init_lighthouse(db_project)
+    Lighthouse::Ticket.find(ticket_number, :params => { :project_id => db_project.lighthouse_id })
   end
 end

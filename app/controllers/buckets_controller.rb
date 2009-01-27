@@ -42,13 +42,7 @@ class BucketsController < ApplicationController
   # POST /buckets
   # POST /buckets.xml
   def create
-    modified = params[:bucket]
-    if modified
-      modified[:milestone_id] = nil if modified[:milestone_id].blank?
-      modified[:state] = nil if modified[:state].blank?
-    else
-      modified = {}
-    end
+    modified = extract_bucket_params
 
     @bucket = current_user.buckets.new(modified)
     respond_to do |format|
@@ -71,13 +65,7 @@ class BucketsController < ApplicationController
   def update
     @bucket = Bucket.find(params[:id])
 
-    modified = params[:bucket]
-    if modified
-      modified[:milestone_id] = nil if modified[:milestone_id].blank?
-      modified[:state] = nil        if modified[:state].blank?
-    else
-      modified = {}
-    end
+    modified = extract_bucket_params
 
     respond_to do |format|
       if @bucket.update_attributes(modified)
@@ -104,5 +92,17 @@ class BucketsController < ApplicationController
       format.html { redirect_to(buckets_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def extract_bucket_params
+    modified = params[:bucket]
+    if modified
+      modified[:milestone_id] = nil if modified[:milestone_id].blank?
+      modified[:state] = nil        if modified[:state].blank?
+    else
+      modified = {}
+    end
+    return modified
   end
 end

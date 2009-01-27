@@ -10,9 +10,9 @@ end %>
 
 <div style="width: 100%">
   <div class="bucket_container">
-<% unless @buckets.blank? -%>
-<% @buckets.each do |bucket| -%>
-    <div class="bucket"><%= button_to bucket.tag, apply_path(:ticket_number => @ticket.number, :bucket_id => bucket.id) %><%= h(bucket.description) if bucket.description %></div>
+<% unless current_user.buckets.blank? -%>
+<% current_user.buckets.each do |bucket| -%>
+    <div class="bucket"><%= button_to bucket.tag, apply_path(:ticket_number => @lh_ticket.number, :bucket_id => bucket.id) %><%= h(bucket.description) if bucket.description %></div>
 <% end -%>
 <% end -%>
     <div class="clear"></div>
@@ -36,13 +36,13 @@ end %>
   <div class="clear"></div>
 </div>
 <br>
-<h1><%= @title %></h1>
-<% unless @ticket.tags.blank? -%>
-<h2>Tags: <%= @ticket.tags.join(', ') %></h2>
+<h1><%= @lh_ticket.title %></h1>
+<% unless @lh_ticket.tags.blank? -%>
+<h2>Tags: <%= @lh_ticket.tags.join(', ') %></h2>
 <% end -%>
-<% @ticket.versions.each do |version| -%>
+<% @lh_ticket.versions.each do |version| -%>
 <h3>by <%= @user_map[version.user_id].name %>:
-<% if version.title != @title -%>
+<% if version.title != @lh_ticket.title -%>
 <%= version.title %>
 <% end -%>
 </h3>
