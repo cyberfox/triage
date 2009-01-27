@@ -7,8 +7,8 @@ require "#{Rails.root}/app/models/ticket"
 # preserves the data used afterwards, so we can check updates.
 
 class Ticket < ActiveRecord::Base
-  def lighthouse_with_mocked_tags
-    ticket = lighthouse_without_mocked_tags
+  def lighthouse_with_mocked_tags(*args)
+    ticket = lighthouse_without_mocked_tags(*args)
     ticket = @ticket || YAML.load(data)
     def ticket.tags; @test_tags ||= tag.split(' '); end
     @ticket = ticket

@@ -48,6 +48,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def lighthouse(latest_update = nil)
+    updated_at = Time.at(0) if updated_at.nil? && !latest_update.nil?
     updated_at = Time.at(0) if latest_update && latest_update > updated_at
     Ticket.optional_refresh(self, project, number)
   end
