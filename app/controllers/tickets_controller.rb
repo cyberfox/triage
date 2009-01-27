@@ -25,9 +25,9 @@ class TicketsController < ApplicationController
   def apply
     @db_project = current_user.projects.find_by_lighthouse_id(params[:project_id])
     @bucket = current_user.buckets.find_by_id(params[:bucket_id])
-    @bucket.boilerplate = "Zarf is with you again."
     @ticket = @db_project.tickets.find_by_number(params[:ticket_number])
     @bucket.apply_one(@ticket)
+    @ticket.lighthouse(Time.now)
     # Pull the current search from the session, and get the next entry, and show it.
   end
 
