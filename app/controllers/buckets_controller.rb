@@ -45,17 +45,21 @@ class BucketsController < ApplicationController
     modified = extract_bucket_params
 
     @bucket = current_user.buckets.new(modified)
-    respond_to do |format|
-      if @bucket.save
-        flash[:notice] = 'Bucket was successfully created.'
-        format.html { redirect_to(@bucket) }
-        format.xml  { render :xml => @bucket, :status => :created, :location => @bucket }
-      else
-        format.html do
-          prep_bucket_form
-          render :action => "new"
+    if request.xhr?
+      render :xml => @bucket, :status => :created, :location => @bucket if @bucket.save
+    else
+      respond_to do |format|
+        if @bucket.save
+          flash[:notice] = 'Bucket was successfully created.'
+          format.html { redirect_to(@bucket) }
+          format.xml  { render :xml => @bucket, :status => :created, :location => @bucket }
+        else
+          format.html do
+            prep_bucket_form
+            render :action => "new"
+          end
+          format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
         end
-        format.xml  { render :xml => @bucket.errors, :status => :unprocessable_entity }
       end
     end
   end

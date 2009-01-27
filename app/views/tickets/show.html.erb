@@ -10,24 +10,35 @@ end %>
 
 <div style="width: 100%">
   <div class="bucket_container">
+    <a id="bucket_edit_link" href="<%= buckets_path %>" onclick="makeEditable(); return false;">
+      <div class="bucket_edit_block"><%= image_tag('tag_blue_edit.png') %>Edit</div>
+    </a>
 <% unless current_user.buckets.blank? -%>
 <% current_user.buckets.each do |bucket| -%>
-    <div class="bucket"><%= button_to bucket.tag, apply_path(:ticket_number => @lh_ticket.number, :bucket_id => bucket.id) %><%= h(bucket.description) if bucket.description %></div>
+    <div class="bucket" id="<%= "bucket_#{bucket.id}" %>">
+      <%= link_to_remote(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')") %>
+      <%= link_to_function(image_tag('cog_edit.png', :class => 'edit_button'),
+                           "editBucketForm('#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
+      <%= button_to bucket.tag, apply_path(:ticket_number => @lh_ticket.number, :bucket_id => bucket.id), :class => 'actual_button' %>
+      <%= h(bucket.description) if bucket.description %>
+    </div>
 <% end -%>
 <% end -%>
     <div class="clear"></div>
+    <div class="operational">
     <div class="bucket" id="new_button">
       <%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'toggleBucketForm(); return false;' %>Create a new bucket
     </div>
     <div class="bucket" id="cancel_button" style="display: none">
       <%= button_to "Cancel", nil, :onclick => 'toggleBucketForm(); return false;' %>Cancel new bucket creation
     </div>
-    <div class="bucket"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
+    <div class="bucket" id="skip_button"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
     <div class="clear"></div>
+    </div>
   </div>
 </div>
 <div id="popup_bucket" style="display: none">
-  <% form_for(@bucket) do |f| %>
+  <% remote_form_for(@bucket, :success => 'hackery(request)') do |f| %>
     <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
     <p id="bucket_submit_button">
       <%= f.submit "Create" %>
@@ -51,3 +62,7 @@ end %>
 </div>
 <hr width="50%"/>
 <% end -%>
+<script type="text/javascript">
+$$('.edit_button').invoke('hide');
+$$('.delete_button').invoke('hide');
+</script>

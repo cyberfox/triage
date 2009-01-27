@@ -5,6 +5,11 @@
     <%= f.text_field :tag %>
   </p>
 
+  <p id="bucket_description">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+
   <p id="bucket_state">
     <%= f.label :state %><br />
     <%= select :bucket, :state, @states, { :include_blank => "-do not change" } %>
@@ -16,6 +21,7 @@
   </p>
 
   <div class="clear"></div>
+
   <p id="bucket_boilerplate">
     <%= f.label :boilerplate %><br />
     <%= f.text_area :boilerplate, :cols => 80, :rows => 5 %>

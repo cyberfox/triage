@@ -74,7 +74,19 @@ body {
   margin-right: 2px;
 }
 
+.bucket_edit_block {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.bucket_edit_block img {
+  float: left;
+  border: 0px;
+}
+
 .bucket_container {
+  position: relative;
   border: 1px solid black;
   padding: 2px;
   margin-left: 15%;
@@ -84,8 +96,14 @@ body {
 }
 
 .bucket {
-  width: 49%;
+  width: 48%;
   float: left;
+}
+
+#new_button {
+}
+
+#skip_button {
 }
 
 .clear {
@@ -138,5 +156,15 @@ body {
 #popup_bucket form p#bucket_boilerplate {
   display: inline;
   margin-top: 0px;
+  float: left;
+}
+
+.edit_button {
+  border: 0px;
+  float: left;
+}
+
+.delete_button {
+  border: 0px;
   float: left;
 }
