@@ -50,6 +50,8 @@ class TicketsControllerTest < ActionController::TestCase
   context "Searching a projects tickets" do
     setup do
       login_as(:quentin)
+      tickets(:snipe_error).updated_at = Time.at(0)
+      tickets(:snipe_error).lighthouse
       get :search, :q => 'my ebay', :project_id => projects(:jbidwatcher).lighthouse_id
     end
 

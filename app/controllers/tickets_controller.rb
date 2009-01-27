@@ -37,7 +37,7 @@ class TicketsController < ApplicationController
 
   def search
     @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
-    db_project = Project.find_by_lighthouse_id(@lh_project.id)
+    db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
 
     @lh_tickets = Ticket.search(db_project, params[:q])
     @query = params[:q]
