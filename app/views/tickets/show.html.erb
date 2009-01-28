@@ -1,25 +1,3 @@
-<script type="text/javascript">
-function showBucketForm() {
-  $$('.cancel_button').invoke('show');
-  $$('.new_button').invoke('hide');
-  if(!$('popup_bucket').visible()) {
-<%= update_page do |page|
-    page.visual_effect :slide_down, :popup_bucket, :duration => 0.33
-end %>
-  }
-}
-
-function hideBucketForm() {
-  $$('.cancel_button').invoke('hide');
-  $$('.new_button').invoke('show');
-  if($('popup_bucket').visible()) {
-<%= update_page do |page|
-    page.visual_effect :slide_up, :popup_bucket, :duration => 0.33
-end %>
-  }
-}
-</script>
-
 <div style="width: 100%">
   <div class="bucket_container">
     <a id="bucket_edit_link" href="<%= buckets_path %>" onclick="makeEditable(); return false;">
@@ -30,7 +8,7 @@ end %>
     <div class="bucket" id="<%= "bucket_#{bucket.id}" %>">
       <%= link_to_remote(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')") %>
       <%= link_to_function(image_tag('cog_edit.png', :class => 'edit_button'),
-                           "editBucketForm('#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
+                           "editBucketForm(#{bucket.id}, '#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
       <%= button_to bucket.tag, apply_path(:ticket_number => @lh_ticket.number, :bucket_id => bucket.id), :class => 'actual_button' %>
       <%= h(bucket.description) if bucket.description %>
     </div>
@@ -39,10 +17,10 @@ end %>
     <div class="clear"></div>
     <div class="operational" style="width: 100%">
       <div class="new_button">
-	<%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'showBucketForm(); return false;' %>Create a new bucket
+	<%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'newBucketForm(); return false;' %>Create a new bucket
       </div>
       <div class="cancel_button" style="display: none">
-	<%= button_to "Cancel", nil, :onclick => 'hideBucketForm(); return false;' %>Cancel new bucket creation
+	<%= button_to "Cancel", nil, :onclick => 'hideBucketForm(); return false;' %>
       </div>
       <div class="skip_button"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
       <div class="clear"></div>

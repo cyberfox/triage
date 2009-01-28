@@ -20,6 +20,8 @@
     <%= collection_select :bucket, :milestone_id, @milestones, :id, :title, { :include_blank => "-do not change" } %>
   </p>
 
+  <%= f.hidden_field :id %>
+
   <div class="clear"></div>
 
   <p id="bucket_boilerplate">
