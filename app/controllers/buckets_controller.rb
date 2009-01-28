@@ -44,15 +44,19 @@ class BucketsController < ApplicationController
   def create
     modified = extract_bucket_params
 
-    @bucket = current_user.buckets.new(modified)
+    @bucket = current_user.buckets.find(modified[:id]) unless modified[:id].blank?
+    @bucket = current_user.buckets.new(modified) if @bucket.nil?
+
+    new_record = @bucket.new_record?
+
     if request.xhr?
-      render :xml => @bucket, :status => :created, :location => @bucket if @bucket.save
+      render_bucket_xml(new_record) if @bucket.save
     else
       respond_to do |format|
         if @bucket.save
           flash[:notice] = 'Bucket was successfully created.'
           format.html { redirect_to(@bucket) }
-          format.xml  { render :xml => @bucket, :status => :created, :location => @bucket }
+          format.xml  { render_bucket_xml(new_record) }
         else
           format.html do
             prep_bucket_form
@@ -108,5 +112,9 @@ class BucketsController < ApplicationController
       modified = {}
     end
     return modified
+  end
+
+  def render_bucket_xml(new_record)
+    render :xml => @bucket, :status => (new_record ? :created : :ok), :location => @bucket 
   end
 end

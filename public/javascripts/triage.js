@@ -1,15 +1,37 @@
-function hackery(response) {
-  alert(response.responseText);
-  if(response.responseText != null) {
-    addNewBucket(response.responseXML);
+function createSuccessful(xml) {
+  desc = '';
+  tag = xml.getElementsByTagName('tag')[0].childNodes[0].nodeValue;
+  tag_desc = xml.getElementsByTagName('description');
+  try {
+    desc = xml.getElementsByTagName('description')[0].childNodes[0].nodeValue;
+  } catch(e) {
+      //  Ignore it and leave desc empty.
   }
+
+  alert("Created tag '" + tag + "', with description '" + desc + "'.");
 }
 
-function addNewBucket(xml) {
+function updateSuccessful(xml) {
+  desc = '';
   tag = xml.getElementsByTagName('tag')[0].childNodes[0].nodeValue;
-  desc = xml.getElementsByTagName('description')[0].childNodes[0].nodeValue;
+  try {
+    desc = xml.getElementsByTagName('description')[0].childNodes[0].nodeValue;
+  } catch(e) {
+      //  Ignore it and leave desc empty.
+  }
 
-  alert("Got tag '" + tag + "', with description '" + desc + "'.");
+  alert("Updated tag '" + tag + "', with description '" + desc + "'.");
+}
+
+function operationSuccessful(response) {
+    alert(response.responseText);
+    if(response.responseText != null) {
+	if(response.status == 200) {
+	    updateSuccessful(response.responseXML);
+	} else if(response.status == 201) {
+	    createSuccessful(response.responseXML);
+	}
+    }
 }
 
 var editable=false;

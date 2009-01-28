@@ -28,7 +28,7 @@
   </div>
 </div>
 <div id="popup_bucket" style="display: none">
-  <% remote_form_for(@bucket, :success => 'hackery(request)') do |f| %>
+  <% remote_form_for(@bucket, :success => 'operationSuccessful(request)') do |f| %>
     <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
     <p id="bucket_submit_button">
       <%= f.submit "Create" %>
