@@ -12,18 +12,20 @@ function addNewBucket(xml) {
   alert("Got tag '" + tag + "', with description '" + desc + "'.");
 }
 
-var toggle=0;
+var editable=false;
 
 function makeEditable() {
-  $$('.edit_button').invoke('toggle');
-  $$('.delete_button').invoke('toggle');
-  $$('.operational').invoke('toggle');
-  toggle = 1-toggle;
-  if(toggle == 1) {
+  editable = !editable;
+  if(editable) {
     $$('.actual_button').invoke('disable');
   } else {
     $$('.actual_button').invoke('enable');
+    hideBucketForm();
   }
+  $$('.edit_button').invoke('toggle');
+  $$('.delete_button').invoke('toggle');
+  $$('.new_button').invoke('toggle');
+  $$('.skip_button').invoke('toggle');
 }
 
 function nuke(elem) {

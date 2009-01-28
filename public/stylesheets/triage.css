@@ -100,10 +100,19 @@ body {
   float: left;
 }
 
-#new_button {
+.cancel_button {
+  margin-left: 35%;
+  margin-right: 35%;
 }
 
-#skip_button {
+.new_button {
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+.skip_button {
+  margin-left: 35%;
+  margin-right: 35%;
 }
 
 .clear {

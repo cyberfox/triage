@@ -1,9 +1,17 @@
 <script type="text/javascript">
-function toggleBucketForm() {
+function showBucketForm() {
+  $$('.cancel_button').invoke('show');
+  $$('.new_button').invoke('hide');
 <%= update_page do |page|
-    page.toggle 'cancel_button'
-    page.toggle 'new_button'
-    page.visual_effect :toggle_slide, :popup_bucket, :duration => 0.33
+    page.visual_effect :slide_down, :popup_bucket, :duration => 0.33
+end %>
+}
+
+function hideBucketForm() {
+  $$('.cancel_button').invoke('hide');
+  $$('.new_button').invoke('show');
+<%= update_page do |page|
+    page.visual_effect :slide_up, :popup_bucket, :duration => 0.33
 end %>
 }
 </script>
@@ -25,15 +33,15 @@ end %>
 <% end -%>
 <% end -%>
     <div class="clear"></div>
-    <div class="operational">
-    <div class="bucket" id="new_button">
-      <%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'toggleBucketForm(); return false;' %>Create a new bucket
-    </div>
-    <div class="bucket" id="cancel_button" style="display: none">
-      <%= button_to "Cancel", nil, :onclick => 'toggleBucketForm(); return false;' %>Cancel new bucket creation
-    </div>
-    <div class="bucket" id="skip_button"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
-    <div class="clear"></div>
+    <div class="operational" style="width: 100%">
+      <div class="new_button">
+	<%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'showBucketForm(); return false;' %>Create a new bucket
+      </div>
+      <div class="cancel_button" style="display: none">
+	<%= button_to "Cancel", nil, :onclick => 'hideBucketForm(); return false;' %>Cancel new bucket creation
+      </div>
+      <div class="skip_button"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
+      <div class="clear"></div>
     </div>
   </div>
 </div>
@@ -65,4 +73,7 @@ end %>
 <script type="text/javascript">
 $$('.edit_button').invoke('hide');
 $$('.delete_button').invoke('hide');
+$$('.new_button').invoke('hide');
+var bucketsize = $$('.actual_button').pluck('offsetWidth').max();
+$$('.actual_button').each(function(elem) { elem.style.width = bucketsize + 'px' });
 </script>
