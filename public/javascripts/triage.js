@@ -40,5 +40,5 @@ function editBucketForm(tag, desc, milestone_id, state, boilerplate) {
   form['bucket_milestone_id'].value = milestone_id;
   form['bucket_boilerplate'].value = boilerplate;
 
-  toggleBucketForm();
+  showBucketForm();
 }
