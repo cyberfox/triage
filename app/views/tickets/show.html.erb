@@ -1,41 +1,4 @@
-<div style="width: 100%">
-  <div class="bucket_container">
-    <a id="bucket_edit_link" href="<%= buckets_path %>" onclick="makeEditable(); return false;">
-      <div class="bucket_edit_block"><%= image_tag('tag_blue_edit.png') %>Edit</div>
-    </a>
-<% unless current_user.buckets.blank? -%>
-<% current_user.buckets.each do |bucket| -%>
-    <div class="bucket" id="<%= "bucket_#{bucket.id}" %>">
-      <%= link_to_remote(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')") %>
-      <%= link_to_function(image_tag('cog_edit.png', :class => 'edit_button'),
-                           "editBucketForm(#{bucket.id}, '#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
-      <%= button_to bucket.tag, apply_path(:ticket_number => @lh_ticket.number, :bucket_id => bucket.id), :class => 'actual_button' %>
-      <%= h(bucket.description) if bucket.description %>
-    </div>
-<% end -%>
-<% end -%>
-    <div class="clear"></div>
-    <div class="operational" style="width: 100%">
-      <div class="new_button">
-	<%= button_to "New", { :action => 'new', :controller => 'buckets' }, :onclick => 'newBucketForm(); return false;' %>Create a new bucket
-      </div>
-      <div class="cancel_button" style="display: none">
-	<%= button_to "Cancel", nil, :onclick => 'hideBucketForm(); return false;' %>
-      </div>
-      <div class="skip_button"><%= button_to "Skip", { :action => 'next' } %>Skip to the next ticket</div>
-      <div class="clear"></div>
-    </div>
-  </div>
-</div>
-<div id="popup_bucket" style="display: none">
-  <% remote_form_for(@bucket, :success => 'operationSuccessful(request)') do |f| %>
-    <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
-    <p id="bucket_submit_button">
-      <%= f.submit "Create" %>
-    </p>
-  <% end %>
-  <div class="clear"></div>
-</div>
+<%= render :partial => 'buckets/topblock', :locals => { :new_bucket => @bucket, :lh_ticket => @lh_ticket, :lh_project => @lh_project } %>
 <br>
 <h1><%= @lh_ticket.title %></h1>
 <% unless @lh_ticket.tags.blank? -%>
@@ -52,10 +15,3 @@
 </div>
 <hr width="50%"/>
 <% end -%>
-<script type="text/javascript">
-$$('.edit_button').invoke('hide');
-$$('.delete_button').invoke('hide');
-$$('.new_button').invoke('hide');
-var bucketsize = $$('.actual_button').pluck('offsetWidth').max();
-$$('.actual_button').each(function(elem) { elem.style.width = bucketsize + 'px' });
-</script>

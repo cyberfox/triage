@@ -12,9 +12,10 @@ class TicketsController < ApplicationController
   end
 
   def show
-    lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
-    db_project = current_user.projects.find_by_lighthouse_id(lh_project.id)
+    @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
+    db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
     @lh_ticket = db_project.tickets.find_by_number(params[:id]).lighthouse
+    session[:ticket_number] = @lh_ticket.number
 
     users = (@lh_ticket.versions.collect(&:user_id) +
              @lh_ticket.versions.collect(&:assigned_user_id)).uniq

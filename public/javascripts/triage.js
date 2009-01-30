@@ -1,53 +1,21 @@
-function createSuccessful(xml) {
-  desc = '';
-  tag = xml.getElementsByTagName('tag')[0].childNodes[0].nodeValue;
-  tag_desc = xml.getElementsByTagName('description');
-  try {
-    desc = xml.getElementsByTagName('description')[0].childNodes[0].nodeValue;
-  } catch(e) {
-      //  Ignore it and leave desc empty.
-  }
-
-  alert("Created tag '" + tag + "', with description '" + desc + "'.");
-}
-
-function updateSuccessful(xml) {
-  desc = '';
-  tag = xml.getElementsByTagName('tag')[0].childNodes[0].nodeValue;
-  try {
-    desc = xml.getElementsByTagName('description')[0].childNodes[0].nodeValue;
-  } catch(e) {
-      //  Ignore it and leave desc empty.
-  }
-
-  alert("Updated tag '" + tag + "', with description '" + desc + "'.");
-}
-
-function operationSuccessful(response) {
-    alert(response.responseText);
-    if(response.responseText != null) {
-	if(response.status == 200) {
-	    updateSuccessful(response.responseXML);
-	} else if(response.status == 201) {
-	    createSuccessful(response.responseXML);
-	}
-    }
-}
-
 var editable=false;
 
 function makeEditable() {
   editable = !editable;
   if(editable) {
     $$('.actual_button').invoke('disable');
+    $$('.new_button').invoke('show');
+    $$('.skip_button').invoke('hide');
+    $$('.edit_button').invoke('show');
+    $$('.delete_button').invoke('show');
   } else {
     $$('.actual_button').invoke('enable');
     hideBucketForm();
+    $$('.new_button').invoke('hide');
+    $$('.skip_button').invoke('show');
+    $$('.edit_button').invoke('hide');
+    $$('.delete_button').invoke('hide');
   }
-  $$('.edit_button').invoke('toggle');
-  $$('.delete_button').invoke('toggle');
-  $$('.new_button').invoke('toggle');
-  $$('.skip_button').invoke('toggle');
 }
 
 function nuke(elem) {

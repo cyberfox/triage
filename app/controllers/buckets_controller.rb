@@ -48,6 +48,9 @@ class BucketsController < ApplicationController
     @bucket = current_user.buckets.new(modified) if @bucket.nil?
 
     new_record = @bucket.new_record?
+    unless new_record
+      @bucket.attributes=modified
+    end
 
     if request.xhr?
       render_bucket_xml(new_record) if @bucket.save
@@ -115,6 +118,15 @@ class BucketsController < ApplicationController
   end
 
   def render_bucket_xml(new_record)
-    render :xml => @bucket, :status => (new_record ? :created : :ok), :location => @bucket 
+    db_ticket = Ticket.find_by_number(session[:ticket_number])
+    db_project = db_ticket.project
+    @lh_ticket = db_ticket.lighthouse
+    @lh_project = db_project.lighthouse
+    prep_bucket_form
+
+    render :update do |page|
+      page.replace 'bucket_block', render(:partial => 'topblock', :locals => { :new_bucket => Bucket.new, :lh_ticket => @lh_ticket, :lh_project => @lh_project })
+      page << 'makeEditable();'
+    end
   end
 end
