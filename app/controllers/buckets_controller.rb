@@ -53,13 +53,13 @@ class BucketsController < ApplicationController
     end
 
     if request.xhr?
-      render_bucket_xml(new_record) if @bucket.save
+      ajax_bucket_block(new_record) if @bucket.save
     else
       respond_to do |format|
         if @bucket.save
           flash[:notice] = 'Bucket was successfully created.'
           format.html { redirect_to(@bucket) }
-          format.xml  { render_bucket_xml(new_record) }
+          format.xml  { ajax_bucket_block(new_record) }
         else
           format.html do
             prep_bucket_form
@@ -117,7 +117,7 @@ class BucketsController < ApplicationController
     return modified
   end
 
-  def render_bucket_xml(new_record)
+  def ajax_bucket_block(new_record)
     db_ticket = Ticket.find_by_number(session[:ticket_number])
     db_project = db_ticket.project
     @lh_ticket = db_ticket.lighthouse

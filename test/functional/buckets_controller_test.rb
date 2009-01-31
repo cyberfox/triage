@@ -82,6 +82,36 @@ class BucketsControllerTest < ActionController::TestCase
     end
   end
 
+  context "Creating a bucket through XMLHttpRequest" do
+    setup do
+      @request.session[:ticket_number] = tickets(:bad_sort).number
+      assert_difference('Bucket.count') do
+        xhr :post, :create, :bucket => { :tag => 'frappe', :description => 'An icy cold coffee drink' }
+      end
+    end
+
+    should "set lh_ticket and lh_project" do
+      assert_not_nil assigns(:lh_ticket)
+      assert_not_nil assigns(:lh_project)
+    end
+  end
+
+  context "Editing a bucket through XMLHttpRequest" do
+    setup do
+      @request.session[:ticket_number] = tickets(:bad_sort).number
+
+      assert_no_difference('Bucket.count') do
+        xhr :post, :create, :bucket => { :id => buckets(:investigate).id, :tag => 'invest', :description => 'Give power to' }
+      end
+    end
+
+    should "have updated the investigate ticket" do
+      b = buckets(:investigate).reload
+      assert_equal "invest", b.tag
+      assert_equal 'Give power to', b.description
+    end
+  end
+
   should "show bucket" do
     get :show, :id => buckets(:details).id
     assert_response :success
