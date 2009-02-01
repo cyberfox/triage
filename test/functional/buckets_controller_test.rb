@@ -90,9 +90,14 @@ class BucketsControllerTest < ActionController::TestCase
       end
     end
 
-    should "set lh_ticket and lh_project" do
-      assert_not_nil assigns(:lh_ticket)
-      assert_not_nil assigns(:lh_project)
+    should "use topblock partial" do
+      assert_template 'buckets/_topblock.html.erb'
+    end
+
+    should "create a new bucket with 'frappe' as its tag" do
+      frappe = Bucket.find_by_tag('frappe')
+      assert_not_nil frappe
+      assert_equal 'An icy cold coffee drink', frappe.description
     end
   end
 

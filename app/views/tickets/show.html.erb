@@ -1,4 +1,4 @@
-<%= render :partial => 'buckets/topblock', :locals => { :new_bucket => @bucket, :lh_ticket => @lh_ticket, :lh_project => @lh_project } %>
+<%= render :partial => 'buckets/topblock', :locals => { :new_bucket => @bucket, :ticket_number => @lh_ticket.number, :lh_project => @lh_project } %>
 <br>
 <h1><%= @lh_ticket.title %></h1>
 <% unless @lh_ticket.tags.blank? -%>

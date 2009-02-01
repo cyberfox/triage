@@ -10,7 +10,7 @@
       <%= link_to_remote(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')") %>
       <%= link_to_function(image_tag('cog_edit.png', :class => 'edit_button'),
                            "editBucketForm(#{bucket.id}, '#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
-      <%= button_to bucket.tag, apply_path(:project_id => lh_project.id, :ticket_number => lh_ticket.number, :bucket_id => bucket.id), :class => 'actual_button' %>
+      <%= button_to bucket.tag, apply_path(:project_id => lh_project.id, :ticket_number => ticket_number, :bucket_id => bucket.id), :class => 'actual_button' %>
       <%= h(bucket.description) if bucket.description %>
     </div>
 <% end -%>
