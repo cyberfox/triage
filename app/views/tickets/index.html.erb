@@ -1,2 +1,3 @@
+<%= render :partial => 'buckets/topblock', :locals => { :new_bucket => Bucket.new, :ticket_number => nil, :lh_project => @lh_project } %>
 <h1>Tickets for <%= @lh_project.name %>, in search bin <%= @bin.name %></h1>
 <%= render :partial => 'search_results', :locals => { :result => @bin, :tickets => @lh_tickets, :project => @lh_project } %>
