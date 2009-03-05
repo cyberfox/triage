@@ -20,10 +20,11 @@ and whether it changes the state of the ticket (and what to), or
 milestone would be customizable per-bucket.
 
 This magic application would then apply that tag, change it from 'new'
-to 'open' (or closed in the case of the last two), and move to showing
-the next ticket in the Lighthouse search results.  The buttons would
-be in the same place for each ticket, for minimal and predictable
-mouse movement.
+to 'open' (or closed in the case of the last two), maybe stick some
+boilerplate in the ticket comments, and move to showing the next
+ticket in the Lighthouse search results.  The buttons would be in the
+same place for each ticket, for minimal and predictable mouse
+movement.
 
 Eventually, I'd love to offer niceties like applying tags to multiple
 items at once, perhaps with some simple gmail like multiple selection.
@@ -34,7 +35,8 @@ useful to many developers.
 For now, I'm working on the simple things.  Getting a list of projects,
 then a list of search bins, then a list of tickets, then an individual
 ticket.  That all works, right now, and caches the results in a local
-database.
+database.  It's not fast, but it _tries_ to keep in sync with Lighthouse,
+so it probably won't ever be.
 
 Searches aren't cached, but the ticket retrievals are, and cache
 expiry is handled using the updated_at field.
@@ -46,7 +48,9 @@ re-implement the entire database structure of Lighthouse.  This
 required a small change to the Lighthouse API library, so it's bundled
 as a packed gem (cyberfox-lighthouse-api on http://gems.github.com ).
 
-Soon I'll try adding a button to quickly tag something as 'investigate'.
+It's currently functional; you can create buckets and apply them to
+tickets.  The next step is handling stepping one at a time through
+search results.
 
 Then maybe I'll skin the whole thing and make it look pretty.  :)
 Actually I'm not very good at making things look pretty, but I'm
