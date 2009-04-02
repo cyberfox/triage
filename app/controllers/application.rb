@@ -43,8 +43,8 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_title_information
-    @title_controller = controller.singular_class_name(controller).gsub('_controller', '').captialize
-    @title_optional_action = controller.action_name if controller.action_name != 'index'
+    @title_controller = self.singular_class_name(self).gsub('_controller', '').capitalize
+    @title_optional_action = self.action_name if self.action_name != 'index'
     @title_optional_action, @title_controller = [nil, 'Sign In'] if @title_controller == 'Sessions' && @title_optional_action == 'new'
   end
 end

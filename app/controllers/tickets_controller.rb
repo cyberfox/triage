@@ -42,6 +42,7 @@ class TicketsController < ApplicationController
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
 
     @lh_tickets = Ticket.search(db_project, params[:q])
+    session[:search] = @lh_tickets
     @query = params[:q]
     @result = OpenStruct.new(:tickets_count => "At least #{@lh_tickets.length}")
     prep_bucket_form
