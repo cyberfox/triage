@@ -53,6 +53,9 @@ class SessionsControllerTest < ActionController::TestCase
     users(:quentin).remember_me
     @request.cookies["auth_token"] = cookie_for(:quentin)
     get :new
+    assert_not_nil assigns(:title_controller)
+    assert_nil assigns(:title_optional_action)
+    assert_equal "Sign In", assigns(:title_controller)
     assert @controller.send(:logged_in?)
   end
 

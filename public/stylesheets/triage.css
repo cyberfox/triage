@@ -177,3 +177,15 @@ body {
   border: 0px;
   float: left;
 }
+
+.form_label {
+  text-align: left;
+  width: 6em;
+  display: inline-block;
+}
+
+.form2_label {
+  text-align: left;
+  width: 12em;
+  display: inline-block;
+}

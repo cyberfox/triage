@@ -15,9 +15,11 @@
 <div id="top_line">
   <span id="user_controls">
 <% if logged_in? -%>
-Settings | <%= link_to('Sign Out', logout_path) %>
-<% elsif @title_controller != 'Sign In' -%>
-<%= link_to('Sign In', login_path) %>
+  Settings | <%= link_to('Sign Out', logout_path) %>
+<% else -%>
+  <% if @title_controller != 'Sign Up' -%><%= link_to("Sign Up", signup_url) -%><% end %>
+  <% if @title_controller != 'Sign Up' && @title_controller != 'Sign In' %> | <% end -%>
+  <% if @title_controller != 'Sign In' %><%= link_to('Sign In', login_path) %><% end %>
 <% end %>
   </span>
 <% if logged_in? -%>
