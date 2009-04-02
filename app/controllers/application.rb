@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_current_project
   helper :all # include all helpers, all the time
   helper_method :current_project
+  before_filter :prepare_title_information
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -39,5 +40,11 @@ class ApplicationController < ActionController::Base
     project = current_user.projects.first
     @milestones = project.milestones
     @states = project.states
+  end
+
+  def prepare_title_information
+    @title_controller = controller.singular_class_name(controller).gsub('_controller', '').captialize
+    @title_optional_action = controller.action_name if controller.action_name != 'index'
+    @title_optional_action, @title_controller = [nil, 'Sign In'] if @title_controller == 'Sessions' && @title_optional_action == 'new'
   end
 end
