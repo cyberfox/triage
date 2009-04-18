@@ -65,6 +65,10 @@ body {
   color: green;
 }
 
+.flash_error {
+  color: red;
+}
+
 .indent {
   margin-left: 3px;
 }
