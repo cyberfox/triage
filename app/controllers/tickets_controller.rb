@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'rdiscount'
 
 class TicketsController < ApplicationController
   before_filter :login_required
@@ -12,6 +13,7 @@ class TicketsController < ApplicationController
     prep_bucket_form
     session[:tickets] = @lh_tickets.collect(&:number)
     session[:ticket_index] = 0
+    session[:ticket_search] = @bin.query
   end
 
   def show
@@ -35,7 +37,6 @@ class TicketsController < ApplicationController
     @ticket.lighthouse(Time.now)
     # Pull the current search from the session, and get the next entry, and show it.
   end
-
 
   # Pull the current search from the session, get the next entry, and show it.
   def next
