@@ -69,8 +69,18 @@ body {
   color: red;
 }
 
-.indent {
+.comment {
+  margin-left: 15px;
+  margin-right: 100px;
+  background-color: #e0e0e0;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black
+}
+
+
+.comment_body {
   margin-left: 3px;
+  margin-right: 3px;
 }
 
 #main {
@@ -91,7 +101,9 @@ body {
 
 .bucket_container {
   position: relative;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   padding: 2px;
   margin-left: 15%;
   margin-right: 15%;
@@ -192,4 +204,10 @@ body {
   text-align: left;
   width: 12em;
   display: inline-block;
+}
+
+#bucket_block {
+  background-color: white;
+  padding-top: 4px;
+  border-bottom: 1px solid black;
 }
