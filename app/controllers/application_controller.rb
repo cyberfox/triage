@@ -18,8 +18,9 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   def current_project
-    @session_project = Project.find_by_id(session[:project_id]) if session[:project_id]
-    return @session_project
+    @session_project ||= Project.find_by_id(session[:project_id]) if session[:project_id]
+    @session_project ||= Project.find_by_lighthouse_id(params[:project_id]) if params[:project_id]
+    @session_project
   end
 
   def store_current_project
