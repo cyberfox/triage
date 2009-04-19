@@ -35,7 +35,8 @@ class TicketsController < ApplicationController
     @ticket = @db_project.tickets.find_by_number(params[:ticket_number])
     @bucket.apply_one(@ticket)
     @ticket.lighthouse(Time.now)
-    # Pull the current search from the session, and get the next entry, and show it.
+    flash[:notice] = "Applied '#{@bucket.tag}' to '#{@ticket.title}' (ticket ##{@ticket.number})."
+    self.next
   end
 
   # Pull the current search from the session, get the next entry, and show it.
@@ -44,9 +45,13 @@ class TicketsController < ApplicationController
       next_ticket_idx = session[:ticket_index].to_i + 1
       if next_ticket_idx > session[:tickets].length
         # TODO -- Retrieve next 30 tickets?
+        # TODO -- Return to index if past the actual end of tickets.
       end
+      session[:ticket_index] = next_ticket_idx
       next_ticket_number = session[:tickets][next_ticket_idx]
       redirect_to :action => 'show', :project_id => params[:project_id], :id => next_ticket_number
+    else
+      redirect_to :action => 'index', :project_id => params[:project_id]
     end
   end
 

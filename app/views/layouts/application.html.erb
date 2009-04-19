@@ -33,7 +33,7 @@
   <%= render :partial => '/shared/byline', :locals => { :location => 'status_bar' } %>
 <% end -%>
 </div>
-<% if flash[:notice] %><div class="flash"><span class="flash_notice"><%= flash[:notice] %></span></div><% end %>
+<% if flash[:notice] %><div class="flash"><span class="flash_notice"><%= lighthouse_auto_link(current_project, flash[:notice]) %></span></div><% end %>
 <% if flash[:error] %><div class="flash"><span class="flash_error"><%= flash[:error]%></span></div><% end %>
 
 <div id="main">
