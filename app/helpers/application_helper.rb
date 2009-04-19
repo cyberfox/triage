@@ -4,7 +4,7 @@ module ApplicationHelper
     result = auto_link(text)
     return result if project.nil?
 
-    prefix = "#{project.user.subdomain}.lighthouseapp.com/projects/#{project.lighthouse_id}/tickets/"
+    prefix = "http://#{project.user.subdomain}.lighthouseapp.com/projects/#{project.lighthouse_id}/tickets/"
     result.gsub(/#([0-9]+)/, "<a href=\"#{prefix}\\1\">#\\1</a>")
   end
 end
