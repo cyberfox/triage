@@ -3,6 +3,10 @@ body {
   padding: 0px;
 }
 
+#top_flash {
+  width: 100%;
+}
+
 #top_line {
   padding-bottom: 2px;
   border-bottom: 1px solid black;

@@ -1,7 +1,7 @@
 <%= render :partial => 'buckets/topblock', :locals => { :new_bucket => @bucket, :ticket_number => @lh_ticket.number, :lh_project => @lh_project } %>
 <br>
 <div id="ticket_body">
-  <h1><%= @lh_ticket.title %></h1>
+  <h1><center><%= @lh_ticket.title %> (<%= lighthouse_auto_link(current_project, "##{@lh_ticket.number}") %>)</center></h1>
   <% unless @lh_ticket.tags.blank? -%>
     <h2>Tags: <%= @lh_ticket.tags.join(', ') %></h2>
   <% end -%>
@@ -20,9 +20,13 @@
 </div>
 <script type="text/javascript">
 Event.observe(window, 'load', function() {
-  $('bucket_block').style.margin=$('top_line').offsetHeight + "px 0px 0px 0px";
-  $('bucket_block').style.position="fixed";
-  $('top_line').style.position="fixed";
-  $('ticket_body').style.margin=($('top_line').offsetHeight + $('bucket_block').offsetHeight) + "px 0px 0px 0px";
+  top_lines = $('top_line').offsetHeight + $('top_flash').offsetHeight;
+  body_top = top_lines + $('bucket_block').offsetHeight;
+  $('bucket_block').style.margin = top_lines + "px 0px 0px 0px";
+  $('ticket_body').style.margin = body_top   + "px 0px 0px 0px";
+  $('top_flash').style.top = $('top_line').offsetHeight + "px";
+  $('bucket_block').style.position = "fixed";
+  $('top_line').style.position = "fixed";
+  $('top_flash').style.position = "fixed";
 });
 </script>
