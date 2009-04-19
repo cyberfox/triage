@@ -47,6 +47,28 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  def setup_search
+    login_as(:quentin)
+    tickets(:snipe_error).updated_at = Time.at(0)
+    tickets(:snipe_error).lighthouse
+    @search_results = Ticket.search(projects(:jbidwatcher), 'milestone:next state:new sort:oldest').collect(&:number)
+    @request.session[:tickets] = @search_results
+    @request.session[:ticket_index] = 2
+    @request.session[:ticket_search] = 'milestone:next state:new sort:oldest'
+  end
+
+  context "After a search" do
+    setup do
+      setup_search
+    end
+
+    should "allow 'next' to go to the next found ticket" do
+      get :next, :project_id => projects(:jbidwatcher).lighthouse_id
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[3]
+      assert_equal 3, @response.session[:ticket_index]
+    end
+  end
+
   context "Searching a projects tickets" do
     setup do
       login_as(:quentin)
@@ -65,11 +87,30 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  context "Applying a bucket to a ticket as part of a search" do
+    setup do
+      setup_search
+      post :apply, :project_id => projects(:jbidwatcher).lighthouse_id, :ticket_number => @search_results[2], :bucket_id => buckets(:feature).id
+    end
+
+    should "be redirected to the next ticket" do
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[3]
+    end
+
+    should "set flash to an appropriate message" do
+      assert_equal "Applied 'featurerequest' to 'Selling tab empty with 2.0beta8 [OS X 10.5.4]' (ticket #278).", @response.flash[:notice]
+    end
+  end
+
   context "Applying a bucket to a ticket" do
     setup do
       login_as(:quentin)
       set_project(:jbidwatcher)
       post :apply, :project_id => projects(:jbidwatcher).lighthouse_id, :ticket_number => tickets(:bad_sort).number, :bucket_id => buckets(:feature).id
+    end
+
+    should "redirect to index when not part of a search" do
+      assert_redirected_to :action => 'index', :project_id => projects(:jbidwatcher).lighthouse_id
     end
 
     should "assign the feature request bucket to @bucket" do
