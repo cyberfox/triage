@@ -10,20 +10,26 @@ class TicketsController < ApplicationController
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
     @bin = @lh_project.bins.find {|bin| bin.id.to_s == params[:bin_id].to_s}
     if @bin
-      search_query = @bin.query
+      @search_query = @bin.query
       @lh_tickets = Ticket.search(db_project, @bin.query)
     else
-      search_query = session[:ticket_search]
-      @lh_tickets = Ticket.search(db_project, search_query) if search_query
+      @search_query = session[:ticket_search]
+      @lh_tickets = Ticket.search(db_project, @search_query) if @search_query
     end
     if @lh_tickets.blank?
+      flash[:error] = "No tickets found for '#{h @search_query}'"
       redirect_to :controller => 'projects', :action => 'index'
     else
       prep_bucket_form
       session[:bin_id] = params[:bin_id]
       session[:tickets] = @lh_tickets.collect(&:number)
       session[:ticket_index] = 0
-      session[:ticket_search] = @bin.query
+      session[:ticket_search] = @search_query
+    end
+    if @bin
+      @ticket_count = @bin.ticket_count
+    else
+      @ticket_count = @lh_tickets.length
     end
   end
 
@@ -94,4 +100,7 @@ class TicketsController < ApplicationController
   def set_project
     session[:project_id] = current_project.id if current_project
   end
+
+  protected
+    include ERB::Util
 end

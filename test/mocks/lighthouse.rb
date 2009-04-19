@@ -73,6 +73,7 @@ module Lighthouse
 
       @@tickets ||= Lighthouse.from_yaml(:tickets)
       if condition == :all
+        return [] if params[:params] && params[:params][:q] == 'empty'
         if params[:params] && params[:params][:page] == 2
           return @@tickets[0..7]
         else

@@ -1,4 +1,4 @@
-Showing <%= tickets.length %> of <%= result.tickets_count %>.<br/>
+Showing <%= tickets.length %> of <%= @ticket_count %>.<br/>
 <ul>
 <% tickets.each do |ticket| -%>
 <li><%= link_to(ticket.title, url_for(:controller => 'tickets', :project_id => project.id, :id => ticket.number, :action => 'show')) %></li>

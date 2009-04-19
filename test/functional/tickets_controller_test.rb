@@ -1,6 +1,40 @@
 require 'test_helper'
 
 class TicketsControllerTest < ActionController::TestCase
+  context "Refreshing a ticket" do
+    setup do
+      login_as(:quentin)
+      get :refresh, :project_id => projects(:jbidwatcher).lighthouse_id, :id => tickets(:snipe_error).number
+    end
+
+    should "redirect to show for the refreshed item" do
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => tickets(:snipe_error).number
+    end
+  end
+
+  context "Getting the next ticket w/o a current ticket" do
+    setup do
+      login_as(:quentin)
+      get :next, :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+
+    should "redirect to index" do
+      assert_redirected_to :action => 'index', :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+  end
+
+  context "An empty search" do
+    setup do
+      login_as(:quentin)
+      @request.session[:ticket_search] = 'empty'
+      get :index, :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+
+    should "redirect to the top level projects controller" do
+      assert_redirected_to :controller => 'projects', :action => 'index'
+    end
+  end
+
   context "Getting the ticket list for a project" do
     context "when not logged in" do
       setup do
@@ -11,6 +45,20 @@ class TicketsControllerTest < ActionController::TestCase
 
       should "redirect to new session (login)" do
         assert_redirected_to :controller => 'sessions', :action => 'new'
+      end
+    end
+
+    context "when coming from a search query" do
+      setup do
+        login_as(:quentin)
+        @request.session[:ticket_search] = 'search query'
+        tickets(:snipe_error).updated_at = Time.at(0)
+        tickets(:snipe_error).lighthouse
+        get :index, :project_id => projects(:jbidwatcher).lighthouse_id
+      end
+
+      should "be successful" do
+        assert_response :success
       end
     end
 
