@@ -20,7 +20,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
     should "auto_link a ticket number to the lighthouse page when a project is given" do
       basic_message = "Applied mrs@best.com 'featurerequest' to http://url.com 'Selling tab empty with 2.0beta8 [OS X 10.5.4]' (ticket #999)."
-      assert_equal "Applied <a href=\"mailto:mrs@best.com\">mrs@best.com</a> 'featurerequest' to <a href=\"http://url.com\">http://url.com</a> 'Selling tab empty with 2.0beta8 [OS X 10.5.4]' (ticket <a href=\"bar.lighthouseapp.com/projects/8037/tickets/999\">#999</a>).",
+      assert_equal "Applied <a href=\"mailto:mrs@best.com\">mrs@best.com</a> 'featurerequest' to <a href=\"http://url.com\">http://url.com</a> 'Selling tab empty with 2.0beta8 [OS X 10.5.4]' (ticket <a href=\"http://bar.lighthouseapp.com/projects/8037/tickets/999\">#999</a>).",
         lighthouse_auto_link(projects(:jbidwatcher), basic_message)
     end
   end

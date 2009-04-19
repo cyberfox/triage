@@ -2,10 +2,12 @@ require 'test_helper'
 require 'ostruct'
 
 class TicketTest < ActiveSupport::TestCase
-  test "Search returns tickets" do
-    tickets = Ticket.search(projects(:jbidwatcher), "order:number", 1)
-    assert !tickets.empty?
-    assert_equal 30, tickets.length
+  context "Search" do
+    should "return tickets" do
+      tickets = Ticket.search(projects(:jbidwatcher), "order:number", 1)
+      assert !tickets.empty?
+      assert_equal 30, tickets.length
+    end
   end
 
   test "Find by P & T fills in details if latest_update newer than DB ticket" do
@@ -42,7 +44,7 @@ class TicketTest < ActiveSupport::TestCase
   end
 
   test "Import all tickets" do
-    assert_difference('Ticket.count', 29) do
+    assert_difference('Ticket.count', 28) do
       Ticket.import_all(projects(:jbidwatcher))
     end
   end

@@ -76,7 +76,7 @@ module Lighthouse
         if params[:params] && params[:params][:page] == 2
           return @@tickets[0..7]
         else
-          return @@tickets
+          return @@tickets[0...30]
         end
       else
         ticket = @@tickets.find { |ticket| ticket.number.to_s == condition.to_s }

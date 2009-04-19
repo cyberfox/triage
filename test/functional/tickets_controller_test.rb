@@ -53,7 +53,8 @@ class TicketsControllerTest < ActionController::TestCase
     tickets(:snipe_error).lighthouse
     @search_results = Ticket.search(projects(:jbidwatcher), 'milestone:next state:new sort:oldest').collect(&:number)
     @request.session[:tickets] = @search_results
-    @request.session[:ticket_index] = 2
+    @first_index = @search_results.index(278)
+    @request.session[:ticket_index] = @first_index
     @request.session[:ticket_search] = 'milestone:next state:new sort:oldest'
   end
 
@@ -64,8 +65,8 @@ class TicketsControllerTest < ActionController::TestCase
 
     should "allow 'next' to go to the next found ticket" do
       get :next, :project_id => projects(:jbidwatcher).lighthouse_id
-      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[3]
-      assert_equal 3, @response.session[:ticket_index]
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[@first_index + 1]
+      assert_equal @first_index + 1, @response.session[:ticket_index]
     end
   end
 
@@ -90,11 +91,11 @@ class TicketsControllerTest < ActionController::TestCase
   context "Applying a bucket to a ticket as part of a search" do
     setup do
       setup_search
-      post :apply, :project_id => projects(:jbidwatcher).lighthouse_id, :ticket_number => @search_results[2], :bucket_id => buckets(:feature).id
+      post :apply, :project_id => projects(:jbidwatcher).lighthouse_id, :ticket_number => @search_results[@first_index], :bucket_id => buckets(:feature).id
     end
 
     should "be redirected to the next ticket" do
-      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[3]
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => @search_results[@first_index+1]
     end
 
     should "set flash to an appropriate message" do
@@ -109,8 +110,8 @@ class TicketsControllerTest < ActionController::TestCase
       post :apply, :project_id => projects(:jbidwatcher).lighthouse_id, :ticket_number => tickets(:bad_sort).number, :bucket_id => buckets(:feature).id
     end
 
-    should "redirect to index when not part of a search" do
-      assert_redirected_to :action => 'index', :project_id => projects(:jbidwatcher).lighthouse_id
+    should "redirect to the ticket (to see the result) when not part of a search" do
+      assert_redirected_to :action => 'show', :project_id => projects(:jbidwatcher).lighthouse_id, :id => tickets(:bad_sort).number
     end
 
     should "assign the feature request bucket to @bucket" do

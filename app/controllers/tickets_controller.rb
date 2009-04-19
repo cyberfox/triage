@@ -1,19 +1,38 @@
 require 'ostruct'
-require 'rdiscount'
 
 class TicketsController < ApplicationController
   before_filter :login_required
   before_filter :get_token
+  before_filter :set_project
 
   def index
     @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
     @bin = @lh_project.bins.find {|bin| bin.id.to_s == params[:bin_id].to_s}
-    @lh_tickets = Ticket.search(db_project, @bin.query)
-    prep_bucket_form
-    session[:tickets] = @lh_tickets.collect(&:number)
-    session[:ticket_index] = 0
-    session[:ticket_search] = @bin.query
+    if @bin
+      search_query = @bin.query
+      @lh_tickets = Ticket.search(db_project, @bin.query)
+    else
+      search_query = session[:ticket_search]
+      @lh_tickets = Ticket.search(db_project, search_query) if search_query
+    end
+    if @lh_tickets.blank?
+      redirect_to :controller => 'projects', :action => 'index'
+    else
+      prep_bucket_form
+      session[:bin_id] = params[:bin_id]
+      session[:tickets] = @lh_tickets.collect(&:number)
+      session[:ticket_index] = 0
+      session[:ticket_search] = @bin.query
+    end
+  end
+
+  def refresh
+    lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
+    db_project = current_user.projects.find_by_lighthouse_id(lh_project.id)
+    db_ticket = db_project.tickets.find_by_number(params[:id])
+    db_ticket.update_from_lighthouse(Ticket.retrieve(db_project, db_ticket.number))
+    redirect_to :action => 'show', :project_id => params[:project_id], :id => db_ticket.number
   end
 
   def show
@@ -34,9 +53,10 @@ class TicketsController < ApplicationController
     @bucket = current_user.buckets.find_by_id(params[:bucket_id])
     @ticket = @db_project.tickets.find_by_number(params[:ticket_number])
     @bucket.apply_one(@ticket)
-    @ticket.lighthouse(Time.now)
+    @ticket.update_from_lighthouse(Ticket.retrieve(@db_project, @ticket.number))
     flash[:notice] = "Applied '#{@bucket.tag}' to '#{@ticket.title}' (ticket ##{@ticket.number})."
-    self.next
+    self.next if session[:ticket_index]
+    redirect_to(:action => 'show', :project_id => params[:project_id], :id => params[:ticket_number]) unless session[:ticket_index]
   end
 
   # Pull the current search from the session, get the next entry, and show it.
@@ -51,7 +71,9 @@ class TicketsController < ApplicationController
       next_ticket_number = session[:tickets][next_ticket_idx]
       redirect_to :action => 'show', :project_id => params[:project_id], :id => next_ticket_number
     else
-      redirect_to :action => 'index', :project_id => params[:project_id]
+      index_action = { :action => 'index', :project_id => params[:project_id] }
+      index_action.merge!(:bin_id => session[:bin_id]) if session[:bin_id]
+      redirect_to index_action
     end
   end
 
@@ -60,9 +82,16 @@ class TicketsController < ApplicationController
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
 
     @lh_tickets = Ticket.search(db_project, params[:q])
-    session[:search] = @lh_tickets
+    session[:tickets] = @lh_tickets.collect(&:number)
+    session[:ticket_index] = 0
+    session[:ticket_search] = params[:q]
     @query = params[:q]
     @result = OpenStruct.new(:tickets_count => "At least #{@lh_tickets.length}")
     prep_bucket_form
+  end
+
+  private
+  def set_project
+    session[:project_id] = current_project.id if current_project
   end
 end
