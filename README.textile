@@ -36,7 +36,7 @@ For now, I'm working on the simple things.  Getting a list of projects,
 then a list of search bins, then a list of tickets, then an individual
 ticket.  That all works, right now, and caches the results in a local
 database.  It's not fast, but it _tries_ to keep in sync with Lighthouse,
-so it probably won't ever be.
+so it probably won't ever be very fast.
 
 Searches aren't cached, but the ticket retrievals are, and cache
 expiry is handled using the updated_at field.
@@ -49,10 +49,12 @@ required a small change to the Lighthouse API library, so it's bundled
 as a packed gem (cyberfox-lighthouse-api on http://gems.github.com ).
 
 It's currently functional; you can create buckets and apply them to
-tickets.  The next step is handling stepping one at a time through
-search results.
+tickets.  Applying a bucket moves to the next search (or redisplays
+the current ticket if it's not part of an existing search.)  You can
+also skip through tickets, allowing you to walk through a search very
+nicely.  It's pretty nearly completely functional for my use, now.
 
-Then maybe I'll skin the whole thing and make it look pretty.  :)
+Then maybe I'll re-skin the whole thing and make it look pretty.  :)
 Actually I'm not very good at making things look pretty, but I'm
 pretty good at making things functional...
 
