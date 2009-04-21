@@ -215,3 +215,19 @@ body {
   padding-top: 4px;
   border-bottom: 1px solid black;
 }
+
+.even {
+  background-color: #f8f8ff;
+}
+
+.odd {
+  background-color: #f8f8f8;
+}
+
+.ticket_list {
+  display: block;
+  overflow: hidden;
+  width: 80%;
+  height: 2em;
+  list-style: none;
+}
