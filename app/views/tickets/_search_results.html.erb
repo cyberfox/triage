@@ -6,7 +6,7 @@ Showing <%= tickets.length %> of <%= @ticket_count %>.<br/>
       <span style="display: inline-block; width: 3em; text-align: right;"><%= ticket.number %></span>
       <%= check_box_tag "ticket_#{ticket.id}" %>
       <%= link_to(ticket.title, url_for(:controller => 'tickets', :project_id => project.id, :id => ticket.number, :action => 'show')) %>
-      <% body = Project.find_by_lighthouse_id(project.id).tickets.find_by_number(ticket.number).lighthouse.versions.first.body %>
+      <% body = current_user.projects.find_by_lighthouse_id(project.id).tickets.find_by_number(ticket.number).lighthouse.versions.first.body %>
       <% unless ticket.tags.blank? -%>
         <b style="color: #000000">&nbsp;&mdash;&nbsp;</b>
 	<span style="color: #c8c8c8">
