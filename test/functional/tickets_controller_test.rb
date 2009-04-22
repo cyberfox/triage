@@ -23,6 +23,36 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  context "Getting a ticket that doesn't exist" do
+    setup do
+      login_as(:quentin)
+      get :show, :project_id => projects(:jbidwatcher).lighthouse_id, :id => 9099
+    end
+
+    should "set the flash" do
+      assert_equal "Ticket 9099 is missing", @response.flash[:error]
+    end
+
+    should "redirect to index" do
+      assert_redirected_to :action => 'index', :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+  end
+
+  context "Calling 'show' without an id" do
+    setup do
+      login_as(:quentin)
+      get :show, :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+
+    should "set the flash" do
+      assert_equal "Ticket to view is blank", @response.flash[:error]
+    end
+
+    should "redirect to index" do
+      assert_redirected_to :action => 'index', :project_id => projects(:jbidwatcher).lighthouse_id
+    end
+  end
+
   context "An empty search" do
     setup do
       login_as(:quentin)

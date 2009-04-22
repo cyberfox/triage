@@ -42,9 +42,20 @@ class TicketsController < ApplicationController
   end
 
   def show
+    if params[:id].blank?
+      flash[:error] = "Ticket to view is blank"
+      redirect_to :action => 'index', :project_id => params[:project_id]
+      return
+    end
     @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
-    @lh_ticket = db_project.tickets.find_by_number(params[:id]).lighthouse
+    db_ticket = db_project.tickets.find_by_number(params[:id])
+    if db_ticket.nil?
+      flash[:error] = "Ticket #{h params[:id]} is missing"
+      redirect_to :action => 'index', :project_id => params[:project_id]
+      return
+    end
+    @lh_ticket = db_ticket.lighthouse
     session[:ticket_index] = session[:tickets].index(@lh_ticket.number) if session[:tickets]
     session[:ticket_number] = @lh_ticket.number
 
