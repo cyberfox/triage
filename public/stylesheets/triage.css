@@ -213,7 +213,7 @@ body {
 #bucket_block {
   background-color: white;
   padding-top: 4px;
-  border-bottom: 1px solid black;
+  width: 100%;
 }
 
 .even {

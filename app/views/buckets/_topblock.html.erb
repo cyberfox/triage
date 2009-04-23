@@ -1,6 +1,6 @@
-<div id="bucket_block">
+<div id="bucket_block"<% unless ticket_number.nil? %> style="border-bottom: 1px solid black"<% end %>>
 <div style="width: 100%">
-  <div class="bucket_container">
+  <div class="bucket_container"<% if ticket_number.nil? %> style="border-bottom: 1px solid black"<% end %>>
     <a id="bucket_edit_link" href="<%= buckets_path %>" onclick="makeEditable(); return false;">
       <div class="bucket_edit_block"><%= image_tag('tag_blue_edit.png') %>Edit</div>
     </a>
