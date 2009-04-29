@@ -27,7 +27,7 @@ class TicketsController < ApplicationController
       session[:ticket_search] = @search_query
     end
     if @bin
-      @ticket_count = @bin.ticket_count
+      @ticket_count = @bin.tickets_count
     else
       @ticket_count = @lh_tickets.length
     end
