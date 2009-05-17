@@ -17,10 +17,10 @@ begin
       Addressable::URI.parse(*args)
     end
   end
-rescue LoadError
-  puts "Install the Addressable gem to support accounts with subdomains."
-  puts "# sudo gem install addressable"
-  puts
+rescue LoadError => e
+  puts "Install the Addressable gem (with dependencies) to support accounts with subdomains."
+  puts "# sudo gem install addressable --development"
+  puts e.message
 end
 
 require 'activesupport'
@@ -282,7 +282,7 @@ module Lighthouse
         returning tags do |tag|
           tag.collect! do |t|
             unless tag.blank?
-              t = Tag.new(t)
+              t = Tag.new(t,prefix_options[:project_id])
               t.downcase!
               t.gsub! /(^')|('$)/, ''
               t.gsub! /[^a-z0-9 \-_@\!']/, ''
