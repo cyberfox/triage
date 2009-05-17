@@ -23,5 +23,9 @@ config.action_mailer.delivery_method = :test
 
 config.gem "thoughtbot-shoulda", :lib => 'shoulda'
 config.gem "thoughtbot-quietbacktrace", :lib => 'quietbacktrace'
+config.gem 'fakeweb', :lib => 'fake_web'
 
 require "#{Rails.root}/test/mocks/lighthouse"
+
+require 'fake_web'
+FakeWeb.allow_net_connect = false
