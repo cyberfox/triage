@@ -1,4 +1,28 @@
 require 'rubygems'
+
+begin
+  require 'uri'
+  require 'addressable/uri'
+
+  module URI
+    def decode(*args)
+      Addressable::URI.decode(*args)
+    end
+
+    def escape(*args)
+      Addressable::URI.escape(*args)
+    end
+
+    def parse(*args)
+      Addressable::URI.parse(*args)
+    end
+  end
+rescue LoadError
+  puts "Install the Addressable gem to support accounts with subdomains."
+  puts "# sudo gem install addressable"
+  puts
+end
+
 require 'activesupport'
 require 'activeresource'
 
@@ -135,16 +159,37 @@ module Lighthouse
     def changesets(options = {})
       Changeset.find(:all, :params => options.update(:project_id => id))
     end
+
+    def memberships(options = {})
+      ProjectMembership.find(:all, :params => options.update(:project_id => id))
+    end
+
+    def tags(options = {})
+      TagResource.find(:all, :params => options.update(:project_id => id))
+    end
   end
 
   class User < Base
-    def memberships
+    def memberships(options = {})
       Membership.find(:all, :params => {:user_id => id})
     end
   end
   
   class Membership < Base
     site_format << '/users/:user_id'
+    def save
+      raise Error, "Cannot modify memberships from the API"
+    end
+  end
+  
+  class ProjectMembership < Base
+    self.element_name = 'membership'
+    site_format << '/projects/:project_id'
+
+    def url
+      respond_to?(:account) ? account : project
+    end
+
     def save
       raise Error, "Cannot modify memberships from the API"
     end
@@ -194,6 +239,22 @@ module Lighthouse
       @tags ||= tag.blank? ? [] : parse_with_spaces(tag)
     end
 
+    def body
+      attributes['body'] ||= ''
+    end
+
+    def body=(value)
+      attributes['body'] = value
+    end
+
+    def body_html
+      attributes['body_html'] ||= ''
+    end
+
+    def body_html=(value)
+      attributes['body_html'] = value
+    end
+
     def save_with_tags
       self.tag = @tags.collect do |tag|
         tag.include?(' ') ? tag.inspect : tag
@@ -221,10 +282,12 @@ module Lighthouse
         returning tags do |tag|
           tag.collect! do |t|
             unless tag.blank?
+              t = Tag.new(t)
               t.downcase!
               t.gsub! /(^')|('$)/, ''
               t.gsub! /[^a-z0-9 \-_@\!']/, ''
               t.strip!
+              t.prefix_options = prefix_options
               t
             end
           end
@@ -244,10 +307,18 @@ module Lighthouse
   
   class Milestone < Base
     site_format << '/projects/:project_id'
+
+    def tickets(options = {})
+      Ticket.find(:all, :params => options.merge(prefix_options).update(:q => %{milestone:"#{title}"}))
+    end
   end
   
   class Bin < Base
     site_format << '/projects/:project_id'
+
+    def tickets(options = {})
+      Ticket.find(:all, :params => options.merge(prefix_options).update(:q => query))
+    end
   end
   
   class Changeset < Base
@@ -255,6 +326,38 @@ module Lighthouse
   end
   
   class Change < Array; end
+
+  class TagResource < Base
+    self.element_name = 'tag'
+    site_format << '/projects/:project_id'
+
+    def name
+      @name ||= Tag.new(attributes['name'], prefix_options[:project_id])
+    end
+
+    def tickets(options = {})
+      name.tickets(options)
+    end
+  end
+  
+  class Tag < String
+    attr_writer :prefix_options
+    attr_accessor :project_id
+
+    def initialize(s, project_id)
+      @project_id = project_id
+      super(s)
+    end
+
+    def prefix_options
+      @prefix_options || {}
+    end
+
+    def tickets(options = {})
+      options[:project_id] ||= @project_id
+      Ticket.find(:all, :params => options.merge(prefix_options).update(:q => %{tagged:"#{self}"}))
+    end
+  end
 end
 
 module ActiveResource
