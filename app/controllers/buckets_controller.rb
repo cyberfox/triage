@@ -119,13 +119,18 @@ class BucketsController < ApplicationController
 
   def ajax_bucket_block(new_record)
     db_ticket = Ticket.find_by_number(session[:ticket_number])
-    db_project = db_ticket.project
-    lh_ticket = db_ticket.lighthouse
+    if db_ticket
+      db_project = db_ticket.project
+      lh_ticket = db_ticket.lighthouse
+    else
+      db_project = current_user.projects.first
+      lh_ticket = nil
+    end
     lh_project = db_project.lighthouse
     prep_bucket_form
 
     render :update do |page|
-      page.replace 'bucket_block', render(:partial => 'topblock', :locals => { :new_bucket => Bucket.new, :ticket_number => lh_ticket.number, :lh_project => lh_project })
+      page.replace 'bucket_block', render(:partial => 'topblock', :locals => { :new_bucket => Bucket.new, :ticket_number => (lh_ticket ? lh_ticket.number : nil), :lh_project => lh_project })
       page << 'makeEditable();'
     end
   end
