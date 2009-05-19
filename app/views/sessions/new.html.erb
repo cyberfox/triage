@@ -1,21 +1,17 @@
-<div id="bucket_block">
-<div style="width: 100%">
-<center><div class="bucket_container" style="width: 28em;">
+<div class="signin">
 <h1>Sign In</h1>
 
 <% form_tag session_path do -%>
-<p><div class="form_label"><%= label_tag 'Login:' %></div><%= text_field_tag 'login', @login %></p>
-<o><div class="form_label"><%= label_tag 'Password:' %></div><%= password_field_tag 'password', nil %></p>
+<p class="login_line"><%= label_tag 'Login:' %><%= text_field_tag 'login', @login %></p>
+<p class="login_line"><%= label_tag 'Password:' %><%= password_field_tag 'password', nil %></p>
 
 <!-- Uncomment this if you want this functionality
 <p><%= label_tag 'remember_me', 'Remember me' %>
 <%= check_box_tag 'remember_me', '1', @remember_me %></p>
 -->
 
-<center><p><%= submit_tag 'Log in' %></p></center>
+<p><%= submit_tag 'Log in', :id => 'login' %></p>
 <% end -%>
-
-If you don't have an account yet, <%= link_to("create one now", signup_url) -%>.
-</div></center>
-</div>
+<br/>
+<p class="signup_invite">Don't have an account yet?  <%= link_to("Create one now!", signup_url) -%>.</p>
 </div>
