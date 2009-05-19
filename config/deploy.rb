@@ -27,7 +27,11 @@ after "deploy:update_code", "deploy:write_sha1"
 
 namespace :deploy do
   task :restart do
-    run "cp #{release_path}/config/database.yml.production #{release_path}/config/database.yml"
+    run <<-CMD
+        cd #{latest_release} &&
+        ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
+        ln -nfs #{shared_path}/config/site_keys.rb #{latest_release}/config/initializers/site_keys.rb
+    CMD
     run "mongrel_rails cluster::restart -C #{mongrel_config}"
   end
 
