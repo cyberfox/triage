@@ -24,20 +24,24 @@ set :user, "triage"              # defaults to the currently logged in user
 set :mongrel_config, "/etc/mongrel_cluster/#{application}.yml" 
 
 after "deploy:update_code", "deploy:write_sha1"
+after "deploy:update_code", "deploy:link_config"
 
 namespace :deploy do
   task :restart do
-    run <<-CMD
-        cd #{latest_release} &&
-        ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
-        ln -nfs #{shared_path}/config/site_keys.rb #{latest_release}/config/initializers/site_keys.rb
-    CMD
     run "mongrel_rails cluster::restart -C #{mongrel_config}"
   end
 
   desc "write sha1 to file"
   task :write_sha1 do
     run "cd #{latest_release} && git show-ref --heads --hash=7 > #{latest_release}/config/HEAD"
+  end
+
+  task :link_config do
+    run <<-CMD
+        cd #{latest_release} &&
+        ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml &&
+        ln -nfs #{shared_path}/config/site_keys.rb #{latest_release}/config/initializers/site_keys.rb
+    CMD
   end
 end
 
