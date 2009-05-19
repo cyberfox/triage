@@ -1,0 +1,40 @@
+.signin {
+  position: relative;
+  top: 4em;
+  height: 10em;
+  width: 20em;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin: auto;
+  border: thin solid grey;
+  background-color: #e0e0ff;
+  padding: 0px 5px 5px 5px;
+}
+
+.signin h1 {
+  text-align: center;
+  font-size: 160%;
+  margin-bottom: 5px;
+}
+
+.signin form p {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signin form p label {
+  margin-left: 5px;
+}
+
+.signin form p input {
+  position: absolute;
+  right: 10px;
+}
+
+.signup_invite {
+  margin-top: 10px;
+  font-size: 75%;
+  text-align: center;
+}
+

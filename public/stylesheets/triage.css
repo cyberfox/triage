@@ -1,3 +1,5 @@
+@import url('login.css');
+
 body {
   margin: 0px;
   padding: 0px;
@@ -114,42 +116,6 @@ body {
   margin: auto;
   margin-top: 2px;
   background-color: #e0e0ff;
-}
-
-.signin {
-  position: relative;
-  top: 2em;
-  height: 13em;
-  width: 20em;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin: auto;
-  border: thin solid grey;
-  background-color: #e0e0ff;
-  padding: 0px 5px 5px 5px;
-}
-
-.signin h1 {
-  text-align: center;
-}
-
-p.login_line {
-  width: 100%;
-  display: block;
-}
-
-p.login_line label {
-  margin-left: 5px;
-}
-
-.signin form p input {
-  position: absolute;
-  right: 10px;
-}
-
-.signup_invite {
-  font-size: 75%;
-  text-align: center;
 }
 
 .bucket {
