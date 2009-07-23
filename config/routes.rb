@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.projects 'projects', :controller => 'projects', :action => 'index'
   map.bin_tickets  'projects/:project_id/bins/:bin_id/tickets', :controller => 'tickets', :action => 'index'
+  map.tickets_page 'projects/:project_id/bins/:bin_id/tickets/page/:page', :controller => 'tickets', :action => 'index'
   map.search   'projects/:project_id/tickets/search', :controller => 'tickets', :action => 'search'
   map.connect  'projects/:project_id/tickets/:action', :controller => 'tickets'
   map.ticket   'projects/:project_id/tickets/:action/:id', :controller => 'tickets'

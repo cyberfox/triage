@@ -1,0 +1,16 @@
+<% tickets.each do |ticket| -%>
+  <li class="ticket_list <%= cycle('even', 'odd') %>">
+    <span style="display: inline-block; width: 3em; text-align: right;"><%= ticket.number %></span>
+    <%= check_box_tag "ticket_#{ticket.id}" %>
+    <%= link_to(ticket.title, url_for(:controller => 'tickets', :project_id => project.id, :id => ticket.number, :action => 'show')) %>
+    <% body = get_first_body(project.id, ticket.number) %>
+    <% unless ticket.tags.blank? -%>
+      <b style="color: #000000">&nbsp;&mdash;&nbsp;</b>
+      <span style="color: #c8c8c8">
+        <%= ticket.tags.join(', ') %>
+      </span>
+    <% end -%>
+    <b style="color: #000000">&nbsp;&mdash;&nbsp;</b>
+    <span style="color: #b8b8b8"><%= h(body.to_s[0..128]) %><%= (body.blank? || body.length < 128) ? "" : "..." %></span>
+  </li>
+<% end -%>

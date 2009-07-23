@@ -6,12 +6,14 @@ class TicketsController < ApplicationController
   before_filter :set_project
 
   def index
+    page = params[:page] || 1
+    page = page.to_i unless page == 1
     @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
     db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
     @bin = @lh_project.bins.find {|bin| bin.id.to_s == params[:bin_id].to_s}
     if @bin
       @search_query = @bin.query
-      @lh_tickets = Ticket.search(db_project, @bin.query)
+      @lh_tickets = Ticket.search(db_project, @bin.query, page)
     else
       @search_query = session[:ticket_search]
       @lh_tickets = Ticket.search(db_project, @search_query) if @search_query
@@ -30,6 +32,9 @@ class TicketsController < ApplicationController
       @ticket_count = @bin.tickets_count
     else
       @ticket_count = @lh_tickets.length
+    end
+    if page != 1 && request.xhr?
+      render :partial => 'ticket_list', :locals => { :tickets => @lh_tickets, :project => @lh_project }
     end
   end
 
