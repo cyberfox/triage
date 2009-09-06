@@ -5,14 +5,41 @@ class Ticket < ActiveRecord::Base
 
   def self.search(project, query, page=1)
     tickets = query(project, query, page)
-    tickets.collect do |ticket|
-      find_by_project_and_ticket(project, ticket.number, ticket.updated_at)
+
+    # This is optimized from what came before, because what came before was very slow.
+    ticket_numbers = []
+    ticket_map = {}
+    tickets.each do |ticket|
+      ticket_numbers << ticket.number
+      ticket_map[ticket.number.to_i] = ticket
     end
+    db_tickets = project.tickets.find_all_by_number(ticket_numbers)
+    results = db_tickets.collect do |ticket|
+      updated_at = (ticket_map.delete ticket.number).updated_at
+      choose_refresh(ticket, project, ticket.number, updated_at)
+    end
+
+    unless ticket_map.empty?
+      ticket_map.values.collect do |ticket|
+        results << choose_refresh(nil, project, ticket.number, ticket.updated_at)
+      end
+    end
+
+#    results.sort {|x, y| x.number <=> y.number}
+    results
   end
 
-  # Takes an ActiveRecord Project, a number, and an optional latest_update date.
+#    tickets.collect do |ticket|
+#      find_by_project_and_ticket(project, ticket.number, ticket.updated_at)
+#    end
+
+ # Takes an ActiveRecord Project, a number, and an optional latest_update date.
   def self.find_by_project_and_ticket(project, ticket_number, latest_update = nil)
     cached = project.tickets.find_by_number(ticket_number)
+    choose_refresh(cached, project, ticket_number, latest_update)
+  end
+
+  def self.choose_refresh(cached, project, ticket_number, latest_update = nil)
     cached.updated_at = Time.at(0) if cached && latest_update && latest_update > cached.updated_at
     optional_refresh(cached, project, ticket_number)
   end
