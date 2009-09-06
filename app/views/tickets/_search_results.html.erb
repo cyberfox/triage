@@ -1,10 +1,12 @@
-Showing <%= tickets.length %> of <%= @ticket_count %>.<br/>
+Showing <span id="ticket_count"><%= tickets.length %></span> of <%= @ticket_count %>.<br/>
 <% form_tag :action => 'mass_update', :method => :post do %>
 <ul>
   <%= render :partial => 'ticket_list', :locals => { :tickets => tickets, :project => project } %>
   <div id="next_page"></div>
 </ul>
 <% unless @bin.nil? -%>
+<div id="more_button">
 <%= button_to_remote('More...', { :url => tickets_page_url(:project => project.id, :bin_id => @bin.id, :page => 2), :update => 'next_page', :position => :bottom }); %>
+</div>
 <% end -%>
 <% end %>

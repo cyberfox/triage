@@ -34,7 +34,8 @@ class TicketsController < ApplicationController
       @ticket_count = @lh_tickets.length
     end
     if page != 1 && request.xhr?
-      render :partial => 'ticket_list', :locals => { :tickets => @lh_tickets, :project => @lh_project }
+      @page = page
+      render :partial => 'later_ticket_pages', :locals => { :tickets => @lh_tickets, :project => @lh_project }
     end
   end
 

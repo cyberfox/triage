@@ -1,0 +1,9 @@
+<%= render :partial => 'ticket_list', :locals => { :tickets => tickets, :project => project } %>
+<div id="more_button_page_<%= @page %>" style="display: none">
+<%= button_to_remote('More...', { :url => tickets_page_url(:project => project.id, :bin_id => @bin.id, :page => @page + 1), :update => 'next_page', :position => :bottom }); %>
+</div>
+
+<script type="text/javascript">
+$('more_button').innerHTML = $('more_button_page_<%= @page %>').innerHTML;
+$('ticket_count').innerHTML = (parseInt($('ticket_count').innerHTML) + <%= tickets.length %>);
+</script>
