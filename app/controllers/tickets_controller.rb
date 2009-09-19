@@ -22,6 +22,9 @@ class TicketsController < ApplicationController
       flash[:error] = "No tickets found for '#{h @search_query}'"
       redirect_to :controller => 'projects', :action => 'index'
     else
+      if @search_query.include?('sort:number') || !@search_query.include?('sort:')
+        @lh_tickets.sort {|x, y| x.number <=> y.number}
+      end
       prep_bucket_form
       session[:bin_id] = params[:bin_id]
       session[:tickets] = @lh_tickets.collect(&:number)
