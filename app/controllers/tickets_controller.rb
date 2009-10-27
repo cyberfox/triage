@@ -27,8 +27,12 @@ class TicketsController < ApplicationController
       end
       prep_bucket_form
       session[:bin_id] = params[:bin_id]
-      session[:tickets] = @lh_tickets.collect(&:number)
-      session[:ticket_index] = 0
+      if request.xhr?
+        session[:tickets] += @lh_tickets.collect(&:number)
+      else
+        session[:tickets] = @lh_tickets.collect(&:number)
+        session[:ticket_index] = 0
+      end
       session[:ticket_search] = @search_query
     end
     if @bin
