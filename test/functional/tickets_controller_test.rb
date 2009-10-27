@@ -107,6 +107,20 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  context "Getting the second page of search results" do
+    setup do
+      login_as(:quentin)
+      tickets(:snipe_error).updated_at = Time.at(0)
+      tickets(:snipe_error).lighthouse
+      session[:tickets] = projects(:jbidwatcher).tickets[0...30].collect(&:number)
+      xhr :get, :index, :page => 2, :project_id => projects(:jbidwatcher).lighthouse_id, :bin_id => 5933
+    end
+
+    should "succeed" do
+      assert_response :success
+    end
+  end
+
   context "Retrieving a specific ticket" do
     setup do
       login_as(:quentin)
