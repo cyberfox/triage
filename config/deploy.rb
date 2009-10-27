@@ -21,14 +21,12 @@ role :db, "fox.vulpine.com", :primary => true
 set :deploy_to, "/home/triage/app"
 set :user, "triage"              # defaults to the currently logged in user
 
-set :mongrel_config, "/etc/mongrel_cluster/#{application}.yml" 
-
 after "deploy:update_code", "deploy:write_sha1"
 after "deploy:update_code", "deploy:link_config"
 
 namespace :deploy do
   task :restart do
-    run "mongrel_rails cluster::restart -C #{mongrel_config}"
+    run "touch #{release_path}/tmp/restart.txt"
   end
 
   desc "write sha1 to file"
