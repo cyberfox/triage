@@ -70,3 +70,6 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
+lh = Ticket.first; lh.updated_at = Time.at(0); Ticket.optional_refresh(lh, lh.project, lh.number)
+lh = Ticket.find_by_number(697); lh.updated_at = Time.at(0); Ticket.optional_refresh(lh, lh.project, lh.number)

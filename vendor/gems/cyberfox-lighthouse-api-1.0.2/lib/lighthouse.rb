@@ -295,10 +295,6 @@ module Lighthouse
           tag.uniq!
         end
       end
-
-    class Version < Base
-      site_format << '/projects/:project_id'
-    end
   end
   
   class Message < Base
