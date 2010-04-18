@@ -1,7 +1,7 @@
 --- !ruby/object:Gem::Specification 
 name: cyberfox-lighthouse-api
 version: !ruby/object:Gem::Version 
-  version: 1.0.2
+  version: 1.1.0.1
 platform: ruby
 authors: 
 - Rick Olsen
@@ -33,9 +33,19 @@ dependencies:
       - !ruby/object:Gem::Version 
         version: 2.1.0
     version: 
+- !ruby/object:Gem::Dependency 
+  name: addressable
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
 description: RubyGem wrapper for ActiveResource API to http://lighthouseapp.com
 email: 
-- FIXME email
+- justin@entp.com
 executables: []
 
 extensions: []
@@ -50,6 +60,8 @@ files:
 - lib/lighthouse/console.rb
 has_rdoc: true
 homepage: http://lighthouseapp.com/api
+licenses: []
+
 post_install_message: 
 rdoc_options: 
 - --main
@@ -71,9 +83,9 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: lighthouse
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
-specification_version: 2
+specification_version: 3
 summary: RubyGem wrapper for ActiveResource API to http://lighthouseapp.com
 test_files: []
 

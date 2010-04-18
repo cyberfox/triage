@@ -1,5 +1,3 @@
-require 'rubygems'
-
 begin
   require 'uri'
   require 'addressable/uri'
@@ -23,8 +21,8 @@ rescue LoadError => e
   puts e.message
 end
 
-require 'activesupport'
-require 'activeresource'
+require 'active_support'
+require 'active_resource'
 
 # Ruby lib for working with the Lighthouse API's XML interface.  
 # The first thing you need to set is the account name.  This is the same
@@ -85,7 +83,20 @@ module Lighthouse
   self.protocol      = 'http'
   self.port          = ''
 
+  require 'ostruct'
+
+  class FauxResponse < OpenStruct
+    def [](lookup)
+      marshal_dump[lookup.to_sym]
+    end
+  end
+
   class Base < ActiveResource::Base
+    def from_xml(body)
+      response = FauxResponse.new(:body => body, "Content-Length" => body.length)
+      load_attributes_from_response(response)
+    end
+
     def self.inherited(base)
       Lighthouse.resources << base
       class << base
@@ -295,6 +306,10 @@ module Lighthouse
           tag.uniq!
         end
       end
+
+    class Version < Base
+      site_format << '/projects/:project_id'
+    end
   end
   
   class Message < Base
