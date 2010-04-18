@@ -1,9 +1,9 @@
 class UpdateTextColumnsToMediumText < ActiveRecord::Migration
   def self.up
-#    execute "ALTER TABLE tickets MODIFY data MEDIUMTEXT"
+    execute "ALTER TABLE tickets MODIFY data MEDIUMTEXT"
   end
 
   def self.down
-#    execute "ALTER TABLE tickets MODIFY data TEXT"
+    execute "ALTER TABLE tickets MODIFY data TEXT"
   end
 end
