@@ -6,7 +6,7 @@ class Milestone < ActiveRecord::Base
   def self.find_by_project_and_milestone(project, milestone_number, original=nil)
     cached = project.milestones.find_by_lighthouse_id(milestone_number)
     cached.updated_at = Time.at(0) if cached && original && original.updated_at > cached.updated_at
-    optional_refresh(cached, project, milestone_number, original)
+    optional_refresh(cached, project, milestone_number, Lighthouse::Milestone, original)
   end
 
   def self.all_lighthouse(project)
@@ -18,7 +18,7 @@ class Milestone < ActiveRecord::Base
 
   def update_from_lighthouse(original)
     update_attributes(:title => original.title,
-                      :data => original.to_yaml)
+                      :data => original.to_xml)
     return original
   end
 
@@ -26,7 +26,7 @@ class Milestone < ActiveRecord::Base
   def self.create_from_lighthouse(project, original)
     project.milestones.create(:title => original.title,
                               :lighthouse_id => original.id,
-                              :data => original.to_yaml)
+                              :data => original.to_xml)
     return original
   end
 

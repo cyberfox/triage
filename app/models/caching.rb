@@ -5,13 +5,13 @@ module Caching
   #   self#retrieve(db_project, number)
   #   #update_from_lighthouse(original)
   module ClassMethods
-    def optional_refresh(db_object, db_project, number, original=nil)
+    def optional_refresh(db_object, db_project, number, klass, original=nil)
       if db_object
         if (db_object.updated_at < update_frequency)
           original = retrieve(db_project, number) if original.nil?
           db_object.update_from_lighthouse(original)
         else
-          YAML.load(db_object.data)
+          klass.new.from_xml(db_object.data)
         end
       else
         original = retrieve(db_project, number) if original.nil?

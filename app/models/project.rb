@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   has_many :milestones
 
   def lighthouse
-    YAML.load(data)
+    Lighthouse::Project.new.from_xml(data)
   end
   memoize :lighthouse
 
@@ -31,7 +31,7 @@ class Project < ActiveRecord::Base
       real.each do |project|
         user.projects.create(:lighthouse_id => project.id,
                        :name => project.name,
-                       :data => project.to_yaml)
+                       :data => project.to_xml)
       end
     else
       first = true
@@ -42,12 +42,12 @@ class Project < ActiveRecord::Base
             first = false
           end
           actual = Lighthouse::Project.find(project.lighthouse_id)
-          project.data = actual.to_yaml
+          project.data = actual.to_xml
           project.updated_at = Time.now
           project.save
           actual
         else
-          YAML.load(project.data)
+          Lighthouse::Project.new.from_xml(project.data)
         end
       end
     end
@@ -63,16 +63,16 @@ class Project < ActiveRecord::Base
         if project.blank?
           user.projects.create(:lighthouse_id => real.id,
                                :name => real.name,
-                               :data => real.to_yaml)
+                               :data => real.to_xml)
         else
-          project.data = real.to_yaml
+          project.data = real.to_xml
           project.updated_at = Time.now
           project.save
         end
       end
       real
     else
-      real = YAML.load(project.data)
+      real = Lighthouse::Project.new.from_xml(project.data)
     end
   end
 end

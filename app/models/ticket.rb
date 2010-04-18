@@ -41,7 +41,7 @@ class Ticket < ActiveRecord::Base
 
   def self.choose_refresh(cached, project, ticket_number, latest_update = nil)
     cached.updated_at = Time.at(0) if cached && latest_update && latest_update > cached.updated_at
-    optional_refresh(cached, project, ticket_number)
+    optional_refresh(cached, project, ticket_number, Lighthouse::Ticket)
   end
 
   # This takes a long time; it first loads the search-level ticket information
@@ -70,14 +70,14 @@ class Ticket < ActiveRecord::Base
 
   def update_from_lighthouse(ticket)
     # Assumption: Project & Ticket numbers don't change.
-    update_attributes(:title => ticket.title, :data => ticket.to_yaml)
+    update_attributes(:title => ticket.title, :data => ticket.to_xml)
     return ticket
   end
 
   def lighthouse(latest_update = nil)
     updated_at = Time.at(0) if updated_at.nil? && !latest_update.nil?
     updated_at = Time.at(0) if latest_update && latest_update > updated_at
-    Ticket.optional_refresh(self, project, number)
+    Ticket.optional_refresh(self, project, number, Lighthouse::Ticket)
   end
 
   private
@@ -88,7 +88,7 @@ class Ticket < ActiveRecord::Base
   def self.create_from_lighthouse(db_project, ticket)
     db_project.tickets.create(:number => ticket.number,
                               :title => ticket.title,
-                              :data => ticket.to_yaml)
+                              :data => ticket.to_xml)
     return ticket
   end
 
