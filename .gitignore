@@ -3,3 +3,8 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 *.rails2
+Gemfile.lock
+*~
+nohup.out
+coverage
+.idea
