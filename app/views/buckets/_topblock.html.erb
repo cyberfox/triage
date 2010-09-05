@@ -33,7 +33,7 @@
   </div>
 </div>
 <div id="popup_bucket" style="display: none">
-  <% remote_form_for(new_bucket) do |f| %>
+  <% form_for(new_bucket, :remote => true) do |f| %>
     <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
     <p id="bucket_submit_button">
       <%= f.submit "Create" %>

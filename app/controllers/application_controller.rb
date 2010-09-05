@@ -1,3 +1,5 @@
+require Rails.root.join('lib/authenticated_system.rb').to_s
+
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
@@ -44,7 +46,10 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_title_information
-    @title_controller = self.singular_class_name(self).gsub('_controller', '').capitalize
+    singularizer = defined?(ActiveModel::Naming.singular) ? ActiveModel::Naming.method(:singular) : ActionController::RecordIdentifier.method(:singular_class_name)
+    logger.warn     
+
+    @title_controller = self.class.to_s.gsub('Controller', '').singularize.capitalize
     @title_optional_action = self.action_name if self.action_name != 'index'
     @title_optional_action, @title_controller = [nil, 'Sign In'] if @title_controller == 'Sessions' && @title_optional_action == 'new'
     @title_optional_action, @title_controller = [nil, 'Sign Up'] if @title_controller == 'Users' && @title_optional_action == 'new'
