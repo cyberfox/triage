@@ -1,7 +1,7 @@
 <div class="signin">
 <h1>Sign In</h1>
 
-<% form_tag session_path do -%>
+<%= form_tag session_path do -%>
 <p class="login_line"><%= label_tag 'Login:' %><%= text_field_tag 'login', @login %></p>
 <p class="login_line"><%= label_tag 'Password:' %><%= password_field_tag 'password', nil %></p>
 

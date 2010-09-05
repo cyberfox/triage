@@ -59,6 +59,7 @@ class Ticket < ActiveRecord::Base
       last = ticket_set.length
       all_tickets += ticket_set
       page += 1
+      puts "Imported #{all_tickets.length} so far."
     end
 
     length = all_tickets.length
@@ -72,6 +73,10 @@ class Ticket < ActiveRecord::Base
     # Assumption: Project & Ticket numbers don't change.
     update_attributes(:title => ticket.title, :data => ticket.to_xml)
     return ticket
+  end
+
+  def pure_lighthouse
+    Lighthouse::Ticket.new.from_xml(data)
   end
 
   def lighthouse(latest_update = nil)
@@ -94,7 +99,7 @@ class Ticket < ActiveRecord::Base
 
   def self.query(db_project, q, page)
     init_lighthouse(db_project)
-    Lighthouse::Ticket.find(:all, :params => { :project_id => db_project.lighthouse_id, :page => page, :q => q })
+    Lighthouse::Ticket.all(:params => { :project_id => db_project.lighthouse_id, :page => page, :q => q })
   end
 
   def self.retrieve(db_project, ticket_number)

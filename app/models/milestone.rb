@@ -11,7 +11,7 @@ class Milestone < ActiveRecord::Base
 
   def self.all_lighthouse(project)
     init_lighthouse(project)
-    milestones = Lighthouse::Milestone.find(:all, :params => { :project_id => project.lighthouse_id })
+    milestones = Lighthouse::Milestone.all(:params => { :project_id => project.lighthouse_id })
     milestones.each { |milestone| find_by_project_and_milestone(project, milestone.id, milestone) }
     return milestones
   end

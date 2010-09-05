@@ -1,6 +1,6 @@
 <h1>Editing bucket</h1>
 
-<% form_for(@bucket) do |f| %>
+<%= form_for(@bucket) do |f| %>
 <%= render :partial => 'modify', :locals => { :f => f } -%>
   <p>
     <%= f.submit "Update" %>

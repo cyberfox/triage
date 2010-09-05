@@ -11,6 +11,7 @@ gem "rails", "3.0.0"
 gem 'mysql2'
 
 gem 'delayed_job'
+gem 'async_methods'
 
 gem 'lighthouse-api'
 

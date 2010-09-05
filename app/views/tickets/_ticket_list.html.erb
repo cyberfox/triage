@@ -3,7 +3,7 @@
     <span style="display: inline-block; width: 3em; text-align: right;"><%= ticket.number %></span>
     <%= check_box_tag "ticket_#{ticket.id}" %>
     <%= link_to(ticket.title, url_for(:controller => 'tickets', :project_id => project.id, :id => ticket.number, :action => 'show')) %>
-    <% body = get_first_body(project.id, ticket.number) %>
+    <% body = get_first_body(ticket) %>
     <% unless ticket.tags.blank? -%>
       <b style="color: #000000">&nbsp;&mdash;&nbsp;</b>
       <span style="color: #c8c8c8">

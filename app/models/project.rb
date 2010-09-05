@@ -24,10 +24,10 @@ class Project < ActiveRecord::Base
   end
 
   def self.all_lighthouse(user)
-    projects = user.projects.find(:all)
+    projects = user.projects
     if projects.blank?
       init_lighthouse(user)
-      real = Lighthouse::Project.find(:all)
+      real = Lighthouse::Project.all
       real.each do |project|
         user.projects.create(:lighthouse_id => project.id,
                        :name => project.name,

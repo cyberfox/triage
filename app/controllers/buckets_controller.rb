@@ -2,7 +2,7 @@ class BucketsController < ApplicationController
   # GET /buckets
   # GET /buckets.xml
   def index
-    @buckets = Bucket.find(:all)
+    @buckets = Bucket.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -7,7 +7,7 @@
 <% unless current_user.buckets.blank? -%>
 <% current_user.buckets.each do |bucket| -%>
     <div class="bucket" id="<%= "bucket_#{bucket.id}" %>">
-      <%= link_to_remote(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')") %>
+      <%= link_to(image_tag('delete.png', :class => 'delete_button'), :url => { :controller => 'buckets', :action => 'destroy', :id => bucket.id }, :method => 'delete', :success => "nuke('bucket_#{bucket.id}')", :remote => true) %>
       <%= link_to_function(image_tag('cog_edit.png', :class => 'edit_button'),
                            "editBucketForm(#{bucket.id}, '#{bucket.tag}', '#{bucket.description}', '#{bucket.milestone_id}', '#{bucket.state}', '#{bucket.boilerplate}')") %>
 <% if ticket_number -%>
@@ -33,7 +33,7 @@
   </div>
 </div>
 <div id="popup_bucket" style="display: none">
-  <% form_for(new_bucket, :remote => true) do |f| %>
+  <%= form_for(new_bucket, :remote => true) do |f| %>
     <%= render :partial => 'buckets/modify', :locals => { :f => f } -%>
     <p id="bucket_submit_button">
       <%= f.submit "Create" %>

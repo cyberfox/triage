@@ -5,6 +5,27 @@ class TicketsController < ApplicationController
   before_filter :get_token
   before_filter :set_project
 
+  def all
+    prep_bucket_form
+
+    @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
+    @bin = nil
+    db_project = current_user.projects.find_by_lighthouse_id(@lh_project.id)
+    @lh_tickets = db_project.tickets.includes(:project).order(:number).collect(&:pure_lighthouse)
+    @search_query = 'all'
+    @ticket_count = @lh_tickets.length
+
+    render 'index'
+  end
+
+  # Output to the template:
+  #   @lh_project - Current project (lighthouse)
+  #   @bin - Current bin (lighthouse)
+  #   @search_query = Current query (string)
+  #   @lh_tickets = List of tickets (lighthouse)
+  #   @ticket_count = The count of tickets in the bin (if there is one),
+  #     or in this set of tickets if we're not viewing a bin.
+
   def index
     page = params[:page] || 1
     page = page.to_i unless page == 1
@@ -18,7 +39,7 @@ class TicketsController < ApplicationController
       @search_query = session[:ticket_search]
       @lh_tickets = Ticket.search(db_project, @search_query) if @search_query
     end
-    if @lh_tickets.blank?
+    if @lh_tickets.blank? && !request.xhr?
       flash[:error] = "No tickets found for '#{h @search_query}'"
       redirect_to :controller => 'projects', :action => 'index'
     else
@@ -72,8 +93,8 @@ class TicketsController < ApplicationController
     session[:ticket_index] = session[:tickets].index(@lh_ticket.number) if session[:tickets]
     session[:ticket_number] = @lh_ticket.number
 
-    users = (@lh_ticket.versions.collect(&:user_id) +
-             @lh_ticket.versions.collect(&:assigned_user_id)).uniq
+    users = (@lh_ticket.versions.collect {|x| x.respond_to?(:user_id) ? x.user_id : x['user_id']} +
+             @lh_ticket.versions.collect {|x| x.respond_to?(:assigned_user_id) ? x.assigned_user_id : x['assigned_user_id']}).uniq
     @user_map = users.inject({}) {|accum, user_id| accum[user_id] = LighthouseUser.get(user_id); accum}
     prep_bucket_form
   end

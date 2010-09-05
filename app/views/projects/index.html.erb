@@ -8,7 +8,7 @@
       <li><%= link_to(bin.name, bin_tickets_path(:project_id => project.id, :bin_id => bin.id)) %> (<%= bin.tickets_count %>)</li>
 <% end -%>
 <% end -%>
-      <li><label style="float: left;">Search: &nbsp;<% form_tag(search_path(:project_id => project.id), :method => :get) do %><%= text_field_tag :q, '', :size => 30 %><% end %></label></li>
+      <li><label style="float: left;">Search: &nbsp;<%= form_tag(search_path(:project_id => project.id), :method => :get) do %><%= text_field_tag :q, '', :size => 30 %><% end %></label></li>
     </ul>
 <% end -%>
 </ul>

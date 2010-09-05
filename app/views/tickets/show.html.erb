@@ -7,13 +7,13 @@
   <% end -%>
   <% @lh_ticket.versions.each do |version| -%>
     <div class="comment">
-      <h3>by <%= @user_map[version.user_id].name %>:
-        <% if version.title != @lh_ticket.title -%>
-          <%= version.title %>
+      <h3>by <%= @user_map[version['user_id']].name %>:
+        <% if version['title'] != @lh_ticket.title -%>
+          <%= version['title'] %>
         <% end -%>
       </h3>
       <div class="comment_body">
-        <%= version.body_html %>
+        <%= raw version['body_html'] %>
       </div>
     </div>
   <% end -%>

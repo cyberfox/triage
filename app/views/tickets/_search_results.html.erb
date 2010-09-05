@@ -1,5 +1,5 @@
 Showing <span id="ticket_count"><%= tickets.length %></span> of <%= @ticket_count %>.<br/>
-<% form_tag :action => 'mass_update', :method => :post do %>
+<%= form_tag :action => 'mass_update', :method => :post do %>
 <ul>
   <%= render :partial => 'ticket_list', :locals => { :tickets => tickets, :project => project } %>
   <div id="next_page"></div>
