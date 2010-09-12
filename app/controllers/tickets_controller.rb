@@ -5,6 +5,35 @@ class TicketsController < ApplicationController
   before_filter :get_token
   before_filter :set_project
 
+  def fun
+    @action = params[:id]
+    unless ['all', 'new', 'open'].include?(@action)
+      redirect_to :index
+      return
+    end
+
+    prep_bucket_form
+
+    @lh_project = Project.find_by_lighthouse_project(current_user, params[:project_id])
+    @bin = nil
+
+    tickets = []
+    case(@action)
+      when 'all' then tickets = Ticket.all
+      when 'new' then tickets = Ticket.where(:state => 'new')
+      when 'open' then tickets = Ticket.where(:state => 'open')
+    end
+
+    @lh_tickets = tickets.includes(:project).order(:number).collect(&:pure_lighthouse)
+    @search_query = @action
+    @ticket_count = @lh_tickets.length
+
+    session[:tickets] = @lh_tickets.collect(&:number)
+    session[:ticket_index] = 0
+
+    render 'index'
+  end
+
   def all
     prep_bucket_form
 

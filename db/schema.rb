@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100904081008) do
+ActiveRecord::Schema.define(:version => 20100911180241) do
 
   create_table "buckets", :force => true do |t|
     t.string   "tag"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(:version => 20100904081008) do
     t.text     "data",       :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
+    t.boolean  "closed"
   end
 
   create_table "users", :force => true do |t|
