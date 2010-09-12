@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     session[:project_id] = @session_project ? @session_project.id : nil;
   end
 
-  private
+  protected
   def get_token
     if logged_in?
       Lighthouse.account = current_user.subdomain
@@ -37,7 +37,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  protected
   def prep_bucket_form
     @bucket = Bucket.new unless @bucket
     project = current_user.projects.first
