@@ -1,4 +1,27 @@
+require 'nokogiri'
+
+class XMLProxy
+  def initialize(xml)
+    @underlying = Nokogiri::XML.parse(xml)
+    @root = @underlying.root.name
+  end
+
+  def method_missing(method, *args, &block)
+    begin
+      if (@underlying % "//#{@root}/#{method.to_s.dasherize}") == nil
+        super
+      else
+        (@underlying % "//#{@root}/#{method.to_s.dasherize}").text
+      end
+    end
+  rescue => e
+    puts e
+    super
+  end
+end
+
 class Ticket < ActiveRecord::Base
+  extend ActiveSupport::Memoizable
   include Caching
 
   belongs_to :project
@@ -84,6 +107,11 @@ class Ticket < ActiveRecord::Base
     updated_at = Time.at(0) if latest_update && latest_update > updated_at
     Ticket.optional_refresh(self, project, number, Lighthouse::Ticket)
   end
+
+  def info
+    XMLProxy.new(data)
+  end
+  memoize :info
 
   private
   def self.update_frequency

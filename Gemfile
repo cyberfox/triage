@@ -12,6 +12,7 @@ gem 'mysql2'
 
 gem 'delayed_job'
 gem 'async_methods'
+gem 'nokogiri'
 
 gem 'lighthouse-api'
 
